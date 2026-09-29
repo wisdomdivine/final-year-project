@@ -1,0 +1,26 @@
+[
+  {
+    "partition": "Training",
+    "percentage": "70%",
+    "rows": 1268,
+    "depth_start_m": 3127.71,
+    "depth_end_m": 3320.95,
+    "purpose": "Model parameter learning"
+  },
+  {
+    "partition": "Validation",
+    "percentage": "15%",
+    "rows": 272,
+    "depth_start_m": 3321.1,
+    "depth_end_m": 3362.4,
+    "purpose": "Hyperparameter tuning and model selection"
+  },
+  {
+    "partition": "Testing",
+    "percentage": "15%",
+    "rows": 271,
+    "depth_start_m": 3362.55,
+    "depth_end_m": 3403.55,
+    "purpose": "Final unbiased model evaluation"
+  }
+]

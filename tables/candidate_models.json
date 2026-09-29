@@ -1,0 +1,26 @@
+[
+  {
+    "model": "Multiple Linear Regression (MLR)",
+    "family": "Linear",
+    "role": "Baseline model to evaluate linear relationship with PP",
+    "evaluation_metrics": "MAE, MSE, RMSE, R-squared"
+  },
+  {
+    "model": "Random Forest Regression (RF)",
+    "family": "Bagged Decision Trees",
+    "role": "Nonlinear ensemble capturing complex interactions",
+    "evaluation_metrics": "MAE, MSE, RMSE, R-squared"
+  },
+  {
+    "model": "CatBoost Regression",
+    "family": "Gradient Boosted Decision Trees",
+    "role": "High performance gradient boosting benchmark",
+    "evaluation_metrics": "MAE, MSE, RMSE, R-squared"
+  },
+  {
+    "model": "Multilayer Perceptron (MLP)",
+    "family": "Artificial Neural Network",
+    "role": "Feedforward neural network representation",
+    "evaluation_metrics": "MAE, MSE, RMSE, R-squared"
+  }
+]

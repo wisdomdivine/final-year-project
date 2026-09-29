@@ -1,0 +1,4 @@
+partition,percentage,rows,depth_start_m,depth_end_m,purpose
+Training,70%,1268,3127.71,3320.95,Model parameter learning
+Validation,15%,272,3321.1,3362.4,Hyperparameter tuning and model selection
+Testing,15%,271,3362.55,3403.55,Final unbiased model evaluation

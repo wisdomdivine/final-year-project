@@ -1,0 +1,86 @@
+[
+  {
+    "variable": "Depth",
+    "description": "Measured depth",
+    "source_curve_mapping": "DEPTH",
+    "units": "m"
+  },
+  {
+    "variable": "DT",
+    "description": "Compressional sonic slowness",
+    "source_curve_mapping": "DT",
+    "units": "us/ft"
+  },
+  {
+    "variable": "GR",
+    "description": "Gamma ray",
+    "source_curve_mapping": "GR",
+    "units": "API"
+  },
+  {
+    "variable": "NPHI",
+    "description": "Neutron porosity",
+    "source_curve_mapping": "NPHI",
+    "units": "v/v"
+  },
+  {
+    "variable": "RD",
+    "description": "Deep resistivity",
+    "source_curve_mapping": "RD",
+    "units": "ohm.m"
+  },
+  {
+    "variable": "RHOB",
+    "description": "Bulk density",
+    "source_curve_mapping": "RHOB",
+    "units": "g/cm3"
+  },
+  {
+    "variable": "ROP",
+    "description": "Rate of penetration",
+    "source_curve_mapping": "ROP5_RM mapped to ROP",
+    "units": "m/hr"
+  },
+  {
+    "variable": "RS",
+    "description": "Shallow resistivity",
+    "source_curve_mapping": "RS",
+    "units": "ohm.m"
+  },
+  {
+    "variable": "RT",
+    "description": "True resistivity",
+    "source_curve_mapping": "RT",
+    "units": "ohm.m"
+  },
+  {
+    "variable": "BVW",
+    "description": "Bulk volume water",
+    "source_curve_mapping": "BVW",
+    "units": "v/v"
+  },
+  {
+    "variable": "K",
+    "description": "Permeability",
+    "source_curve_mapping": "KLOGH mapped to K",
+    "units": "mD"
+  },
+  {
+    "variable": "PHIF",
+    "description": "Formation porosity",
+    "source_curve_mapping": "PHIF",
+    "units": "v/v"
+  },
+  {
+    "variable": "SW",
+    "description": "Water saturation",
+    "source_curve_mapping": "SW",
+    "units": "v/v"
+  },
+  {
+    "variable": "VCL",
+    "description": "Clay volume",
+    "source_curve_mapping": "VSH mapped to VCL",
+    "units": "v/v"
+  }
+]

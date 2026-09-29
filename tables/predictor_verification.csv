@@ -1,0 +1,18 @@
+parameter,reconstructed_data,siddique_et_al_published,match_status
+Total Observations,1811,1811,Exact
+Depth Start (m),3127.71,3127.71,Exact
+Depth End (m),3403.55,3403.55,Exact
+Depth Mean (m),3265.6272,3265.63,Exact
+DT Mean (us/ft),82.9246,82.92,Exact
+GR Mean (API),64.1874,64.19,Exact
+GR Min (API),22.4462,22.45,Exact
+GR Max (API),122.8691,122.87,Exact
+RD Mean (ohm.m),52.9025,52.90,Exact
+RD Max (ohm.m),1319.274,1319.27,Exact
+ROP Mean (m/hr),17.9755,17.98,Exact
+RS Mean (ohm.m),62.0130,62.01,Exact
+RT Mean (ohm.m),52.6648,52.66,Exact
+K Mean (mD),142.0355,142.04,Exact
+K Max (mD),12109.04,12109.04,Exact
+SW Mean (v/v),0.5023,0.50,Exact
+VCL Mean (v/v),0.3960,0.40,Exact

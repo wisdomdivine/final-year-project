@@ -1,0 +1,15 @@
+variable,description,source_curve_mapping,units
+Depth,Measured depth,DEPTH,m
+DT,Compressional sonic slowness,DT,us/ft
+GR,Gamma ray,GR,API
+NPHI,Neutron porosity,NPHI,v/v
+RD,Deep resistivity,RD,ohm.m
+RHOB,Bulk density,RHOB,g/cm3
+ROP,Rate of penetration,ROP5_RM mapped to ROP,m/hr
+RS,Shallow resistivity,RS,ohm.m
+RT,True resistivity,RT,ohm.m
+BVW,Bulk volume water,BVW,v/v
+K,Permeability,KLOGH mapped to K,mD
+PHIF,Formation porosity,PHIF,v/v
+SW,Water saturation,SW,v/v
+VCL,Clay volume,VSH mapped to VCL,v/v

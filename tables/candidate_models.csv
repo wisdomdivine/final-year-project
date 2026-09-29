@@ -1,0 +1,5 @@
+model,family,role,evaluation_metrics
+Multiple Linear Regression (MLR),Linear,Baseline model to evaluate linear relationship with PP,"MAE, MSE, RMSE, R-squared"
+Random Forest Regression (RF),Bagged Decision Trees,Nonlinear ensemble capturing complex interactions,"MAE, MSE, RMSE, R-squared"
+CatBoost Regression,Gradient Boosted Decision Trees,High performance gradient boosting benchmark,"MAE, MSE, RMSE, R-squared"
+Multilayer Perceptron (MLP),Artificial Neural Network,Feedforward neural network representation,"MAE, MSE, RMSE, R-squared"

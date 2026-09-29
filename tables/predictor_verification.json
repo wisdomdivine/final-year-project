@@ -1,0 +1,104 @@
+[
+  {
+    "parameter": "Total Observations",
+    "reconstructed_data": "1811",
+    "siddique_et_al_published": "1811",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "Depth Start (m)",
+    "reconstructed_data": "3127.71",
+    "siddique_et_al_published": "3127.71",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "Depth End (m)",
+    "reconstructed_data": "3403.55",
+    "siddique_et_al_published": "3403.55",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "Depth Mean (m)",
+    "reconstructed_data": "3265.6272",
+    "siddique_et_al_published": "3265.63",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "DT Mean (us/ft)",
+    "reconstructed_data": "82.9246",
+    "siddique_et_al_published": "82.92",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "GR Mean (API)",
+    "reconstructed_data": "64.1874",
+    "siddique_et_al_published": "64.19",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "GR Min (API)",
+    "reconstructed_data": "22.4462",
+    "siddique_et_al_published": "22.45",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "GR Max (API)",
+    "reconstructed_data": "122.8691",
+    "siddique_et_al_published": "122.87",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "RD Mean (ohm.m)",
+    "reconstructed_data": "52.9025",
+    "siddique_et_al_published": "52.90",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "RD Max (ohm.m)",
+    "reconstructed_data": "1319.274",
+    "siddique_et_al_published": "1319.27",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "ROP Mean (m/hr)",
+    "reconstructed_data": "17.9755",
+    "siddique_et_al_published": "17.98",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "RS Mean (ohm.m)",
+    "reconstructed_data": "62.0130",
+    "siddique_et_al_published": "62.01",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "RT Mean (ohm.m)",
+    "reconstructed_data": "52.6648",
+    "siddique_et_al_published": "52.66",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "K Mean (mD)",
+    "reconstructed_data": "142.0355",
+    "siddique_et_al_published": "142.04",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "K Max (mD)",
+    "reconstructed_data": "12109.04",
+    "siddique_et_al_published": "12109.04",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "SW Mean (v/v)",
+    "reconstructed_data": "0.5023",
+    "siddique_et_al_published": "0.50",
+    "match_status": "Exact"
+  },
+  {
+    "parameter": "VCL Mean (v/v)",
+    "reconstructed_data": "0.3960",
+    "siddique_et_al_published": "0.40",
+    "match_status": "Exact"
+  }
+]
