@@ -1,0 +1,100 @@
+[
+  {
+    "variable": "DEPTH",
+    "raw_skewness": -0.0,
+    "transformed_skewness": -0.0,
+    "transformation": "none",
+    "recommended_for": "All models"
+  },
+  {
+    "variable": "DT",
+    "raw_skewness": -0.4834,
+    "transformed_skewness": -0.4834,
+    "transformation": "none",
+    "recommended_for": "All models"
+  },
+  {
+    "variable": "GR",
+    "raw_skewness": 0.1621,
+    "transformed_skewness": 0.1621,
+    "transformation": "none",
+    "recommended_for": "All models"
+  },
+  {
+    "variable": "NPHI",
+    "raw_skewness": -0.1463,
+    "transformed_skewness": -0.1463,
+    "transformation": "none",
+    "recommended_for": "All models"
+  },
+  {
+    "variable": "RD",
+    "raw_skewness": 4.2944,
+    "transformed_skewness": 0.6547,
+    "transformation": "log10",
+    "recommended_for": "MLR, MLP"
+  },
+  {
+    "variable": "RHOB",
+    "raw_skewness": 0.2219,
+    "transformed_skewness": 0.2219,
+    "transformation": "none",
+    "recommended_for": "All models"
+  },
+  {
+    "variable": "RS",
+    "raw_skewness": 11.96,
+    "transformed_skewness": 0.6212,
+    "transformation": "log10",
+    "recommended_for": "MLR, MLP"
+  },
+  {
+    "variable": "RT",
+    "raw_skewness": 3.5711,
+    "transformed_skewness": 0.4754,
+    "transformation": "log10",
+    "recommended_for": "MLR, MLP"
+  },
+  {
+    "variable": "ROP",
+    "raw_skewness": -0.087,
+    "transformed_skewness": -0.087,
+    "transformation": "none",
+    "recommended_for": "All models"
+  },
+  {
+    "variable": "BVW",
+    "raw_skewness": 0.5465,
+    "transformed_skewness": 0.5465,
+    "transformation": "none",
+    "recommended_for": "All models"
+  },
+  {
+    "variable": "K",
+    "raw_skewness": 11.664,
+    "transformed_skewness": -0.016,
+    "transformation": "log10",
+    "recommended_for": "MLR, MLP"
+  },
+  {
+    "variable": "PHIF",
+    "raw_skewness": -0.4743,
+    "transformed_skewness": -0.4743,
+    "transformation": "none",
+    "recommended_for": "All models"
+  },
+  {
+    "variable": "SW",
+    "raw_skewness": 0.2104,
+    "transformed_skewness": 0.2104,
+    "transformation": "none",
+    "recommended_for": "All models"
+  },
+  {
+    "variable": "VCL",
+    "raw_skewness": 0.4217,
+    "transformed_skewness": 0.4217,
+    "transformation": "none",
+    "recommended_for": "All models"
+  }
+]

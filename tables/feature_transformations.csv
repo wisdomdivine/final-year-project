@@ -1,0 +1,15 @@
+variable,raw_skewness,transformed_skewness,transformation,recommended_for
+DEPTH,-0.0,-0.0,none,All models
+DT,-0.4834,-0.4834,none,All models
+GR,0.1621,0.1621,none,All models
+NPHI,-0.1463,-0.1463,none,All models
+RD,4.2944,0.6547,log10,"MLR, MLP"
+RHOB,0.2219,0.2219,none,All models
+RS,11.96,0.6212,log10,"MLR, MLP"
+RT,3.5711,0.4754,log10,"MLR, MLP"
+ROP,-0.087,-0.087,none,All models
+BVW,0.5465,0.5465,none,All models
+K,11.664,-0.016,log10,"MLR, MLP"
+PHIF,-0.4743,-0.4743,none,All models
+SW,0.2104,0.2104,none,All models
+VCL,0.4217,0.4217,none,All models
