@@ -262,3 +262,25 @@ The hydrostatic and fluid regime tables are stored in:
 - [pressure_fluid_gradient_reconciliation.csv](file:///Users/user/final-year-project/tables/pressure_fluid_gradient_reconciliation.csv) and [pressure_fluid_gradient_reconciliation.json](file:///Users/user/final-year-project/tables/pressure_fluid_gradient_reconciliation.json).
 - [pressure_regime_summary.csv](file:///Users/user/final-year-project/tables/pressure_regime_summary.csv) and [pressure_regime_summary.json](file:///Users/user/final-year-project/tables/pressure_regime_summary.json).
 - [near_depth_pressure_pairs.csv](file:///Users/user/final-year-project/tables/near_depth_pressure_pairs.csv) and [near_depth_pressure_pairs.json](file:///Users/user/final-year-project/tables/near_depth_pressure_pairs.json).
+
+## 11. Operational Pretest Dynamics and Resolution of Near-Depth Discrepancies
+
+A cross-examination of the official Schlumberger realtime log (FM_PRESS_COMPUTED_MWD_1.ASC), the quartz gauge calibration report (Test point table.xls), and tool logger remarks resolves the apparent pressure discrepancies across the three near-depth test pairs:
+
+| Station Location | Aborted / Incomplete Test | Status in Official ASC Log | Stabilized Companion Test | Status in Official ASC Log | True Formation Pressure (bar) | Resolution Finding |
+|:---|:---|:---|:---|:---|:---|:---|
+| Sleipner Upper Sand (3,294.0 m MD / 2,970.3 m TVD RKB) | Test 13: 328.056 bar (buildup: 334.161 bar) | Quality 0: "Pressure did not stabilize. Going for a B test." | Test 14: 334.101 bar (buildup: 334.101 bar) | Quality 2: "Second test at this station. Good test." | 334.101 | Test 13 was logged during incomplete drawdown. Its final buildup (334.16 bar) and repeat Test 14 (334.10 bar) match within 0.06 bar. |
+| Skagerrak Upper Sand (3,386.8 m MD / 3,026.1 m TVD RKB) | Test 18: 354.001 bar | Quality 0: "Pressure did not stabilize." | Test 20: 368.706 bar | Quality 2: "Good test." | 368.706 | Test 18 was an aborted pretest flagged Quality 0. Repeat Test 20 (larger pretest volume) achieved full stabilization at 368.71 bar. |
+| Skagerrak Lower Sand (3,403.5 m MD / 3,036.2 m TVD RKB) | Test 19: 357.714 bar | "Unit shutdown. Memory results." | Test 21: 368.818 bar | Quality 2: "Good test." | 368.818 | Test 19 experienced an unexpected tool shutdown mid-buildup. Repeat Test 21 fully stabilized at 368.82 bar. |
+
+### Implications for Geological Interpretation and ML Target Ground Truth
+1. The Skagerrak Formation is not internally chaotic:
+   - When the two incomplete attempts (Tests 18 and 19) are removed, the two valid, fully stabilized tests in the Skagerrak Formation are Test 20 (368.706 bar at 3,026.27 m TVD) and Test 21 (368.818 bar at 3,036.26 m TVD).
+   - The two stabilized Skagerrak measurements agree to within 0.112 bar across 9.99 m TVD (gradient = 0.0112 bar/m).
+2. Definitive formation pressure targets across all three reservoirs:
+   - Hugin Sandstone (Tests 1 to 12): 320.020 to 325.702 bar (continuous oil column, P = 118.205 + 0.07028 * TVD).
+   - Sleipner Sandstone (Tests 14, 15, 16): 334.101 to 341.713 bar.
+   - Skagerrak Sandstone (Tests 20, 21): 368.706 to 368.818 bar.
+3. This operational reconciliation eliminates the need to average discordant values or introduce artificial compartment boundaries, providing clear physical ground-truth anchors for model evaluation.
+
+The reconciliation audit is stored in [pretest_stabilization_reconciliation.csv](file:///Users/user/final-year-project/tables/pretest_stabilization_reconciliation.csv) and [pretest_stabilization_reconciliation.json](file:///Users/user/final-year-project/tables/pretest_stabilization_reconciliation.json).
