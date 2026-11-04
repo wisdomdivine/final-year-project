@@ -1,0 +1,42 @@
+overburden:
+  water_depth_m: 91.0
+  seawater_density_gcc: 1.025
+  shallow_sediment_top_tvd: 91.0
+  shallow_sediment_base_tvd: 262.43
+  shallow_sediment_mean_density_gcc: 2.011
+  gravity_accel_m_s2: 9.80665
+
+hydrostatic:
+  scenarios:
+    freshwater: 1.000
+    seawater: 1.025
+    formation_brine: 1.030
+  default_fluid_density_gcc: 1.030
+
+formation_regimes:
+  Hugin:
+    top_md: 3127.7052
+    base_md: 3263.5000
+    fluid_type: "oil"
+    oil_gradient_bar_m: 0.07028
+    oil_density_gcc: 0.7167
+    api_gravity: 42.6
+    intercept_pressure_bar: 118.205
+    test_range: [1, 12]
+  Sleipner:
+    top_md: 3263.5000
+    base_md: 3340.0000
+    fluid_type: "baffled_regime"
+    pressure_range_bar: [334.10, 341.71]
+    test_range: [13, 16]
+  Skagerrak:
+    top_md: 3340.0000
+    base_md: 3403.5492
+    fluid_type: "overpressured"
+    stabilized_pressure_bar: 368.80
+    test_range: [18, 21]
+
+eaton_calibration:
+  sonic_exponent: 3.0
+  regional_dt0_us_ft: 195.0
+  regional_compaction_c: 0.00045

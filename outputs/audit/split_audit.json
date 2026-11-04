@@ -1,0 +1,44 @@
+[
+  {
+    "partition":"Train",
+    "start_md_m":3127.7052,
+    "end_md_m":3320.796,
+    "start_tvd_msl_m":2853.2491028645,
+    "end_tvd_msl_m":2968.0969851033,
+    "observation_count":1268,
+    "percentage":70.0165654335,
+    "formations_covered":"Hugin Sandstone + Sleipner (part)",
+    "mean_dt_us_ft":84.4891267155,
+    "mean_gr_api":56.8321327703,
+    "mean_rhob_gcc":2.3002559923,
+    "mean_rd_ohmm":74.9427691674
+  },
+  {
+    "partition":"Validation",
+    "start_md_m":3320.9484,
+    "end_md_m":3362.2488,
+    "start_tvd_msl_m":2968.1885029233,
+    "end_tvd_msl_m":2993.000533596,
+    "observation_count":272,
+    "percentage":15.019326339,
+    "formations_covered":"Sleipner Formation (lower \/ transition)",
+    "mean_dt_us_ft":78.8970742831,
+    "mean_gr_api":83.7103895654,
+    "mean_rhob_gcc":2.4991764604,
+    "mean_rd_ohmm":1.5951937415
+  },
+  {
+    "partition":"Test",
+    "start_md_m":3362.4012,
+    "end_md_m":3403.5492,
+    "start_tvd_msl_m":2993.0921089937,
+    "end_tvd_msl_m":3017.8267158837,
+    "observation_count":271,
+    "percentage":14.9641082275,
+    "formations_covered":"Skagerrak Formation (overpressured)",
+    "mean_dt_us_ft":79.6466568613,
+    "mean_gr_api":79.0076269657,
+    "mean_rhob_gcc":2.4663350508,
+    "mean_rd_ohmm":1.2735922487
+  }
+]
