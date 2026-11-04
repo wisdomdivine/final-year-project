@@ -1,0 +1,26 @@
+[
+  {
+    "lithology": "Sandstone (Reservoir Sand)",
+    "flag_definition": "SAND_FLAG == 1.0",
+    "row_count": 1144,
+    "percentage": 63.17,
+    "gr_mean_api": 52.43,
+    "vcl_mean": 0.2969,
+    "dt_mean_us_ft": 84.96,
+    "rhob_mean_g_cm3": 2.2875,
+    "k_mean_md": 223.75,
+    "phif_mean": 0.2147
+  },
+  {
+    "lithology": "Shale / Non-Sand (Caprock & Intra-reservoir)",
+    "flag_definition": "SAND_FLAG == 0.0",
+    "row_count": 667,
+    "percentage": 36.83,
+    "gr_mean_api": 84.35,
+    "vcl_mean": 0.5658,
+    "dt_mean_us_ft": 79.43,
+    "rhob_mean_g_cm3": 2.4707,
+    "k_mean_md": 1.89,
+    "phif_mean": 0.1137
+  }
+]

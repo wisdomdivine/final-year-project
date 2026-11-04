@@ -1,0 +1,4 @@
+gr_threshold_api,sample_count,norm_interval_samples,dt_surface_us_ft,compaction_coefficient_per_m,normal_dt_top_3128m,normal_dt_mid_3266m,normal_dt_base_3404m
+60.0,9143,6729,189.58,0.000204,100.17,97.39,94.69
+75.0,8211,6470,182.84,0.000184,102.72,100.14,97.62
+90.0,7194,5966,173.7,0.000151,108.25,106.02,103.83

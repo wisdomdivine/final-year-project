@@ -1,0 +1,32 @@
+[
+  {
+    "gr_threshold_api": 60.0,
+    "sample_count": 9143,
+    "norm_interval_samples": 6729,
+    "dt_surface_us_ft": 189.58,
+    "compaction_coefficient_per_m": 0.000204,
+    "normal_dt_top_3128m": 100.17,
+    "normal_dt_mid_3266m": 97.39,
+    "normal_dt_base_3404m": 94.69
+  },
+  {
+    "gr_threshold_api": 75.0,
+    "sample_count": 8211,
+    "norm_interval_samples": 6470,
+    "dt_surface_us_ft": 182.84,
+    "compaction_coefficient_per_m": 0.000184,
+    "normal_dt_top_3128m": 102.72,
+    "normal_dt_mid_3266m": 100.14,
+    "normal_dt_base_3404m": 97.62
+  },
+  {
+    "gr_threshold_api": 90.0,
+    "sample_count": 7194,
+    "norm_interval_samples": 5966,
+    "dt_surface_us_ft": 173.7,
+    "compaction_coefficient_per_m": 0.000151,
+    "normal_dt_top_3128m": 108.25,
+    "normal_dt_mid_3266m": 106.02,
+    "normal_dt_base_3404m": 103.83
+  }
+]
