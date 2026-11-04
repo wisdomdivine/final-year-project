@@ -1,0 +1,8 @@
+interval_layer,top_md_m,base_md_m,top_tvd_msl_m,base_tvd_msl_m,thickness_tvd_m,mean_density_g_cm3,interval_stress_bar,cumulative_Sv_bar,obg_bar_per_m,notes
+Air Gap,0.0,54.9,-54.9,0.0,54.9,0.0,0.0,0.0,0.0,Kelly Bushing elevation above sea surface; zero lithostatic contribution
+Water Column (Seawater),54.9,145.9,0.0,91.0,91.0,1.03,9.1918,9.1918,0.101,"Central North Sea normal seawater gradient (0.1010 bar/m, 0.4466 psi/ft)"
+Shallow Unlogged Sediments (Seabed to Log Start),145.9,262.43,91.0,262.43,171.43,1.88,31.6061,40.7979,0.1555,"Compaction model: Low=1.80, Mid=1.88, High=1.95 g/cm3 (uncertainty +/- 1.26 bar)"
+"Upper Tertiary Claystones (Log Start to 1,350 m MD)",262.43,1350.0,262.43,1323.84,1061.41,2.011,204.3997,253.9302,0.1891,Decoded MWD bulk density from Run 3 pilot hole; continuous empirical log
+"Mid-Lower Tertiary Section (1,350 to 2,500 m MD)",1350.0,2500.0,1323.84,2412.27,1088.42,2.104,229.4927,474.6902,0.1968,Normal mechanical compaction regime; runs 5-6 MWD ARC-ADN
+"Upper Cretaceous Chalk Group (2,500 to 3,127.7 m MD)",2500.0,3127.71,2412.27,2853.25,440.99,2.47,105.3638,580.054,0.2033,High-density carbonate seal (Cretaceous Chalk); causes sonic velocity jump
+"Study / Predictor Interval (3,127.71 to 3,403.55 m MD)",3127.71,3403.55,2853.25,3017.83,164.58,2.355,38.0167,618.0707,0.2048,"Hugin, Sleipner, and Skagerrak formations; 1,811 rows target evaluation interval"

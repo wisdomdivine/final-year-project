@@ -126,44 +126,95 @@ Evaluation criteria:
 - Root Mean Squared Error (RMSE)
 - Coefficient of Determination (R-squared)
 
-## 8. Formation Pressure Reference Data and Target Formulation
+## 8. Formation Pressure Reference Data and Split Audit
 
-Official formation pressure measurements were extracted from the Schlumberger MWD Stethoscope pretest report (FM_PRESS_COMPUTED_MWD_1.ASC) for well 15/9-F-12.
+Official formation pressure measurements were extracted and reconciled across three primary sources for well 15/9-F-12: the Schlumberger MWD Stethoscope pretest report (FM_PRESS_COMPUTED_MWD_1.ASC), the high-precision Quartz Gauge (AQAP) certification report (Test point table.xls), and the official well completion records.
 
-Across the entire well, 24 test stations were executed (MD 3127.9 m to 3490.4 m). Within the 1,811-observation study interval (3127.71 m to 3403.55 m), 20 stations exist, of which 16 are stabilized, high-quality pressure measurements:
+Key quality and dataset audit resolutions:
+- Test 14 TVD corrected: Fixed erroneous TVD entry (2,970.40 m TVD RKB / 2,915.50 m TVD MSL).
+- Test 19 recovered: Recovered high-precision memory quartz gauge record (357.714 bar at 3,403.53 m MD / 3,036.23 m TVD RKB).
+- Pressure test lithology: 22 of 23 test stations reside in reservoir sandstone (SAND_FLAG = 1.0). Only station 17 is in tight shale/siltstone (SAND_FLAG = 0.0).
+- Contiguous partition alignment: 15 stations reside in Training (MD <= 3,320.80 m), 2 in Validation (3,320.95 to 3,362.25 m), and 4 in Testing (3,362.40 to 3,403.57 m).
 
-| Test No | Formation | Depth MD (m) | TVD RKB (m) | TVD MSL (m) | Pressure (bar) | Quality Code | Quality Description |
-|:---|:---|:---|:---|:---|:---|:---|:---|
-| 1  | Hugin     | 3127.9 | 2871.8 | 2816.9 | 320.17 | 4 | Very good permeability |
-| 2  | Hugin     | 3128.0 | 2871.9 | 2817.0 | 320.18 | 3 | Good permeability |
-| 3  | Hugin     | 3136.7 | 2877.5 | 2822.6 | 320.57 | 4 | Very good permeability |
-| 4  | Hugin     | 3143.5 | 2881.1 | 2826.2 | 320.88 | 4 | Very good permeability |
-| 5  | Hugin     | 3153.0 | 2886.7 | 2831.8 | 321.20 | 4 | Very good permeability |
-| 6  | Hugin     | 3170.7 | 2897.0 | 2842.1 | 321.90 | 3 | Good permeability |
-| 7  | Hugin     | 3192.0 | 2909.8 | 2854.9 | 322.84 | 4 | Very good permeability |
-| 8  | Hugin     | 3222.0 | 2927.5 | 2872.6 | 324.02 | 3 | Good permeability |
-| 9  | Hugin     | 3241.0 | 2938.8 | 2883.9 | 324.84 | 3 | Good permeability |
-| 10 | Hugin     | 3255.0 | 2947.2 | 2892.3 | 325.46 | 3 | Good permeability |
-| 11 | Hugin     | 3263.5 | 2952.6 | 2897.7 | 325.81 | 3 | Good permeability |
-| 12 | Hugin     | 3262.8 | 2951.9 | 2897.0 | 325.81 | 2 | Poor permeability |
-| 14 | Sleipner  | 3293.9 | 2980.0 | 2925.1 | 334.22 | 2 | Poor permeability |
-| 15 | Sleipner  | 3307.7 | 2978.6 | 2923.7 | 335.74 | 2 | Poor permeability |
-| 16 | Sleipner  | 3324.7 | 2988.7 | 2933.8 | 341.87 | 2 | Poor permeability |
-| 20 | Skagerrak | 3387.0 | 3026.3 | 2971.4 | 368.88 | 2 | Poor permeability |
+| Test No | Run | Formation | Depth MD (m) | TVD RKB (m) | TVD MSL (m) | Pressure (bar) | Split Partition | Quality Interpretation | Recommended Role |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| 1  | 10 | Hugin     | 3127.71 | 2871.76 | 2816.86 | 320.020 | Training   | Very good permeability (AQAP) | Primary calibration reference |
+| 2  | 10 | Hugin     | 3127.99 | 2871.92 | 2817.02 | 320.042 | Training   | Good permeability (AQAP)      | Primary calibration reference |
+| 3  | 10 | Hugin     | 3136.74 | 2877.09 | 2822.19 | 320.385 | Training   | Very good permeability (AQAP) | Primary calibration reference |
+| 4  | 10 | Hugin     | 3144.07 | 2881.43 | 2826.53 | 320.713 | Training   | Very good permeability (AQAP) | Primary calibration reference |
+| 5  | 10 | Hugin     | 3152.61 | 2886.49 | 2831.59 | 321.050 | Training   | Very good permeability (AQAP) | Primary calibration reference |
+| 6  | 10 | Hugin     | 3170.73 | 2897.20 | 2842.30 | 321.827 | Training   | Good permeability (AQAP)      | Primary calibration reference |
+| 7  | 10 | Hugin     | 3191.85 | 2909.70 | 2854.80 | 322.677 | Training   | Very good permeability (AQAP) | Primary calibration reference |
+| 8  | 10 | Hugin     | 3221.68 | 2927.35 | 2872.45 | 323.892 | Training   | Good permeability (AQAP)      | Primary calibration reference |
+| 9  | 10 | Hugin     | 3240.73 | 2938.67 | 2883.77 | 324.698 | Training   | Good permeability (AQAP)      | Primary calibration reference |
+| 10 | 10 | Hugin     | 3254.85 | 2947.11 | 2892.21 | 325.298 | Training   | Good permeability (AQAP)      | Primary calibration reference |
+| 12 | 10 | Hugin     | 3262.78 | 2951.85 | 2896.95 | 325.686 | Training   | Poor permeability (AQAP)      | Secondary reference candidate |
+| 11 | 10 | Hugin     | 3263.51 | 2952.29 | 2897.39 | 325.702 | Training   | Good permeability (AQAP)      | Primary calibration reference |
+| 13 | 10 | Sleipner  | 3293.55 | 2970.18 | 2915.28 | 328.056 | Training   | Unstabilized drawdown         | Exclude from calibration |
+| 14 | 10 | Sleipner  | 3294.00 | 2970.40 | 2915.50 | 334.101 | Training   | Poor permeability (AQAP)      | Secondary reference candidate |
+| 15 | 10 | Sleipner  | 3307.73 | 2978.60 | 2923.70 | 335.610 | Training   | Poor permeability (AQAP)      | Secondary reference candidate |
+| 16 | 10 | Sleipner  | 3324.65 | 2988.70 | 2933.80 | 341.713 | Validation | Good permeability (AQAP)      | Validation reference candidate |
+| 17 | 10 | Sleipner  | 3333.57 | 2994.05 | 2939.15 | 69.279  | Validation | Tight formation / dry test    | Exclude from quantitative PP |
+| 18 | 10 | Skagerrak | 3386.51 | 3025.98 | 2971.08 | 354.001 | Testing    | Fair permeability (AQAP)      | Secondary reference candidate |
+| 20 | 10 | Skagerrak | 3386.99 | 3026.27 | 2971.37 | 368.706 | Testing    | Good permeability (AQAP)      | Final test reference candidate |
+| 19 | 10 | Skagerrak | 3403.53 | 3036.23 | 2981.33 | 357.714 | Testing    | Good permeability (Memory)    | Final test reference candidate |
+| 21 | 10 | Skagerrak | 3403.57 | 3036.26 | 2981.36 | 368.818 | Testing    | Good permeability (AQAP)      | External boundary reference |
 
-Unusable or invalid stations in the study interval:
-- Station 13: 3293.6 m (334.42 bar, Quality 0: pressure did not stabilize).
-- Station 17: 3333.6 m (69.74 bar, Quality 1: tight dry test).
-- Station 18: 3386.5 m (354.26 bar, Quality 0: unstabilized).
-- Station 19: 3403.5 m (Quality 0: tool shutdown, no pressure recorded).
+Detailed audit findings:
+- Validation partition contains exactly 1 good test (Test 16: 341.713 bar) and 1 dry test (Test 17: 69.279 bar).
+- Testing partition contains 3 valid tests (Tests 18, 19, 20) and 1 external boundary station (Test 21 at 3,403.57 m MD, 0.02 m below predictor cutoff).
+- An 11.10 bar discrepancy exists between Test 19 (357.714 bar at 3,403.53 m) and Test 21 (368.818 bar at 3,403.57 m), reflecting differing drawdown regimes or isolated sand compartments that must not be averaged.
 
-### Pore Pressure Target Formulation Pathways
+## 9. Stage 2: Overburden Stress Profile (Sv) Reconstruction
 
-1. Hybrid Geomechanical Calibration (Recommended Approach):
-   - Continuous pore pressure is calculated using Eaton's sonic compaction method across all 1,811 depth observations.
-   - The compaction trend and Eaton exponent are calibrated directly against the 16 verified formation pressure test points.
-   - This provides a continuous target profile grounded in classical geomechanics, avoiding arbitrary mathematical interpolation.
-   - The 16 physical measurement stations remain isolated as independent ground truth benchmarks to assess machine learning predictions against actual formation tests.
+Total vertical lithostatic stress Sv(z) represents the cumulative weight of overlying pore fluids and rock matrix per unit area from surface down to depth z:
 
-2. Supervised Target Training:
-   - Machine learning algorithms learn to map the 14 well-log and drilling predictors to the calibrated continuous pore pressure curve, with model performance benchmarked using MAE, MSE, RMSE, and R-squared.
+Sv(z) = integral from 0 to z of rho(z') * g * dz'
+
+### Reference Datums and Geometry
+- Kelly Bushing Elevation (RKB): 54.90 m above Mean Sea Level (MSL).
+- Sea Level (MSL): 0.0 m TVD MSL (54.90 m TVD RKB).
+- Seabed / Mudline: 91.00 m TVD MSL (145.90 m TVD RKB).
+- Air Gap (0.0 to 54.90 m RKB): Zero lithostatic contribution.
+- Water Column (0.0 to 91.00 m TVD MSL): Central North Sea seawater density rho_w = 1.03 g/cm3, producing 9.1918 bar (133.32 psi) at seabed (gradient = 0.1010 bar/m).
+- Shallow Sediment Interval (91.00 to 262.43 m TVD MSL): Thickness = 171.43 m.
+- Continuous Measured Density Log: Decoded from WLC_COMPOSITE_1.LIS (262.43 m to 3,507.79 m MD), verified against WLC_PETRO_COMPUTED_INPUT_1.LAS (1,349.96 m to 3,507.49 m MD).
+
+### Shallow Sediment Sensitivity Cases
+Because continuous wireline logging commences at 262.43 m MD (Run 3 pilot hole ARC-ADN), the unlogged shallow sediment column between seabed (91.0 m TVD MSL) and 262.43 m TVD MSL (171.43 m thickness) is evaluated under three standard North Sea compaction cases:
+- Low case: Mean density = 1.80 g/cm3 (stress contribution = 30.26 bar).
+- Mid case (Nominal): Mean density = 1.88 g/cm3 (stress contribution = 31.61 bar).
+- High case: Mean density = 1.95 g/cm3 (stress contribution = 32.78 bar).
+Total shallow uncertainty is +/- 1.26 bar (+/- 0.21% of total overburden stress at reservoir depth).
+
+### Overburden Interval Breakdown
+
+| Interval Layer | Top MD (m) | Base MD (m) | Top TVD MSL (m) | Base TVD MSL (m) | Thickness (m) | Mean Density (g/cm3) | Layer Stress (bar) | Cumulative Sv (bar) | OBG (bar/m) | Equivalent Density (s.g.) |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| Air Gap | 0.00 | 54.90 | -54.90 | 0.00 | 54.90 | 0.000 | 0.0000 | 0.0000 | 0.0000 | 0.000 |
+| Water Column (Seawater) | 54.90 | 145.90 | 0.00 | 91.00 | 91.00 | 1.030 | 9.1918 | 9.1918 | 0.1010 | 1.030 |
+| Shallow Unlogged Sediments | 145.90 | 262.43 | 91.00 | 262.43 | 171.43 | 1.880 | 31.6061 | 40.7979 | 0.1555 | 1.585 |
+| Upper Tertiary Claystones | 262.43 | 1350.00 | 262.43 | 1323.84 | 1061.41 | 2.011 | 204.3997 | 253.9302 | 0.1891 | 1.928 |
+| Mid-Lower Tertiary Section | 1350.00 | 2500.00 | 1323.84 | 2412.27 | 1088.42 | 2.104 | 229.4927 | 474.6902 | 0.1968 | 2.007 |
+| Upper Cretaceous Chalk Group | 2500.00 | 3127.71 | 2412.27 | 2853.25 | 440.99 | 2.470 | 105.3638 | 580.0540 | 0.2033 | 2.073 |
+| Study / Predictor Interval | 3127.71 | 3403.55 | 2853.25 | 3017.83 | 164.58 | 2.355 | 38.0167 | 618.0707 | 0.2048 | 2.088 |
+
+### Overburden Stress Summary across Study Interval
+- Top of Predictor Interval (3,127.71 m MD / 2,853.25 m TVD MSL):
+  - Measured log contribution: 539.26 bar
+  - Shallow sediment contribution (Mid): 31.61 bar (Low: 30.26 bar, High: 32.78 bar)
+  - Seawater column contribution: 9.19 bar
+  - Total vertical stress Sv (Mid): 580.05 bar (8,413 psi / 58.01 MPa)
+  - Overburden gradient (OBG): 0.2033 bar/m (2.073 s.g. / 0.899 psi/ft / 17.30 ppg)
+- Base of Predictor Interval (3,403.55 m MD / 3,017.83 m TVD MSL):
+  - Measured log contribution: 577.27 bar
+  - Total vertical stress Sv (Mid): 618.07 bar (8,964 psi / 61.81 MPa)
+  - Overburden gradient (OBG): 0.2048 bar/m (2.088 s.g. / 0.905 psi/ft / 17.43 ppg)
+- Effective vertical stress in reservoir sands (sigma_v = Sv - P_fm):
+  - Hugin Formation (Tests 1 to 12): 260.03 to 272.14 bar
+  - Sleipner Formation (Tests 14 to 16): 264.78 to 268.47 bar
+  - Skagerrak Formation (Tests 18 to 21): 246.99 to 261.63 bar
+
+The overburden reconstruction profile is stored in [overburden_stress_profile.csv](file:///Users/user/final-year-project/tables/overburden_stress_profile.csv) and [overburden_stress_profile.json](file:///Users/user/final-year-project/tables/overburden_stress_profile.json).
+The interval layer breakdown is stored in [overburden_interval_breakdown.csv](file:///Users/user/final-year-project/tables/overburden_interval_breakdown.csv) and [overburden_interval_breakdown.json](file:///Users/user/final-year-project/tables/overburden_interval_breakdown.json).
+The stress state at all 21 pressure test stations is stored in [overburden_at_pressure_stations.csv](file:///Users/user/final-year-project/tables/overburden_at_pressure_stations.csv) and [overburden_at_pressure_stations.json](file:///Users/user/final-year-project/tables/overburden_at_pressure_stations.json).
