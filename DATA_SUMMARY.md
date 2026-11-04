@@ -50,13 +50,69 @@ The reconstructed feature matrix X consists of 14 continuous variables:
 
 To mitigate spatial autocorrelation leakage, the 1,811 sequential observations are split chronologically down-hole:
 
-| Dataset Partition | Percentage | Approximate Rows | Depth Interval (m) | Primary Purpose |
-|:------------------|:-----------|:-----------------|:-------------------|:----------------|
-| Training          | 70%        | 1,268            | 3127.71 to 3320.95 | Model parameter learning |
-| Validation        | 15%        | 272              | 3321.10 to 3362.40 | Hyperparameter tuning and model selection |
-| Testing           | 15%        | 271              | 3362.55 to 3403.55 | Final unbiased model evaluation |
+| Dataset Partition | Percentage | Rows | Depth Interval (m) | Primary Purpose |
+|:------------------|:-----------|:-----|:-------------------|:----------------|
+| Training          | 70%        | 1,268 | 3127.71 to 3320.80 | Model parameter learning |
+| Validation        | 15%        | 272  | 3320.95 to 3362.25 | Hyperparameter tuning and model selection |
+| Testing           | 15%        | 271  | 3362.40 to 3403.55 | Final unbiased model evaluation |
 
-## 4. Candidate Algorithms and Evaluation Metrics
+## 4. Multicollinearity Assessment (Variance Inflation Factor)
+
+Multicollinearity was evaluated across all 14 variables using the Variance Inflation Factor (VIF). Values greater than 10 indicate severe collinearity that can destabilize linear regression coefficients:
+
+| Variable | VIF | Multicollinearity Level | Primary Correlation Drivers |
+|:---------|:----|:------------------------|:----------------------------|
+| PHIF     | 107.62 | Severe               | Strongly anti-correlated with RHOB (-0.982) |
+| RHOB     | 71.81  | Severe               | Strongly anti-correlated with PHIF (-0.982) |
+| GR       | 39.96  | Severe               | Strongly correlated with VCL (0.912) |
+| SW       | 37.06  | Severe               | Correlated with RHOB (0.893) and PHIF (-0.870) |
+| VCL      | 23.64  | Severe               | Strongly correlated with GR (0.912) |
+| BVW      | 9.79   | Moderate             | Related to porosity and saturation |
+| RT       | 7.74   | Moderate             | Correlated with RD (0.912) |
+| DEPTH    | 7.30   | Moderate             | Depth trend across formation compaction |
+| ROP      | 6.70   | Moderate             | Moderately correlated with SW (0.832) |
+| NPHI     | 6.30   | Moderate             | Correlated with PHIF (0.809) |
+| RD       | 6.15   | Moderate             | Correlated with RT (0.912) |
+| DT       | 1.80   | Low                  | Weak linear dependency |
+| RS       | 1.20   | Low                  | Flushed zone resistivity |
+| K        | 1.20   | Low                  | Dominated by reservoir intervals |
+
+Implications for modeling:
+- Tree-based models (Random Forest, CatBoost) are naturally robust to multicollinearity because splits are determined on individual features.
+- Multiple Linear Regression (MLR) coefficients will be unstable if all collinear features are included without regularization. An L2 regularized variant (Ridge) or feature selection may be assessed alongside ordinary MLR.
+
+## 5. Partition Distribution Comparison
+
+A key feature of the contiguous depth split is that the testing set evaluates model generalization to a deeper subsurface interval:
+
+| Variable | Training Mean | Validation Mean | Testing Mean | Overall Mean | Observation on Distribution Shift |
+|:---------|:--------------|:----------------|:-------------|:-------------|:-----------------------------------|
+| DEPTH (m) | 3224.25     | 3341.60         | 3382.98      | 3265.63      | Contiguous depth progression down-hole |
+| DT (us/ft) | 84.49       | 78.90           | 79.65        | 82.92        | Slightly faster formation in deeper intervals |
+| GR (API)  | 56.83       | 83.71           | 79.01        | 64.19        | Shadier lithology in deeper intervals |
+| NPHI (v/v) | 0.21       | 0.18            | 0.18         | 0.20         | Lower apparent porosity deeper |
+| RD (ohm.m) | 74.94      | 1.60            | 1.27         | 52.90        | Hydrocarbon column shallow, brine deeper |
+| RHOB (g/cm3) | 2.30     | 2.50            | 2.47         | 2.35         | Denser rock in deeper intervals |
+| RS (ohm.m) | 87.82      | 2.04            | 1.45         | 62.01        | Matches deep resistivity pattern |
+| RT (ohm.m) | 74.33      | 2.10            | 2.04         | 52.66        | Matches deep resistivity pattern |
+| ROP (m/hr) | 14.71      | 26.08           | 25.12        | 17.98        | Higher penetration rate in deeper section |
+| BVW (v/v) | 0.05        | 0.09            | 0.11         | 0.07         | Increased bulk water volume deeper |
+| K (mD)    | 180.36      | 102.83          | 2.06         | 142.04       | Low permeability beneath reservoir base |
+| PHIF (v/v) | 0.20       | 0.10            | 0.13         | 0.18         | Porosity drops below main reservoir |
+| SW (v/v)  | 0.33        | 0.92            | 0.87         | 0.50         | Oil-water contact transition |
+| VCL (v/v) | 0.36        | 0.52            | 0.45         | 0.40         | Increase in clay volume |
+
+This distribution shift reflects genuine reservoir geology: the shallower 70% includes the oil-bearing Hugin sandstone, while the deeper 15% penetrates the underlying transition and water-bearing formation. This makes the depth-based test a rigorous real-world evaluation of model transferability.
+
+## 6. Preprocessing and Transformation Strategy
+
+1. Skewness handling:
+   - High positive skewness in permeability K (11.66) and resistivity logs RS (11.96), RD (4.29), and RT (3.57) justifies evaluating log10 transformations for distance-sensitive and linear architectures (MLR, MLP).
+2. Feature scaling:
+   - Standardization parameters (mean and standard deviation) are strictly computed on the 70% Training set (1,268 rows) and applied without recomputation to Validation and Testing sets.
+   - Tree ensembles (Random Forest, CatBoost) are invariant to monotonic scaling and will be evaluated on native scales.
+
+## 7. Candidate Algorithms and Evaluation Metrics
 
 The experimental workflow evaluates four distinct model architectures:
 - Multiple Linear Regression (MLR): Serves as the benchmark baseline.
@@ -70,7 +126,7 @@ Evaluation criteria:
 - Root Mean Squared Error (RMSE)
 - Coefficient of Determination (R-squared)
 
-## 5. Target Variable Status
+## 8. Target Variable Status
 
 The target variable is Pore Pressure (PP). Training and final validation are pending final target integration:
 - Primary pathway: direct confirmation from author correspondence.

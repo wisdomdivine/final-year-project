@@ -1,0 +1,72 @@
+[
+  {
+    "variable": "PHIF",
+    "vif": 107.62,
+    "multicollinearity_level": "Severe"
+  },
+  {
+    "variable": "RHOB",
+    "vif": 71.81,
+    "multicollinearity_level": "Severe"
+  },
+  {
+    "variable": "GR",
+    "vif": 39.96,
+    "multicollinearity_level": "Severe"
+  },
+  {
+    "variable": "SW",
+    "vif": 37.06,
+    "multicollinearity_level": "Severe"
+  },
+  {
+    "variable": "VCL",
+    "vif": 23.64,
+    "multicollinearity_level": "Severe"
+  },
+  {
+    "variable": "BVW",
+    "vif": 9.79,
+    "multicollinearity_level": "Moderate"
+  },
+  {
+    "variable": "RT",
+    "vif": 7.74,
+    "multicollinearity_level": "Moderate"
+  },
+  {
+    "variable": "DEPTH",
+    "vif": 7.3,
+    "multicollinearity_level": "Moderate"
+  },
+  {
+    "variable": "ROP",
+    "vif": 6.7,
+    "multicollinearity_level": "Moderate"
+  },
+  {
+    "variable": "NPHI",
+    "vif": 6.3,
+    "multicollinearity_level": "Moderate"
+  },
+  {
+    "variable": "RD",
+    "vif": 6.15,
+    "multicollinearity_level": "Moderate"
+  },
+  {
+    "variable": "DT",
+    "vif": 1.8,
+    "multicollinearity_level": "Low"
+  },
+  {
+    "variable": "RS",
+    "vif": 1.2,
+    "multicollinearity_level": "Low"
+  },
+  {
+    "variable": "K",
+    "vif": 1.2,
+    "multicollinearity_level": "Low"
+  }
+]

@@ -1,0 +1,15 @@
+variable,vif,multicollinearity_level
+PHIF,107.62,Severe
+RHOB,71.81,Severe
+GR,39.96,Severe
+SW,37.06,Severe
+VCL,23.64,Severe
+BVW,9.79,Moderate
+RT,7.74,Moderate
+DEPTH,7.3,Moderate
+ROP,6.7,Moderate
+NPHI,6.3,Moderate
+RD,6.15,Moderate
+DT,1.8,Low
+RS,1.2,Low
+K,1.2,Low
