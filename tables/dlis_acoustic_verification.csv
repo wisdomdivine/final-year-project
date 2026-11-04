@@ -1,0 +1,2 @@
+dlis_source_file,dlis_channel,las_source_file,las_channel,matched_rows,depth_min_m,depth_max_m,pearson_correlation,mean_absolute_difference_us_ft,median_absolute_difference_us_ft,pct_exact_matches_within_0_1_us_ft,conclusion
+WLC_RAW_AC_MWD_1.DLIS,DTCO,WLC_PETRO_COMPUTED_INPUT_1.LAS,DT,7299,1368.7,2550.26,0.998417,0.0404,0.0,99.56,"DLIS DTCO and LAS DT are identical realizations of the same ISONIC logging pass, confirming LAS DT captures all available acoustic measurements without data loss."

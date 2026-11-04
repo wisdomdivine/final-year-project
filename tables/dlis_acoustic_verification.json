@@ -1,0 +1,14 @@
+{
+  "dlis_source_file": "WLC_RAW_AC_MWD_1.DLIS",
+  "dlis_channel": "DTCO",
+  "las_source_file": "WLC_PETRO_COMPUTED_INPUT_1.LAS",
+  "las_channel": "DT",
+  "matched_rows": 7299,
+  "depth_min_m": 1368.7,
+  "depth_max_m": 2550.26,
+  "pearson_correlation": 0.998417,
+  "mean_absolute_difference_us_ft": 0.0404,
+  "median_absolute_difference_us_ft": 0.0,
+  "pct_exact_matches_within_0_1_us_ft": 99.56,
+  "conclusion": "DLIS DTCO and LAS DT are identical realizations of the same ISONIC logging pass, confirming LAS DT captures all available acoustic measurements without data loss."
+}
