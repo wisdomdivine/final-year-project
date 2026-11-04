@@ -62,3 +62,4 @@ def compute_minimum_curvature(
 
     delta_tvd = (delta_md / 2.0) * (np.cos(i1) + np.cos(i2)) * rf
     return float(delta_tvd)
+

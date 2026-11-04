@@ -122,3 +122,4 @@ def test_nct_trend_fitting():
 
     pred_dt = predict_normal_transit_time(z, fit_results["dt0_us_ft"], fit_results["compaction_coeff_c"])
     assert np.allclose(pred_dt, dt_synthetic, rtol=1e-4)
+

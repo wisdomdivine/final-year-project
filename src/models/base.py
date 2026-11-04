@@ -41,3 +41,4 @@ class BaseModel(ABC):
         if not path.exists():
             raise FileNotFoundError(f"Model file not found at {path}")
         return joblib.load(path)
+

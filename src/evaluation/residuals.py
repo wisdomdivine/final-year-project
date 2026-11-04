@@ -42,3 +42,4 @@ def analyze_residuals(residuals: np.ndarray) -> Dict[str, float]:
         "min_residual": float(np.min(res)),
         "max_residual": float(np.max(res)),
     }
+

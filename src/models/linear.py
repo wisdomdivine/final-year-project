@@ -24,3 +24,4 @@ class MultipleLinearRegressionModel(BaseModel):
         if not self.is_fitted:
             raise RuntimeError("Model must be fitted before predict.")
         return np.asarray(self.model.predict(X))
+

@@ -46,3 +46,4 @@ def predict_normal_transit_time(
 ) -> np.ndarray:
     """Predict normal compaction sonic transit time DT_n given depth."""
     return dt0_us_ft * np.exp(-compaction_coeff_c * tvd_m)
+

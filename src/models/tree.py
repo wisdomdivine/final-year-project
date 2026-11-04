@@ -41,3 +41,4 @@ class RandomForestModel(BaseModel):
         if not self.is_fitted:
             raise RuntimeError("Model must be fitted to get feature importances.")
         return self.model.feature_importances_
+
