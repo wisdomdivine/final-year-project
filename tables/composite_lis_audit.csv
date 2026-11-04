@@ -1,0 +1,5 @@
+logging_run,tool_type,depth_range_m,matched_samples,pearson_correlation,mean_abs_difference_us_ft,median_abs_difference_us_ft,mean_offset_lis_minus_las,pct_matches_within_0_1_us_ft,status
+Run 5-6,MWD ISONIC,1368.7 - 2548.4,7286,0.998985,0.0258,0.0,0.0189,99.73,Verified 1-to-1 match
+Run 9,MWD ISONIC,2548.6 - 3079.6,3388,0.999933,0.0112,0.0,-0.0104,99.59,Verified 1-to-1 match
+Run 10,MWD ECOSCOPE,3079.7 - 3505.5,2381,0.999975,0.034,0.0204,-0.0002,93.41,Verified 1-to-1 match
+Full Composite,Combined Runs 5-10,1368.7 - 3505.5,13058,0.999881,0.0236,0.0,0.0079,98.53,Verified 1-to-1 match

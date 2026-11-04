@@ -1,0 +1,50 @@
+[
+  {
+    "logging_run": "Run 5-6",
+    "tool_type": "MWD ISONIC",
+    "depth_range_m": "1368.7 - 2548.4",
+    "matched_samples": 7286,
+    "pearson_correlation": 0.998985,
+    "mean_abs_difference_us_ft": 0.0258,
+    "median_abs_difference_us_ft": 0.0,
+    "mean_offset_lis_minus_las": 0.0189,
+    "pct_matches_within_0_1_us_ft": 99.73,
+    "status": "Verified 1-to-1 match"
+  },
+  {
+    "logging_run": "Run 9",
+    "tool_type": "MWD ISONIC",
+    "depth_range_m": "2548.6 - 3079.6",
+    "matched_samples": 3388,
+    "pearson_correlation": 0.999933,
+    "mean_abs_difference_us_ft": 0.0112,
+    "median_abs_difference_us_ft": 0.0,
+    "mean_offset_lis_minus_las": -0.0104,
+    "pct_matches_within_0_1_us_ft": 99.59,
+    "status": "Verified 1-to-1 match"
+  },
+  {
+    "logging_run": "Run 10",
+    "tool_type": "MWD ECOSCOPE",
+    "depth_range_m": "3079.7 - 3505.5",
+    "matched_samples": 2381,
+    "pearson_correlation": 0.999975,
+    "mean_abs_difference_us_ft": 0.034,
+    "median_abs_difference_us_ft": 0.0204,
+    "mean_offset_lis_minus_las": -0.0002,
+    "pct_matches_within_0_1_us_ft": 93.41,
+    "status": "Verified 1-to-1 match"
+  },
+  {
+    "logging_run": "Full Composite",
+    "tool_type": "Combined Runs 5-10",
+    "depth_range_m": "1368.7 - 3505.5",
+    "matched_samples": 13058,
+    "pearson_correlation": 0.999881,
+    "mean_abs_difference_us_ft": 0.0236,
+    "median_abs_difference_us_ft": 0.0,
+    "mean_offset_lis_minus_las": 0.0079,
+    "pct_matches_within_0_1_us_ft": 98.53,
+    "status": "Verified 1-to-1 match"
+  }
+]
