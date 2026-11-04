@@ -1,0 +1,7 @@
+test_no,md_m,tvd_m,formation_pressure_bar_plot,last_read_investigation_bar,last_read_final_bar,test_type,quality,source,audit_note,pressure_difference_vs_nearby_test_bar
+13,3293.55,2970.18,334.161,328.166,334.161,Type C,Good,Run 10 FPWD plot p.134,ASC/table discrepancy: use plot Formation Pressure as plotted; investigate why alternate table lists 328.056,0.06
+14,3294.0,2970.4,334.101,333.174,334.101,Type B,Good,Run 10 FPWD plot p.141,Agrees with official final pretest table,-0.06
+18,3386.51,3025.98,354.001,342.317,354.001,Type B,Fair,Run 10 FPWD plot p.164,Final pressure stable per report; lower quality classification retained,-14.705
+19,3403.53,3036.23,357.714,357.708,357.714,Type B,Good,Run 10 FPWD plot p.171,Memory gauge result recovered; stable final pressure,-11.104
+20,3386.99,3026.27,368.706,368.736,368.706,Type A,Good,Run 10 FPWD plot p.178,Near-depth discrepancy with Test 18 remains,14.705
+21,3403.57,3036.26,368.818,368.493,368.818,Type B,Good,Run 10 FPWD plot p.185,Near-depth discrepancy with Test 19 remains,11.104

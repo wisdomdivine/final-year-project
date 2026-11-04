@@ -284,3 +284,13 @@ A cross-examination of the official Schlumberger realtime log (FM_PRESS_COMPUTED
 3. This operational reconciliation eliminates the need to average discordant values or introduce artificial compartment boundaries, providing clear physical ground-truth anchors for model evaluation.
 
 The reconciliation audit is stored in [pretest_stabilization_reconciliation.csv](file:///Users/user/final-year-project/tables/pretest_stabilization_reconciliation.csv) and [pretest_stabilization_reconciliation.json](file:///Users/user/final-year-project/tables/pretest_stabilization_reconciliation.json).
+The original Schlumberger pressure-versus-time plot reconciliation is stored in [fpwd_plot_reconciliation.csv](file:///Users/user/final-year-project/tables/fpwd_plot_reconciliation.csv) and [fpwd_plot_reconciliation.json](file:///Users/user/final-year-project/tables/fpwd_plot_reconciliation.json).
+
+### Calcite Hardgrounds and Vertical Permeability Baffles
+Petrophysical log evaluation of the 1,811 predictor records identifies prominent calcite-cemented stringers and hardgrounds (CARB_FLAG = 1.0, RHOB = 2.50 to 2.66 g/cm3, DT = 64 to 75 us/ft) throughout the lower section:
+- 3,286.5 to 3,290.8 m MD: Dense carbonate hardground directly overlying Sleipner Test 13/14.
+- 3,296.8 to 3,299.2 m MD: Cemented carbonate baffle underlying Test 14.
+- 3,326.3 to 3,330.1 m MD: Thick carbonate seal bed separating Sleipner Test 16 from dry Test 17.
+- 3,404.8 to 3,405.0 m MD: Low-porosity cemented hardground directly below Skagerrak Test 19/21.
+
+These cemented low-permeability beds act as regional and local vertical flow barriers, preventing pressure communication between individual sand stringers and explaining why step-wise pressure transitions occur across the Middle Jurassic and Triassic intervals.
