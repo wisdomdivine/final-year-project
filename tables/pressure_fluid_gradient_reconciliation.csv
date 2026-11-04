@@ -1,0 +1,20 @@
+metric,value,unit
+"Official Schlumberger oil gradient, Hugin tests 1-12",0.07,bar/m
+Equivalent oil density reported by Schlumberger,0.717,g/cc
+Hugin linear fit slope from table,0.07027590772688061,bar/m
+Hugin linear fit intercept,118.20475601320813,bar
+Hugin linear fit R2,0.9999145964612685,dimensionless
+Test 19 pressure,357.714,bar
+Test 19 TVD,3036.23,m TVD
+Test 21 pressure,368.818,bar
+Test 21 TVD,3036.26,m TVD
+Test 18 pressure,354.001,bar
+Test 18 TVD,3025.98,m TVD
+Test 20 pressure,368.706,bar
+Test 20 TVD,3026.27,m TVD
+Test 21 minus Test 19 pressure,11.103999999999985,bar
+Test 21 minus Test 19 TVD,0.03000000000020009,m
+Test 20 minus Test 18 pressure,14.705000000000041,bar
+Test 20 minus Test 18 TVD,0.2899999999999636,m
+Test 19 final minus investigation pressure,0.005999999999971806,bar
+Test 21 final minus investigation pressure,0.32499999999998863,bar

@@ -218,3 +218,47 @@ Total shallow uncertainty is +/- 1.26 bar (+/- 0.21% of total overburden stress 
 The overburden reconstruction profile is stored in [overburden_stress_profile.csv](file:///Users/user/final-year-project/tables/overburden_stress_profile.csv) and [overburden_stress_profile.json](file:///Users/user/final-year-project/tables/overburden_stress_profile.json).
 The interval layer breakdown is stored in [overburden_interval_breakdown.csv](file:///Users/user/final-year-project/tables/overburden_interval_breakdown.csv) and [overburden_interval_breakdown.json](file:///Users/user/final-year-project/tables/overburden_interval_breakdown.json).
 The stress state at all 21 pressure test stations is stored in [overburden_at_pressure_stations.csv](file:///Users/user/final-year-project/tables/overburden_at_pressure_stations.csv) and [overburden_at_pressure_stations.json](file:///Users/user/final-year-project/tables/overburden_at_pressure_stations.json).
+
+## 10. Hydrostatic Reference Profiles and Reservoir Fluid Regimes
+
+A rigorous hydrostatic reference requires separating the open seawater column above the seabed from the formation fluid column below the mudline, and accounting for reservoir fluid density regimes across the three target formations:
+
+### Fluid Density and Pressure Regimes
+1. Water Column (0 to 91.0 m TVD MSL):
+   - Seawater density rho_w = 1.025 to 1.030 g/cm3.
+   - Hydrostatic pressure at seabed = 9.147 to 9.192 bar (132.67 to 133.32 psi).
+2. Regional Formation Brine Hydrostatic (Seabed to Reservoir Depth):
+   - Normal Central North Sea formation water density: 1.025 to 1.050 g/cm3 (gradients: 0.1005 to 0.1030 bar/m).
+   - Regional brine hydrostatic pressure at 2,872 m TVD MSL is approximately 307.0 to 308.4 bar.
+   - Measured Hugin sandstone formation pressures (320.02 to 325.70 bar) indicate an overpressure of 11.6 to 13.1 bar above regional brine hydrostatic.
+3. Hugin Formation Hydrocarbon Regime (Tests 1 to 12):
+   - Linear fit: Pressure = 118.20 + 0.07028 * TVD (R2 = 0.999915, MAE = 0.017 bar).
+   - Fluid gradient = 0.07028 bar/m, corresponding to an in situ oil density of 0.7167 g/cm3 (42.6 deg API).
+   - Confirms a single, continuously communicating hydrocarbon column across the entire Hugin Sandstone interval.
+4. Sleipner Transitional Regime (Tests 13 to 16):
+   - Pressures increase step-wise from 328.06 bar (Test 13) to 341.71 bar (Test 16).
+   - Apparent gradient = 0.5786 bar/m (R2 = 0.8139), reflecting structural compartmentalization and low-permeability mudstone baffles between individual sand layers.
+5. Skagerrak Compartmentalized Regime (Tests 18 to 21):
+   - Extreme near-depth pressure discrepancies confirm distinct compartment boundaries or localized pretest drawdowns:
+     - Depth pair 1 (3,026 m TVD): Test 18 (fair test, 354.001 bar) versus Test 20 (good test, 368.706 bar) exhibits a 14.705 bar discrepancy across only 0.29 m TVD.
+     - Depth pair 2 (3,036 m TVD): Test 19 (memory quartz gauge, 357.714 bar) versus Test 21 (realtime AQAP gauge, 368.818 bar) exhibits an 11.104 bar discrepancy across only 0.03 m TVD.
+   - These measurements cannot be treated as a continuous uniform hydrostatic gradient and must not be averaged.
+
+### Reconciliation of Overburden Sensitivity
+In ChatGPT's provisional Stage 2 evaluation, relying exclusively on WLC_PETRO_COMPUTED_INPUT_1.LAS (density start at 1,349.96 m MD) suggested 1,362 m of missing shallow sediment and generated a 53.44 bar sensitivity spread (Sv = 548.00 to 601.44 bar at top; 585.88 to 639.32 bar at base).
+
+Decoding the complete composite logging archive (WLC_COMPOSITE_1.LIS and WL_RAW_CAL-DEN-GR-NEU-REMP_MWD_1.DLIS from Run 3 pilot hole ARC-ADN) resolves this limitation:
+- Continuous measured LWD bulk density is available starting at 262.43 m MD (262.43 m TVD MSL).
+- The empirical mean bulk density between 262.43 m and 1,350.0 m MD is 2.011 g/cm3.
+- The actual unlogged interval is restricted to only 171.43 m (seabed 91.0 m to 262.43 m TVD MSL).
+- This establishes that the true overburden profile lies between ChatGPT's 1.90 g/cm3 and 2.00 g/cm3 sensitivity scenarios:
+  - Predictor top (3,127.71 m MD): Sv = 580.05 bar (OBG = 0.2033 bar/m / 2.073 s.g.).
+  - Predictor base (3,403.55 m MD): Sv = 618.07 bar (OBG = 0.2048 bar/m / 2.088 s.g.).
+  - The uncertainty spread is collapsed from 53.44 bar down to +/- 1.26 bar (+/- 0.21%).
+
+The hydrostatic and fluid regime tables are stored in:
+- [hydrostatic_sensitivity_1811.csv](file:///Users/user/final-year-project/tables/hydrostatic_sensitivity_1811.csv) and [hydrostatic_sensitivity_1811.json](file:///Users/user/final-year-project/tables/hydrostatic_sensitivity_1811.json).
+- [hydrostatic_pressure_test_comparison.csv](file:///Users/user/final-year-project/tables/hydrostatic_pressure_test_comparison.csv) and [hydrostatic_pressure_test_comparison.json](file:///Users/user/final-year-project/tables/hydrostatic_pressure_test_comparison.json).
+- [pressure_fluid_gradient_reconciliation.csv](file:///Users/user/final-year-project/tables/pressure_fluid_gradient_reconciliation.csv) and [pressure_fluid_gradient_reconciliation.json](file:///Users/user/final-year-project/tables/pressure_fluid_gradient_reconciliation.json).
+- [pressure_regime_summary.csv](file:///Users/user/final-year-project/tables/pressure_regime_summary.csv) and [pressure_regime_summary.json](file:///Users/user/final-year-project/tables/pressure_regime_summary.json).
+- [near_depth_pressure_pairs.csv](file:///Users/user/final-year-project/tables/near_depth_pressure_pairs.csv) and [near_depth_pressure_pairs.json](file:///Users/user/final-year-project/tables/near_depth_pressure_pairs.json).

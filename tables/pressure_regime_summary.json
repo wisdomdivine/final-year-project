@@ -1,0 +1,58 @@
+[
+  {
+    "formation_group":"Hugin (user-supplied mapping)",
+    "n":12,
+    "good_n":12,
+    "fair_n":0,
+    "dry_n":0,
+    "pressure_min_bar":320.02,
+    "pressure_max_bar":325.702,
+    "tvd_min_m":2871.76,
+    "tvd_max_m":2952.29,
+    "linear_gradient_bar_per_m":0.0702759077,
+    "linear_fit_R2":0.9999145965,
+    "linear_fit_MAE_bar":0.0170280834
+  },
+  {
+    "formation_group":"Sleipner (user-supplied mapping)",
+    "n":4,
+    "good_n":4,
+    "fair_n":0,
+    "dry_n":0,
+    "pressure_min_bar":328.056,
+    "pressure_max_bar":341.713,
+    "tvd_min_m":2970.18,
+    "tvd_max_m":2988.7,
+    "linear_gradient_bar_per_m":0.5785756112,
+    "linear_fit_R2":0.813924218,
+    "linear_fit_MAE_bar":1.544274923
+  },
+  {
+    "formation_group":"Other \/ outside mapped intervals",
+    "n":4,
+    "good_n":2,
+    "fair_n":1,
+    "dry_n":1,
+    "pressure_min_bar":69.279,
+    "pressure_max_bar":364.901,
+    "tvd_min_m":2994.05,
+    "tvd_max_m":3088.67,
+    "linear_gradient_bar_per_m":3.0371341123,
+    "linear_fit_R2":0.8768714396,
+    "linear_fit_MAE_bar":36.777119498
+  },
+  {
+    "formation_group":"Skagerrak (user-supplied mapping)",
+    "n":4,
+    "good_n":3,
+    "fair_n":1,
+    "dry_n":0,
+    "pressure_min_bar":354.001,
+    "pressure_max_bar":368.818,
+    "tvd_min_m":3025.98,
+    "tvd_max_m":3036.26,
+    "linear_gradient_bar_per_m":0.211340427,
+    "linear_fit_R2":0.0263871949,
+    "linear_fit_MAE_bar":6.4353427658
+  }
+]

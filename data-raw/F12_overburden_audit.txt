@@ -1,0 +1,14 @@
+F-12 OVERBURDEN RECONSTRUCTION AUDIT
+Input LAS rows: 25899
+Valid RHOB rows: 13951
+RHOB measured TVD MSL range: 1271.353 to 3045.905 m
+First valid RHOB MD: 1349.959 m
+Seabed: -91.0 m TVD MSL (water depth assumption from well metadata)
+RKB elevation: +54.90 m MSL; TVD MSL = TVD RKB - 54.90 m
+Missing shallow sediment interval: 1362.353 m
+Water column pressure: 9.147 bar (rho water 1.025 g/cc)
+Internal RHOB gaps >1m:
+  2784.744 to 2803.158 m TVD MSL, gap 18.414 m; linearly interpolated for numerical integration, not measured
+Shallow sediment density scenarios: 1.7, 1.8, 1.9, 2.0, 2.1 g/cc equivalent average density. These are sensitivity assumptions, not measured values or selected best estimate.
+Measured RHOB contribution integrated by trapezoidal rule in TVD coordinates. Formula: dSv = rho_b*g*dTVD; 1 g/cc over 1 m = 0.0980665 bar.
+No final Eaton labels generated. Overburden remains scenario-dependent due to missing shallow density.

@@ -1,0 +1,97 @@
+[
+  {
+    "metric":"Official Schlumberger oil gradient, Hugin tests 1-12",
+    "value":0.07,
+    "unit":"bar\/m"
+  },
+  {
+    "metric":"Equivalent oil density reported by Schlumberger",
+    "value":0.717,
+    "unit":"g\/cc"
+  },
+  {
+    "metric":"Hugin linear fit slope from table",
+    "value":0.0702759077,
+    "unit":"bar\/m"
+  },
+  {
+    "metric":"Hugin linear fit intercept",
+    "value":118.2047560132,
+    "unit":"bar"
+  },
+  {
+    "metric":"Hugin linear fit R2",
+    "value":0.9999145965,
+    "unit":"dimensionless"
+  },
+  {
+    "metric":"Test 19 pressure",
+    "value":357.714,
+    "unit":"bar"
+  },
+  {
+    "metric":"Test 19 TVD",
+    "value":3036.23,
+    "unit":"m TVD"
+  },
+  {
+    "metric":"Test 21 pressure",
+    "value":368.818,
+    "unit":"bar"
+  },
+  {
+    "metric":"Test 21 TVD",
+    "value":3036.26,
+    "unit":"m TVD"
+  },
+  {
+    "metric":"Test 18 pressure",
+    "value":354.001,
+    "unit":"bar"
+  },
+  {
+    "metric":"Test 18 TVD",
+    "value":3025.98,
+    "unit":"m TVD"
+  },
+  {
+    "metric":"Test 20 pressure",
+    "value":368.706,
+    "unit":"bar"
+  },
+  {
+    "metric":"Test 20 TVD",
+    "value":3026.27,
+    "unit":"m TVD"
+  },
+  {
+    "metric":"Test 21 minus Test 19 pressure",
+    "value":11.104,
+    "unit":"bar"
+  },
+  {
+    "metric":"Test 21 minus Test 19 TVD",
+    "value":0.03,
+    "unit":"m"
+  },
+  {
+    "metric":"Test 20 minus Test 18 pressure",
+    "value":14.705,
+    "unit":"bar"
+  },
+  {
+    "metric":"Test 20 minus Test 18 TVD",
+    "value":0.29,
+    "unit":"m"
+  },
+  {
+    "metric":"Test 19 final minus investigation pressure",
+    "value":0.006,
+    "unit":"bar"
+  },
+  {
+    "metric":"Test 21 final minus investigation pressure",
+    "value":0.325,
+    "unit":"bar"
+  }
+]
