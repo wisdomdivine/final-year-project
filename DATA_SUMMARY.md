@@ -126,8 +126,44 @@ Evaluation criteria:
 - Root Mean Squared Error (RMSE)
 - Coefficient of Determination (R-squared)
 
-## 8. Target Variable Status
+## 8. Formation Pressure Reference Data and Target Formulation
 
-The target variable is Pore Pressure (PP). Training and final validation are pending final target integration:
-- Primary pathway: direct confirmation from author correspondence.
-- Secondary pathway: derivation from official Equinor formation pressure data.
+Official formation pressure measurements were extracted from the Schlumberger MWD Stethoscope pretest report (FM_PRESS_COMPUTED_MWD_1.ASC) for well 15/9-F-12.
+
+Across the entire well, 24 test stations were executed (MD 3127.9 m to 3490.4 m). Within the 1,811-observation study interval (3127.71 m to 3403.55 m), 20 stations exist, of which 16 are stabilized, high-quality pressure measurements:
+
+| Test No | Formation | Depth MD (m) | TVD RKB (m) | TVD MSL (m) | Pressure (bar) | Quality Code | Quality Description |
+|:---|:---|:---|:---|:---|:---|:---|:---|
+| 1  | Hugin     | 3127.9 | 2871.8 | 2816.9 | 320.17 | 4 | Very good permeability |
+| 2  | Hugin     | 3128.0 | 2871.9 | 2817.0 | 320.18 | 3 | Good permeability |
+| 3  | Hugin     | 3136.7 | 2877.5 | 2822.6 | 320.57 | 4 | Very good permeability |
+| 4  | Hugin     | 3143.5 | 2881.1 | 2826.2 | 320.88 | 4 | Very good permeability |
+| 5  | Hugin     | 3153.0 | 2886.7 | 2831.8 | 321.20 | 4 | Very good permeability |
+| 6  | Hugin     | 3170.7 | 2897.0 | 2842.1 | 321.90 | 3 | Good permeability |
+| 7  | Hugin     | 3192.0 | 2909.8 | 2854.9 | 322.84 | 4 | Very good permeability |
+| 8  | Hugin     | 3222.0 | 2927.5 | 2872.6 | 324.02 | 3 | Good permeability |
+| 9  | Hugin     | 3241.0 | 2938.8 | 2883.9 | 324.84 | 3 | Good permeability |
+| 10 | Hugin     | 3255.0 | 2947.2 | 2892.3 | 325.46 | 3 | Good permeability |
+| 11 | Hugin     | 3263.5 | 2952.6 | 2897.7 | 325.81 | 3 | Good permeability |
+| 12 | Hugin     | 3262.8 | 2951.9 | 2897.0 | 325.81 | 2 | Poor permeability |
+| 14 | Sleipner  | 3293.9 | 2980.0 | 2925.1 | 334.22 | 2 | Poor permeability |
+| 15 | Sleipner  | 3307.7 | 2978.6 | 2923.7 | 335.74 | 2 | Poor permeability |
+| 16 | Sleipner  | 3324.7 | 2988.7 | 2933.8 | 341.87 | 2 | Poor permeability |
+| 20 | Skagerrak | 3387.0 | 3026.3 | 2971.4 | 368.88 | 2 | Poor permeability |
+
+Unusable or invalid stations in the study interval:
+- Station 13: 3293.6 m (334.42 bar, Quality 0: pressure did not stabilize).
+- Station 17: 3333.6 m (69.74 bar, Quality 1: tight dry test).
+- Station 18: 3386.5 m (354.26 bar, Quality 0: unstabilized).
+- Station 19: 3403.5 m (Quality 0: tool shutdown, no pressure recorded).
+
+### Pore Pressure Target Formulation Pathways
+
+1. Hybrid Geomechanical Calibration (Recommended Approach):
+   - Continuous pore pressure is calculated using Eaton's sonic compaction method across all 1,811 depth observations.
+   - The compaction trend and Eaton exponent are calibrated directly against the 16 verified formation pressure test points.
+   - This provides a continuous target profile grounded in classical geomechanics, avoiding arbitrary mathematical interpolation.
+   - The 16 physical measurement stations remain isolated as independent ground truth benchmarks to assess machine learning predictions against actual formation tests.
+
+2. Supervised Target Training:
+   - Machine learning algorithms learn to map the 14 well-log and drilling predictors to the calibrated continuous pore pressure curve, with model performance benchmarked using MAE, MSE, RMSE, and R-squared.
