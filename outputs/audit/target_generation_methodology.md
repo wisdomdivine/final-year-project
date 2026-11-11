@@ -63,9 +63,9 @@ The 1,811-observation study interval (3,127.7052 m to 3,403.5492 m MD) traverses
 - Lithology: Deep, overpressured Triassic sandstones and silty shales.
 - Direct Physical Measurements:
   - Test 18 (3,386.51 m MD / 3,025.98 m TVD RKB): 354.001 bar (ASC Quality 0: initial incomplete pretest).
-  - Test 20 (3,386.99 m MD / 3,026.27 m TVD RKB): 368.706 bar (ASC Quality 2 / report Good Test: stabilized companion repeat).
-  - Test 19 (3,403.53 m MD / 3,036.23 m TVD RKB): 357.714 bar (ASC Quality 0 due to real-time telemetry shutdown; recovered from memory gauge as Good Test). Preserved as official memory reference.
-  - Test 21 (3,403.57 m MD / 3,036.26 m TVD RKB): 368.818 bar (ASC Quality 2 / report Good Test: stabilized companion repeat). Primary physical reference.
+  - Test 20 (3,386.99 m MD / 3,026.27 m TVD RKB): 368.706 bar (ASC Quality 2 / report Good Test: stabilized companion repeat). Primary measured anchor.
+  - Test 19 (3,403.53 m MD / 3,036.23 m TVD RKB): 357.714 bar (ASC Quality 0 due to real-time telemetry shutdown; recovered from memory gauge as Good Test). Preserved as secondary conflict observation; strictly excluded from calibration anchors.
+  - Test 21 (3,403.57 m MD / 3,036.26 m TVD RKB): 368.818 bar (ASC Quality 2 / report Good Test: stabilized companion repeat). Primary measured anchor.
 - Skagerrak Pressure Gradient Inconsistency Analysis:
   - Vertical TVD separation between Test 20 and Test 21:
     Delta TVD = 3,036.26 - 3,026.27 = 9.99 m (under Trajectory 1: 2,983.34 - 2,973.36 = 9.98 m).
@@ -82,15 +82,21 @@ The 1,811-observation study interval (3,127.7052 m to 3,403.5492 m MD) traverses
     If a 0.101 bar/m brine gradient is anchored to Test 21 (368.818 bar), the predicted pressure at Test 20 would be 367.809 bar, which is 0.897 bar (13.0 psi) below the measured 368.706 bar.
     Conversely, if anchored to Test 20, Test 21 would be predicted at 369.715 bar (+0.897 bar above measured).
     Therefore, forcing a 0.101 bar/m brine gradient across Tests 20 and 21 introduces an artificial ~0.90 bar distortion.
-  - Physical Interpretation of the Skagerrak Pressure Data:
-    1. Instrumental Gauge Repeatability Limit: The Schlumberger FPWD quartz gauge has an operational repeatability margin of approximately +/- 0.05 to +/- 0.10 bar (+/- 0.7 to +/- 1.5 psi). Across a vertical interval of only 9.99 m, the expected fluid column delta is on the order of the tool repeatability limit.
-    2. Approximately Constant Compartment Pressure Model: The physical data supports an approximately constant compartment pressure regime across the penetrated reservoir sand (mean P = 368.762 bar, with residuals of +/- 0.056 bar, entirely within gauge repeatability tolerance).
-    3. Unresolved Fluid Model: While the apparent gradient of 0.0112 bar/m matches a light hydrocarbon gas column, petrophysical logs indicate a water-bearing/shaly reservoir. We conclude that the fluid gradient cannot be uniquely determined from two closely spaced stations separated by only 9.99 m TVD. We therefore reject the 0.101 bar/m brine model and model the interval as an approximately constant compartment pressure (368.762 bar) with an unresolved fluid gradient.
-- Test 19 Operational Event and Memory Preservation:
+  - Audit of FPWD Gauge Repeatability Claim:
+    The official Volve 15/9-F-12 Schlumberger FPWD well logs and pretest reports record gauge type AQAP (Anadrill Quartz Absolute Pressure), but do not publish manufacturer-certified repeatability or total uncertainty specifications.
+    The previously cited repeatability figure of +/- 0.05 to +/- 0.10 bar is an unverified external rule of thumb derived from general quartz gauge literature, NOT an established instrument specification substantiated in the well documentation.
+    Consequently, this figure cannot be cited as an established instrumental proof. It is retained strictly as an unverified assumption.
+  - Provisional Constant-Compartment Assumption and Extrapolation Uncertainty:
+    1. Separate Measured Anchors: Tests 20 (368.706 bar) and 21 (368.818 bar) remain separate, discrete measured anchors.
+    2. Provisional Assumption: The arithmetic mean of 368.762 bar between Tests 20 and 21 may be adopted as a provisional target-generation assumption for continuous labeling, but must not be described as a proven physical pressure profile.
+    3. Extrapolation Uncertainty: While the interval between Test 20 and Test 21 (3,386.99 to 3,403.57 m MD) is constrained within 0.112 bar by the two physical anchors, extrapolating 368.762 bar upward into the untested upper Skagerrak section (3,340.0 to 3,386.5 m MD) has high uncertainty (+/- 3.0 to 5.0 bar). Over this 46.5 m unmeasured interval, the true pressure profile could follow an overpressured seal transition, a brine column, or a different compartment boundary.
+    4. Data Provenance Distinction: Target metadata must explicitly distinguish measured pressure at Tests 20 and 21 (status: "measured_anchor") from assumed continuous target values (status: "provisional_assumption").
+- Test 19 Operational Event and Status:
   - During acquisition at 3,403.53 m MD, tool telemetry failed ("Unit shutdown"), resulting in zero surface data in real-time logs (`FM_PRESS_COMPUTED_MWD_1.ASC`, quality code 0).
   - Companion repeat Test 21 was immediately drilled 4 cm deeper (3,403.57 m MD), stabilized at 368.818 bar, and transmitted real-time data successfully.
   - Post-run downhole memory extraction recovered a complete drawdown and buildup record for Test 19: stabilized buildup pressure of 357.714 bar with drawdown mobility 5.37 mD/cP (volume 6.02 cc), classified as "Good Test" in Schlumberger's final summary table (`Test_point_table.xls`).
-  - Test 19 is preserved as an official alternative memory reference observation. It conflicts with Test 21 by 11.104 bar. This discrepancy is preserved and documented without artificial discarding or forced reconciliation.
+  - Reliability and Non-Equivalence: Test 19 is not equivalent in reliability to Tests 20 and 21, which possess full real-time telemetry, clear companion repeatability, and consistent compartment readings.
+  - Target Role: Test 19 is preserved as an official alternative memory observation and documented as an unresolved operational conflict (11.104 bar lower than Test 21). It is strictly excluded from primary calibration anchors and is not used to calculate the provisional Skagerrak target value.
 - Overpressure Recalculation under Corrected Trajectory 1:
   - Under corrected Trajectory 1, TVD MSL at the base of the predictor (MD 3,403.55 m / Test 21) is 2,983.34 m.
   - Normal formation brine hydrostatic pressure (density 1.030 g/cm3, seabed at 91.0 m MSL):
@@ -112,8 +118,8 @@ The target dataset must rigorously document provenance across every interval to 
 | Sleipner Upper Sand (3,263.50 to 3,300.0 m) | Test 14 (334.10 bar at 3,294.0 m MD) | Anchor to Test 14 with brine gradient (0.101 bar/m) | Hydraulic isolation from Hugin by regional seal; internal sand continuity | +/- 0.50 bar | Upper boundary seal transition (3,263.5 to 3,293.5 m MD); unmeasured mudstones. |
 | Sleipner Middle Sand (3,300.0 to 3,315.0 m) | Test 15 (335.61 bar at 3,307.7 m MD) | Anchor to Test 15 with brine gradient | Compartment bounded by hardground at 3,297 m | +/- 0.50 bar | Bounding hardground transitions. |
 | Sleipner Lower Sand (3,315.0 to 3,326.0 m) | Test 16 (341.71 bar at 3,324.7 m MD) | Anchor to Test 16 with brine gradient | Isolated step compartment bounded by hardground at 3,326 m | +/- 0.80 bar | Lower Sleipner mudstones (3,326 to 3,340 m MD). |
-| Sleipner-Skagerrak Transition (3,326.0 to 3,386.5 m) | None (Test 17 at 3,333.6 m is dry test, 69.28 bar) | Excluded from primary training target (IS_TARGET_VALID = False); secondary sensitivity experiment | Seal / compaction disequilibrium zone across 60.5 m unmeasured mudstones | High (+/- 10 to 15 bar if interpolated) | Completely unsupported by permeable pressure tests. Excluded from primary ML loss optimization. |
-| Skagerrak Sand (3,386.5 to 3,403.55 m) | Tests 20 (368.71 bar), 21 (368.82 bar), and Test 19 memory (357.71 bar) | Constant compartment pressure model: P = 368.762 bar (+/- 0.06 bar) | Isolated overpressured Triassic reservoir compartment; unresolved fluid gradient | +/- 0.10 bar (gauge repeatability) | Top Skagerrak mudstones (3,340 to 3,386.5 m MD) lack direct tests. |
+| Sleipner-Skagerrak Transition (3,326.0 to 3,386.5 m) | None (Test 17 at 3,333.6 m is dry test, 69.28 bar) | Excluded from all primary targets (IS_TARGET_VALID = False); sensitivity scenarios held strictly separate | Seal / compaction disequilibrium zone across 60.5 m unmeasured mudstones | High (+/- 10 to 15 bar if interpolated) | Completely unsupported by permeable pressure tests. Excluded from primary training, validation, and test targets. |
+| Skagerrak Sand (3,386.5 to 3,403.55 m) | Tests 20 (368.71 bar) and 21 (368.82 bar) as separate measured anchors | Provisional constant compartment assumption: P = 368.762 bar; unverified fluid gradient | Overpressured Triassic reservoir; constant pressure is an operational assumption, not a proven profile | +/- 0.15 bar near anchors; +/- 5.0 bar toward 3,340 m | Upper Skagerrak section (3,340 to 3,386.5 m MD) lacks direct tests; extrapolation carries high uncertainty. |
 
 ---
 
@@ -149,10 +155,11 @@ We evaluated three potential treatments for this unsupported interval:
 ### 3.4 Formal Recommendation and Justification
 We formally recommend **Option 1 (Exclusion from primary training-target dataset) paired with Option 3 (treatment as a secondary sensitivity diagnostic)**.
 
-**Justification:**
-1. Methodological Rigor: In high-stakes geomechanical pore-pressure prediction, presenting an interpolated line across an unmeasured 60.5 m sealing interval as a training ground truth is scientifically flawed.
-2. Protection of Split Evaluation: Because the transition zone sits across the validation and test partitions, excluding it from primary training loss and validation loss ensures that model selection and testing are evaluated solely against verified physical pretests (Tests 16, 20, 21).
-3. Best of Both Worlds: The primary pore-pressure target vector `PP_TARGET_BAR` will mask out this interval, while secondary diagnostic columns (`PP_SENSITIVITY_RAMP_BAR` and `PP_SENSITIVITY_TOPSEAL_BAR`) will be preserved in the dataset for diagnostic sensitivity analyses.
+**Mandatory Separation Rules:**
+1. Complete Primary Exclusion: The 3,326.0 to 3,386.5 m MD interval is completely excluded from all primary training, validation, and test targets (`IS_TARGET_VALID = False`; target set to null/NaN for all benchmark metrics).
+2. Strict Sensitivity Separation: Sensitivity scenarios (such as linear ramps or seal steps) must be held strictly separate in secondary diagnostic columns (`PP_SENSITIVITY_RAMP_BAR` and `PP_SENSITIVITY_TOPSEAL_BAR`). They are never mixed into primary training loss, validation early stopping, or primary test benchmarks.
+3. Methodological Rigor: In high-stakes geomechanical pore-pressure prediction, presenting an interpolated line across an unmeasured 60.5 m sealing interval as a training ground truth is scientifically flawed.
+4. Protection of Split Evaluation: Because the transition zone sits across the validation and test partitions, excluding it from primary training loss and validation loss ensures that model selection and testing are evaluated solely against verified physical pretests (Tests 16, 20, 21).
 
 ---
 
@@ -172,7 +179,7 @@ To enforce zero target leakage and prevent circular validation, pressure station
 ### 4.3 Completely Independent Evaluation Set (Tests 18 to 21, 3,362.40 to 3,403.55 m MD)
 - Tests 20 (368.71 bar) and 21 (368.82 bar) are strictly reserved as independent ground-truth evaluation stations.
 - Test 18 (354.00 bar) is preserved as an initial incomplete pretest (Fair Test).
-- Test 19 (357.71 bar) is preserved as an official alternative memory reference observation, documenting the tool telemetry shutdown and memory recovery.
+- Test 19 (357.71 bar) is preserved as an official alternative memory reference observation, documenting the tool telemetry shutdown and memory recovery. It is not equivalent in reliability to Tests 20 and 21 and is strictly excluded from primary calibration anchors.
 - Rule: No test partition station measurement may be used to train models, fit feature scalers, or tune Eaton exponents.
 - Reporting Rule: ML performance on the test set MUST be evaluated against the discrete physical pretest measurements (Tests 20 and 21), rather than solely against generated continuous curves.
 

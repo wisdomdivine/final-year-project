@@ -48,18 +48,35 @@ formation_regimes:
     top_md: 3340.0000
     base_md: 3403.5492
     regime_type: "overpressured"
-    # Fluid model: Tests 20 & 21 exhibit delta P = 0.112 bar over 9.99 m TVD (apparent gradient 0.0112 bar/m).
-    # Normal brine gradient (0.101 bar/m) is physically rejected as it introduces an artificial ~0.90 bar distortion.
-    fluid_model: "constant_compartment_pressure"
-    mean_compartment_pressure_bar: 368.762
+    # Discrete measured physical anchors (held strictly separate from assumptions):
+    primary_measured_anchors:
+      test_20:
+        md_m: 3386.99
+        tvd_rkb_m: 3026.27
+        formation_pressure_bar: 368.706
+        status: "measured_anchor"
+      test_21:
+        md_m: 3403.57
+        tvd_rkb_m: 3036.26
+        formation_pressure_bar: 368.818
+        status: "measured_anchor"
+    # Apparent gradient across measured anchors: delta P = 0.112 bar over 9.99 m TVD
     apparent_gradient_bar_m: 0.01121
     apparent_fluid_density_gcc: 0.1143
     gradient_status: "unresolved_fluid_model"
-    gauge_repeatability_margin_bar: 0.10
     brine_gradient_rejected_reason: "Forcing 0.101 bar/m brine gradient over 9.99 m TVD separation predicts 1.009 bar delta vs measured 0.112 bar delta, introducing 0.90 bar error."
-    stabilized_pressure_stations:
-      test_20: 368.706
-      test_21: 368.818
+    # Provisional target-generation assumption (explicitly NOT a proven physical profile):
+    provisional_compartment_assumption_bar: 368.762
+    provisional_assumption_status: "provisional_target_generation_assumption"
+    provisional_assumption_warning: "The 368.762 bar value is a mathematical construction assumption for continuous labeling, not a proven physical pressure profile. Substantial uncertainty exists when extrapolating away from Tests 20 and 21, particularly upward toward 3340.0 m MD."
+    extrapolation_uncertainty:
+      anchored_sand_interval_md: [3386.5, 3403.55]
+      anchored_sand_uncertainty_bar: 0.15
+      untested_upper_skagerrak_md: [3340.0, 3386.5]
+      untested_upper_skagerrak_uncertainty_bar: 5.00
+    # Gauge repeatability audit note:
+    gauge_repeatability_status: "unverified_assumption"
+    gauge_repeatability_note: "The FPWD well report does not provide manufacturer-certified repeatability or total uncertainty specifications for the AQAP quartz gauge. The +/-0.05 to +/-0.10 bar figure is an unverified external rule of thumb, not an established instrument specification."
     # Test 19 preserved as official memory readout observation:
     test_19_memory_recovery:
       pressure_bar: 357.714
@@ -68,6 +85,8 @@ formation_regimes:
       telemetry_status: "realtime_telemetry_shutdown"
       companion_repeat_test: 21
       discrepancy_with_test_21_bar: 11.104
+      calibration_role: "excluded_from_calibration"
+      reliability_note: "Not equivalent in reliability to Tests 20 and 21; excluded as a calibration anchor; retained solely as an unresolved operational conflict observation."
     # Corrected overpressure under Trajectory 1 (TVD MSL = 2,983.34 m; Ph = 301.30 bar):
     overpressure_trajectory_1_bar: 67.52
     overpressure_trajectory_1_psi: 979.3
@@ -83,8 +102,11 @@ transition_zones:
     data_status: "unsupported_by_permeable_tests"
     primary_policy: "exclude_from_primary_target"
     mask_primary_training_target: true
+    mask_validation_target: true
+    mask_test_target: true
     rationale: "Unmeasured mudstone interval crossing validation and test splits; synthetic interpolation would corrupt objective function with unverified mathematical spline."
     sensitivity_experiment: true
+    sensitivity_policy: "strictly_separate_from_primary_train_val_test"
     sensitivity_scenarios:
       - "linear_ramp"
       - "sharp_basal_seal"

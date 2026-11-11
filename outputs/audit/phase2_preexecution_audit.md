@@ -141,15 +141,22 @@ The overpressure in the Skagerrak Formation was recalculated using the corrected
 
 All 24 Run 10 tests are detailed in `outputs/audit/pressure_station_reconciliation.csv`:
 - Test 18 (3,386.51 m MD / 3,025.98 m TVD RKB): Pressure = 354.001 bar, ASC Quality 0 ("Pressure did not stabilize"), Fair Test. Initial incomplete pretest.
-- Test 20 (3,386.99 m MD / 3,026.27 m TVD RKB, 0.48 m deeper): Pressure = 368.706 bar, ASC Quality 2, Good Test (Type A pretest, 0.51 cc). Primary stabilized reference.
-- Test 19 (3,403.53 m MD / 3,036.23 m TVD RKB): Real-time ASC recorded tool shutdown ("Unit shutdown") with zero valid telemetry. Post-run memory gauge recovery in operations report yielded 357.714 bar with drawdown mobility 5.37 mD/cP, classified as "Good Test" in Schlumberger summary table. Formally preserved as an official alternative memory reference observation.
-- Test 21 (3,403.57 m MD / 3,036.26 m TVD RKB, 4 cm deeper): Pressure = 368.818 bar, ASC Quality 2, Good Test. Primary stabilized reference.
+- Test 20 (3,386.99 m MD / 3,026.27 m TVD RKB, 0.48 m deeper): Pressure = 368.706 bar, ASC Quality 2, Good Test (Type A pretest, 0.51 cc). Primary stabilized measured anchor.
+- Test 19 (3,403.53 m MD / 3,036.23 m TVD RKB): Real-time ASC recorded tool shutdown ("Unit shutdown") with zero valid telemetry. Post-run memory gauge recovery in operations report yielded 357.714 bar with drawdown mobility 5.37 mD/cP, classified as "Good Test" in Schlumberger summary table. Formally preserved as an official alternative memory reference observation; not equivalent in reliability to Tests 20 and 21; strictly excluded from calibration anchors.
+- Test 21 (3,403.57 m MD / 3,036.26 m TVD RKB, 4 cm deeper): Pressure = 368.818 bar, ASC Quality 2, Good Test. Primary stabilized measured anchor.
 - Skagerrak Apparent Gradient and Rejection of Brine Gradient:
   - Vertical TVD separation between Tests 20 and 21 is 9.99 m.
   - Measured pressure difference is Delta P = 368.818 - 368.706 = 0.112 bar.
   - Apparent gradient = 0.01121 bar/m (equivalent density 0.1143 g/cm3).
   - A standard formation brine gradient of 0.101 bar/m requires Delta P = 1.009 bar across 9.99 m TVD, introducing an error of ~0.90 bar if anchored to either station.
-  - The pressure data does not support a liquid brine hydrostatic column. It supports an **approximately constant compartment pressure model** (P = 368.762 bar +/- 0.056 bar), which is within gauge repeatability tolerance (+/- 0.05 to 0.10 bar), and represents an unresolved fluid-pressure model.
+  - The pressure data does not support a liquid brine hydrostatic column.
+- Audit of Gauge Repeatability Claim:
+  - The well-specific FPWD documentation does not publish manufacturer-certified repeatability or total uncertainty specifications for the AQAP quartz gauge.
+  - The +/- 0.05 to +/- 0.10 bar figure is an unverified external assumption, not an established instrument specification.
+- Provisional Constant-Compartment Assumption and Extrapolation Uncertainty:
+  - Tests 20 and 21 are preserved as separate measured anchors.
+  - The 368.762 bar mean value is an operational target-generation assumption, NOT a proven physical pressure profile.
+  - Extrapolation away from Tests 20 and 21, particularly upward toward the top boundary at 3,340.0 m MD, carries significant uncertainty (+/- 3.0 to 5.0 bar). Target metadata explicitly distinguishes measured anchors from provisional assumptions.
 - Test 19 versus Test 21 Discrepancy:
   - Test 21 is 11.104 bar higher than Test 19 at virtually the same depth. Both are official Schlumberger measurements (real-time companion vs memory recovery). This 11.104 bar conflict is documented and preserved without artificial discarding or forced reconciliation.
 
@@ -160,13 +167,13 @@ All 24 Run 10 tests are detailed in `outputs/audit/pressure_station_reconciliati
 ### 5.1 Target Provenance Specification
 - Hugin (3,127.71 to 3,263.50 m MD): Measured at 12 stations; calculated via oil gradient P = 122.063 + 0.07028 * TVD_MSL in clean sand; thin mudstones assumed in equilibrium.
 - Sleipner (3,263.50 to 3,326.00 m MD): Measured at stations 14 (334.10 bar), 15 (335.61 bar), 16 (341.71 bar); step-wise compartment anchoring across calcite hardgrounds.
-- Sleipner-Skagerrak Transition (3,326.00 to 3,386.50 m MD): Unmeasured 60.5 m interval across validation and test splits (only dry Test 17 at 3,333.6 m MD). Formally excluded from the primary target dataset (IS_TARGET_VALID = False) to prevent models from learning unverified interpolation artifacts; treated as a secondary sensitivity diagnostic.
-- Skagerrak (3,386.50 to 3,403.55 m MD): Measured at stations 20 (368.71 bar) and 21 (368.82 bar); modeled as a constant compartment pressure (368.762 bar); 0.101 bar/m brine gradient rejected.
+- Sleipner-Skagerrak Transition (3,326.00 to 3,386.50 m MD): Unmeasured 60.5 m interval across validation and test splits (only dry Test 17 at 3,333.6 m MD). Formally excluded from all primary targets (training, validation, test) (IS_TARGET_VALID = False) to prevent models from learning unverified interpolation artifacts; sensitivity scenarios are kept strictly separate from all primary targets.
+- Skagerrak (3,386.50 to 3,403.55 m MD): Anchored at separate measured stations 20 (368.71 bar) and 21 (368.82 bar); continuous profile constructed via provisional constant-compartment assumption (368.762 bar); 0.101 bar/m brine gradient rejected.
 
 ### 5.2 Independent Validation Split
 - Calibration Set (Tests 1 to 15, MD <= 3,320.80 m): Used for model training and Hugin/upper Sleipner calibration.
 - Unseen Validation Set (Tests 16 and 17, 3,320.95 to 3,362.25 m MD): Held out as an intermediate validation checkpoint. Test 17 (dry test, 69.28 bar) excluded from quantitative loss.
-- Completely Independent Evaluation Set (Tests 18 to 21, 3,362.40 to 3,403.55 m MD): Held out strictly for final evaluation.
+- Completely Independent Evaluation Set (Tests 18 to 21, 3,362.40 to 3,403.55 m MD): Held out strictly for final evaluation against measured pretests 20 and 21. Test 19 retained as secondary uncalibrated reference.
 - Reporting Rule: ML performance on the test set must be evaluated against the discrete physical pretest measurements (Tests 20 and 21), rather than solely against generated continuous curves.
 
 ---
@@ -189,10 +196,18 @@ All 24 Run 10 tests are detailed in `outputs/audit/pressure_station_reconciliati
 1. Lower Sleipner to Upper Skagerrak Transition (3,326.0 to 3,386.5 m MD):
    - A 60.5-meter interval without valid permeable pressure tests (only dry Test 17 at 3,333.6 m MD).
    - The exact depth where pressure transitions from 341.7 bar to 368.7 bar cannot be directly observed from well test data.
-   - Recommendation adopted: Excluded from primary training/validation target loss to prevent mathematical hallucinations; handled via secondary sensitivity scenarios.
+   - Policy: Excluded from all primary targets (training, validation, test); sensitivity scenarios held strictly separate in secondary diagnostic columns.
 2. Test 19 versus Test 21 Memory Recovery Discrepancy (3,403.55 m MD):
    - Official operations report records an 11.10 bar discrepancy between two companion tests conducted 4 cm apart. Both are classified as "Good Test" in the Schlumberger summary table.
-   - Test 19 is preserved as an official alternative memory reference observation.
+   - Test 19 is preserved as an official alternative memory reference observation, excluded from primary calibration anchors.
+3. Skagerrak Gauge Repeatability and Apparent Gradient:
+   - The well-specific documentation does not publish certified repeatability or total uncertainty specifications for the AQAP quartz gauge.
+   - Tests 20 and 21 indicate an apparent gradient of 0.0112 bar/m across 9.99 m TVD, rejecting a 0.101 bar/m brine column.
+   - The 368.762 bar constant compartment value is a provisional target-generation assumption, NOT a proven physical profile; extrapolation upward to 3,340 m MD carries high uncertainty.
+4. 1D Extrapolation of Calcite Hardground Baffles:
+   - While pressure steps prove hydraulic compartmentalization at the wellbore, lateral extent and continuity cannot be independently verified without 3D seismic or multi-well production data.
+5. Chemical Compaction Precludes Classical Eaton Sonic Application:
+   - Deep Jurassic shales have undergone quartz cementation, lowering DT to 75-82 us/ft. Standard mechanical NCT extrapolation predicts unphysical sub-hydrostatic pressures.
 3. Skagerrak Apparent Gradient (0.0112 bar/m) versus Brine Gradient (0.101 bar/m):
    - Tests 20 and 21 indicate an apparent gradient of 0.0112 bar/m across 9.99 m TVD, rejecting a 0.101 bar/m brine column and supporting an approximately constant compartment pressure regime (368.76 bar) with an unresolved fluid model.
 4. 1D Extrapolation of Calcite Hardground Baffles:

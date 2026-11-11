@@ -228,4 +228,42 @@ def test_test_19_memory_recovery_preservation():
     assert pytest.approx(conflict_delta_p, abs=0.001) == 11.104
 
 
+def test_target_generation_config_policy_integrity():
+    """Verify policy guarantees in target generation configuration."""
+    import yaml
+    from pathlib import Path
+
+    cfg_path = Path("configs/target_generation.yaml")
+    assert cfg_path.exists()
+    with open(cfg_path, "r") as f:
+        cfg = yaml.safe_load(f)
+
+    skag = cfg["formation_regimes"]["Skagerrak"]
+    # 1. Tests 20 and 21 preserved as separate measured anchors
+    assert skag["primary_measured_anchors"]["test_20"]["formation_pressure_bar"] == 368.706
+    assert skag["primary_measured_anchors"]["test_21"]["formation_pressure_bar"] == 368.818
+    assert skag["primary_measured_anchors"]["test_20"]["status"] == "measured_anchor"
+    assert skag["primary_measured_anchors"]["test_21"]["status"] == "measured_anchor"
+
+    # 2. 368.762 bar is a provisional assumption, not proven physical profile
+    assert skag["provisional_compartment_assumption_bar"] == 368.762
+    assert skag["provisional_assumption_status"] == "provisional_target_generation_assumption"
+
+    # 3. Gauge repeatability is an unverified assumption
+    assert skag["gauge_repeatability_status"] == "unverified_assumption"
+
+    # 4. Test 19 is excluded from calibration
+    assert skag["test_19_memory_recovery"]["calibration_role"] == "excluded_from_calibration"
+    assert skag["test_19_memory_recovery"]["pressure_bar"] == 357.714
+
+    # 5. Transition zone is strictly excluded from all primary targets
+    trans = cfg["transition_zones"]["sleipner_skagerrak"]
+    assert trans["primary_policy"] == "exclude_from_primary_target"
+    assert trans["mask_primary_training_target"] is True
+    assert trans["mask_validation_target"] is True
+    assert trans["mask_test_target"] is True
+    assert trans["sensitivity_policy"] == "strictly_separate_from_primary_train_val_test"
+
+
+
 
