@@ -1,0 +1,252 @@
+TVD_MSL_m,predicted_pressure_bar,dP_dTVD_bar_per_m,equivalent_fluid_density_g_cm3,stratigraphic_regime
+2800.0,318.3953,-0.2775,-2.83,Pre-Training Shallow
+2801.0,318.1178,-0.2775,-2.83,Pre-Training Shallow
+2802.0,317.8404,-0.2775,-2.83,Pre-Training Shallow
+2803.0,317.5629,-0.23,-2.346,Pre-Training Shallow
+2804.0,317.3803,-0.1683,-1.716,Pre-Training Shallow
+2805.0,317.2263,-0.154,-1.57,Pre-Training Shallow
+2806.0,317.0723,-0.154,-1.57,Pre-Training Shallow
+2807.0,316.9183,-0.1497,-1.526,Pre-Training Shallow
+2808.0,316.7729,-0.1406,-1.433,Pre-Training Shallow
+2809.0,316.6371,-0.1358,-1.385,Pre-Training Shallow
+2810.0,316.5014,-0.1358,-1.385,Pre-Training Shallow
+2811.0,316.3656,-0.1358,-1.385,Pre-Training Shallow
+2812.0,316.2298,-0.1358,-1.385,Pre-Training Shallow
+2813.0,316.094,-0.1358,-1.385,Pre-Training Shallow
+2814.0,315.9582,-0.1358,-1.385,Pre-Training Shallow
+2815.0,315.8224,-0.1358,-1.385,Pre-Training Shallow
+2816.0,315.6867,-0.0946,-0.964,Pre-Training Shallow
+2817.0,315.6333,-0.039,-0.398,Pre-Training Shallow
+2818.0,315.6087,-0.0164,-0.167,Pre-Training Shallow
+2819.0,315.6004,0.0143,0.146,Pre-Training Shallow
+2820.0,315.6373,0.0369,0.376,Training Interval (Hugin & Upper Sleipner)
+2821.0,315.6742,0.0369,0.376,Training Interval (Hugin & Upper Sleipner)
+2822.0,315.7111,0.0369,0.376,Training Interval (Hugin & Upper Sleipner)
+2823.0,315.748,0.0468,0.477,Training Interval (Hugin & Upper Sleipner)
+2824.0,315.8047,0.0598,0.61,Training Interval (Hugin & Upper Sleipner)
+2825.0,315.8676,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2826.0,315.9305,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2827.0,315.9934,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2828.0,316.0563,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2829.0,316.1192,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2830.0,316.1821,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2831.0,316.245,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2832.0,316.3079,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2833.0,316.3708,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2834.0,316.4337,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2835.0,316.4966,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2836.0,316.5595,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2837.0,316.6224,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2838.0,316.6853,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2839.0,316.7481,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2840.0,316.811,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2841.0,316.8739,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2842.0,316.9368,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2843.0,316.9997,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2844.0,317.0626,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2845.0,317.1255,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2846.0,317.1884,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2847.0,317.2513,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2848.0,317.3142,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2849.0,317.3771,0.0629,0.641,Training Interval (Hugin & Upper Sleipner)
+2850.0,317.44,0.065,0.663,Training Interval (Hugin & Upper Sleipner)
+2851.0,317.5071,0.0729,0.744,Training Interval (Hugin & Upper Sleipner)
+2852.0,317.5859,0.0788,0.804,Training Interval (Hugin & Upper Sleipner)
+2853.0,317.6647,0.0788,0.804,Training Interval (Hugin & Upper Sleipner)
+2854.0,317.7435,0.0788,0.804,Training Interval (Hugin & Upper Sleipner)
+2855.0,317.8223,0.0788,0.804,Training Interval (Hugin & Upper Sleipner)
+2856.0,317.9011,0.0844,0.861,Training Interval (Hugin & Upper Sleipner)
+2857.0,317.9911,0.1068,1.089,Training Interval (Hugin & Upper Sleipner)
+2858.0,318.1146,0.1261,1.286,Training Interval (Hugin & Upper Sleipner)
+2859.0,318.2433,0.1287,1.312,Training Interval (Hugin & Upper Sleipner)
+2860.0,318.3719,0.1287,1.312,Training Interval (Hugin & Upper Sleipner)
+2861.0,318.5006,0.1287,1.312,Training Interval (Hugin & Upper Sleipner)
+2862.0,318.6292,0.1287,1.312,Training Interval (Hugin & Upper Sleipner)
+2863.0,318.7579,0.1287,1.312,Training Interval (Hugin & Upper Sleipner)
+2864.0,318.8865,0.1287,1.312,Training Interval (Hugin & Upper Sleipner)
+2865.0,319.0152,0.1287,1.312,Training Interval (Hugin & Upper Sleipner)
+2866.0,319.1439,0.1287,1.312,Training Interval (Hugin & Upper Sleipner)
+2867.0,319.2725,0.1287,1.312,Training Interval (Hugin & Upper Sleipner)
+2868.0,319.4012,0.1426,1.454,Training Interval (Hugin & Upper Sleipner)
+2869.0,319.5577,0.1584,1.616,Training Interval (Hugin & Upper Sleipner)
+2870.0,319.7181,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2871.0,319.8784,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2872.0,320.0387,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2873.0,320.1991,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2874.0,320.3594,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2875.0,320.5198,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2876.0,320.6801,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2877.0,320.8404,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2878.0,321.0008,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2879.0,321.1611,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2880.0,321.3215,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2881.0,321.4818,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2882.0,321.6421,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2883.0,321.8025,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2884.0,321.9628,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2885.0,322.1232,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2886.0,322.2835,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2887.0,322.4438,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2888.0,322.6042,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2889.0,322.7645,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2890.0,322.9248,0.1603,1.635,Training Interval (Hugin & Upper Sleipner)
+2891.0,323.0852,0.1611,1.643,Training Interval (Hugin & Upper Sleipner)
+2892.0,323.2471,0.1676,1.709,Training Interval (Hugin & Upper Sleipner)
+2893.0,323.4205,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2894.0,323.5939,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2895.0,323.7672,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2896.0,323.9406,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2897.0,324.114,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2898.0,324.2874,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2899.0,324.4608,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2900.0,324.6341,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2901.0,324.8075,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2902.0,324.9809,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2903.0,325.1543,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2904.0,325.3277,0.1734,1.768,Training Interval (Hugin & Upper Sleipner)
+2905.0,325.5011,0.1769,1.804,Training Interval (Hugin & Upper Sleipner)
+2906.0,325.6814,0.1829,1.865,Training Interval (Hugin & Upper Sleipner)
+2907.0,325.8668,0.1854,1.891,Training Interval (Hugin & Upper Sleipner)
+2908.0,326.0522,0.1854,1.891,Training Interval (Hugin & Upper Sleipner)
+2909.0,326.2376,0.1854,1.891,Training Interval (Hugin & Upper Sleipner)
+2910.0,326.423,0.1854,1.891,Training Interval (Hugin & Upper Sleipner)
+2911.0,326.6084,0.1854,1.891,Training Interval (Hugin & Upper Sleipner)
+2912.0,326.7938,0.1854,1.891,Training Interval (Hugin & Upper Sleipner)
+2913.0,326.9792,0.1854,1.891,Training Interval (Hugin & Upper Sleipner)
+2914.0,327.1646,0.1854,1.891,Training Interval (Hugin & Upper Sleipner)
+2915.0,327.35,0.1854,1.891,Training Interval (Hugin & Upper Sleipner)
+2916.0,327.5354,0.1854,1.891,Training Interval (Hugin & Upper Sleipner)
+2917.0,327.7208,0.1858,1.895,Training Interval (Hugin & Upper Sleipner)
+2918.0,327.9071,0.2396,2.443,Training Interval (Hugin & Upper Sleipner)
+2919.0,328.2,0.3127,3.189,Training Interval (Hugin & Upper Sleipner)
+2920.0,328.5325,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2921.0,328.8651,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2922.0,329.1977,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2923.0,329.5302,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2924.0,329.8628,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2925.0,330.1954,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2926.0,330.5279,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2927.0,330.8605,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2928.0,331.193,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2929.0,331.5256,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2930.0,331.8582,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2931.0,332.1907,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2932.0,332.5233,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2933.0,332.8559,0.3326,3.391,Training Interval (Hugin & Upper Sleipner)
+2934.0,333.1884,0.3326,3.391,Validation Interval (Lower Sleipner)
+2935.0,333.521,0.3326,3.391,Validation Interval (Lower Sleipner)
+2936.0,333.8536,0.3326,3.391,Validation Interval (Lower Sleipner)
+2937.0,334.1861,0.3326,3.391,Validation Interval (Lower Sleipner)
+2938.0,334.5187,0.3326,3.391,Validation Interval (Lower Sleipner)
+2939.0,334.8513,0.3326,3.391,Validation Interval (Lower Sleipner)
+2940.0,335.1838,0.3363,3.429,Validation Interval (Lower Sleipner)
+2941.0,335.5238,0.3406,3.474,Validation Interval (Lower Sleipner)
+2942.0,335.8651,0.3413,3.481,Validation Interval (Lower Sleipner)
+2943.0,336.2065,0.3413,3.481,Validation Interval (Lower Sleipner)
+2944.0,336.5478,0.3413,3.481,Validation Interval (Lower Sleipner)
+2945.0,336.8891,0.3413,3.481,Validation Interval (Lower Sleipner)
+2946.0,337.2305,0.3413,3.481,Validation Interval (Lower Sleipner)
+2947.0,337.5718,0.3413,3.481,Validation Interval (Lower Sleipner)
+2948.0,337.9132,0.3413,3.481,Validation Interval (Lower Sleipner)
+2949.0,338.2545,0.3413,3.481,Validation Interval (Lower Sleipner)
+2950.0,338.5959,0.3413,3.481,Validation Interval (Lower Sleipner)
+2951.0,338.9372,0.3413,3.481,Validation Interval (Lower Sleipner)
+2952.0,339.2785,0.3413,3.481,Validation Interval (Lower Sleipner)
+2953.0,339.6199,0.3413,3.481,Validation Interval (Lower Sleipner)
+2954.0,339.9612,0.3705,3.778,Validation Interval (Lower Sleipner)
+2955.0,340.3608,0.4185,4.267,Validation Interval (Lower Sleipner)
+2956.0,340.7981,0.4662,4.753,Validation Interval (Lower Sleipner)
+2957.0,341.2932,0.4986,5.084,Validation Interval (Lower Sleipner)
+2958.0,341.7953,0.5022,5.121,Validation Interval (Lower Sleipner)
+2959.0,342.2975,0.5022,5.121,Testing Interval (Skagerrak Compartment)
+2960.0,342.7997,0.5022,5.121,Testing Interval (Skagerrak Compartment)
+2961.0,343.3019,0.5022,5.121,Testing Interval (Skagerrak Compartment)
+2962.0,343.804,0.5022,5.121,Testing Interval (Skagerrak Compartment)
+2963.0,344.3062,0.5022,5.121,Testing Interval (Skagerrak Compartment)
+2964.0,344.8084,0.5022,5.121,Testing Interval (Skagerrak Compartment)
+2965.0,345.3106,0.5022,5.121,Testing Interval (Skagerrak Compartment)
+2966.0,345.8127,0.5022,5.121,Testing Interval (Skagerrak Compartment)
+2967.0,346.3149,0.5125,5.226,Testing Interval (Skagerrak Compartment)
+2968.0,346.8377,0.5333,5.438,Testing Interval (Skagerrak Compartment)
+2969.0,347.3815,0.5438,5.545,Testing Interval (Skagerrak Compartment)
+2970.0,347.9253,0.5438,5.545,Testing Interval (Skagerrak Compartment)
+2971.0,348.4691,0.5438,5.545,Testing Interval (Skagerrak Compartment)
+2972.0,349.0129,0.5438,5.545,Testing Interval (Skagerrak Compartment)
+2973.0,349.5568,0.5438,5.545,Testing Interval (Skagerrak Compartment)
+2974.0,350.1006,0.5438,5.545,Testing Interval (Skagerrak Compartment)
+2975.0,350.6444,0.5438,5.545,Testing Interval (Skagerrak Compartment)
+2976.0,351.1882,0.5438,5.545,Testing Interval (Skagerrak Compartment)
+2977.0,351.7321,0.5438,5.545,Testing Interval (Skagerrak Compartment)
+2978.0,352.2759,0.5438,5.545,Testing Interval (Skagerrak Compartment)
+2979.0,352.8197,0.5474,5.582,Testing Interval (Skagerrak Compartment)
+2980.0,353.3706,0.5624,5.735,Testing Interval (Skagerrak Compartment)
+2981.0,353.9445,0.5739,5.852,Testing Interval (Skagerrak Compartment)
+2982.0,354.5184,0.5739,5.852,Testing Interval (Skagerrak Compartment)
+2983.0,355.0923,0.5739,5.852,Testing Interval (Skagerrak Compartment)
+2984.0,355.6662,0.5739,5.852,Extrapolated Deep Sub-Skagerrak
+2985.0,356.2401,0.5739,5.852,Extrapolated Deep Sub-Skagerrak
+2986.0,356.814,0.5739,5.852,Extrapolated Deep Sub-Skagerrak
+2987.0,357.3879,0.5739,5.852,Extrapolated Deep Sub-Skagerrak
+2988.0,357.9618,0.5739,5.852,Extrapolated Deep Sub-Skagerrak
+2989.0,358.5357,0.5739,5.852,Extrapolated Deep Sub-Skagerrak
+2990.0,359.1096,0.5739,5.852,Extrapolated Deep Sub-Skagerrak
+2991.0,359.6835,0.5739,5.852,Extrapolated Deep Sub-Skagerrak
+2992.0,360.2574,0.5739,5.852,Extrapolated Deep Sub-Skagerrak
+2993.0,360.8313,0.5957,6.074,Extrapolated Deep Sub-Skagerrak
+2994.0,361.4487,0.6384,6.51,Extrapolated Deep Sub-Skagerrak
+2995.0,362.1081,0.6594,6.724,Extrapolated Deep Sub-Skagerrak
+2996.0,362.7674,0.6644,6.775,Extrapolated Deep Sub-Skagerrak
+2997.0,363.4369,0.6778,6.911,Extrapolated Deep Sub-Skagerrak
+2998.0,364.123,0.6861,6.996,Extrapolated Deep Sub-Skagerrak
+2999.0,364.809,0.6861,6.996,Extrapolated Deep Sub-Skagerrak
+3000.0,365.4951,0.6861,6.996,Extrapolated Deep Sub-Skagerrak
+3001.0,366.1811,0.6861,6.996,Extrapolated Deep Sub-Skagerrak
+3002.0,366.8672,0.6861,6.996,Extrapolated Deep Sub-Skagerrak
+3003.0,367.5533,0.6861,6.996,Extrapolated Deep Sub-Skagerrak
+3004.0,368.2393,0.6861,6.996,Extrapolated Deep Sub-Skagerrak
+3005.0,368.9254,0.6903,7.039,Extrapolated Deep Sub-Skagerrak
+3006.0,369.6199,0.7054,7.193,Extrapolated Deep Sub-Skagerrak
+3007.0,370.3362,0.7163,7.304,Extrapolated Deep Sub-Skagerrak
+3008.0,371.0525,0.7163,7.304,Extrapolated Deep Sub-Skagerrak
+3009.0,371.7688,0.7163,7.304,Extrapolated Deep Sub-Skagerrak
+3010.0,372.4851,0.7163,7.304,Extrapolated Deep Sub-Skagerrak
+3011.0,373.2014,0.7163,7.304,Extrapolated Deep Sub-Skagerrak
+3012.0,373.9177,0.7167,7.309,Extrapolated Deep Sub-Skagerrak
+3013.0,374.6348,0.7235,7.377,Extrapolated Deep Sub-Skagerrak
+3014.0,375.3646,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3015.0,376.0944,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3016.0,376.8243,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3017.0,377.5541,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3018.0,378.2839,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3019.0,379.0137,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3020.0,379.7435,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3021.0,380.4733,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3022.0,381.2031,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3023.0,381.9329,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3024.0,382.6627,0.7298,7.442,Extrapolated Deep Sub-Skagerrak
+3025.0,383.3925,0.7534,7.682,Extrapolated Deep Sub-Skagerrak
+3026.0,384.1694,0.7834,7.989,Extrapolated Deep Sub-Skagerrak
+3027.0,384.9594,0.7899,8.055,Extrapolated Deep Sub-Skagerrak
+3028.0,385.7493,0.7899,8.055,Extrapolated Deep Sub-Skagerrak
+3029.0,386.5392,0.7899,8.055,Extrapolated Deep Sub-Skagerrak
+3030.0,387.3291,0.7899,8.055,Extrapolated Deep Sub-Skagerrak
+3031.0,388.119,0.7899,8.055,Extrapolated Deep Sub-Skagerrak
+3032.0,388.9089,0.7899,8.055,Extrapolated Deep Sub-Skagerrak
+3033.0,389.6988,0.8056,8.215,Extrapolated Deep Sub-Skagerrak
+3034.0,390.5202,0.8219,8.381,Extrapolated Deep Sub-Skagerrak
+3035.0,391.3426,0.8225,8.387,Extrapolated Deep Sub-Skagerrak
+3036.0,392.1651,0.8225,8.387,Extrapolated Deep Sub-Skagerrak
+3037.0,392.9876,0.8225,8.387,Extrapolated Deep Sub-Skagerrak
+3038.0,393.8101,0.8225,8.387,Extrapolated Deep Sub-Skagerrak
+3039.0,394.6326,0.8225,8.387,Extrapolated Deep Sub-Skagerrak
+3040.0,395.4551,0.8225,8.387,Extrapolated Deep Sub-Skagerrak
+3041.0,396.2776,0.8314,8.478,Extrapolated Deep Sub-Skagerrak
+3042.0,397.1179,0.8415,8.581,Extrapolated Deep Sub-Skagerrak
+3043.0,397.9607,0.8428,8.594,Extrapolated Deep Sub-Skagerrak
+3044.0,398.8035,0.8428,8.594,Extrapolated Deep Sub-Skagerrak
+3045.0,399.6463,0.8428,8.594,Extrapolated Deep Sub-Skagerrak
+3046.0,400.4891,0.8428,8.594,Extrapolated Deep Sub-Skagerrak
+3047.0,401.3319,0.8428,8.594,Extrapolated Deep Sub-Skagerrak
+3048.0,402.1747,0.8428,8.594,Extrapolated Deep Sub-Skagerrak
+3049.0,403.0175,0.8428,8.594,Extrapolated Deep Sub-Skagerrak
+3050.0,403.8603,0.8428,8.594,Extrapolated Deep Sub-Skagerrak

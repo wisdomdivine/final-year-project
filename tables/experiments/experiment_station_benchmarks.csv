@@ -14,6 +14,11 @@ exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",rando
 exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",catboost,CatBoost,0.1779,337.2972,4.4158,336.8218,31.8842,338.6572,30.1608,31.0225,31.0345,338.6572,19.0568
 exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",gradient_boosting,Gradient Boosting,0.0293,341.4608,0.2522,341.4388,27.2672,341.3953,27.4227,27.3449,27.3451,341.3953,16.3187
 exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlp,MLP,1.0488,345.9642,-4.2512,370.9638,-2.2578,384.8256,-16.0076,9.1327,11.4311,384.8256,-27.1116
+exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",mlr,MLR,1.0649,339.9009,1.8121,353.658,15.048,357.1698,11.6482,13.3481,13.4559,357.1698,0.5442
+exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",random_forest,Random Forest,0.2044,340.4806,1.2324,340.1934,28.5126,341.1826,27.6354,28.074,28.0774,341.1826,16.5314
+exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",catboost,CatBoost,0.2072,337.6443,4.0687,338.2331,30.4729,338.8567,29.9613,30.2171,30.2182,338.8567,18.8573
+exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",gradient_boosting,Gradient Boosting,0.0234,341.4473,0.2657,341.4356,27.2704,341.3868,27.4312,27.3508,27.3509,341.3868,16.3272
+exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",mlp,MLP,1.3062,352.599,-10.886,397.8261,-29.1201,425.052,-56.234,42.6771,44.7786,425.052,-67.338
 exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlr,MLR,1.2003,335.502,6.211,330.6127,38.0933,327.4537,41.3643,39.7288,39.7624,327.4537,30.2603
 exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",random_forest,Random Forest,0.093,335.0508,6.6622,332.0361,36.6699,334.1836,34.6344,35.6522,35.6667,334.1836,23.5304
 exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",catboost,CatBoost,0.1336,334.941,6.772,332.2769,36.4291,332.5365,36.2815,36.3553,36.3554,332.5365,25.1775

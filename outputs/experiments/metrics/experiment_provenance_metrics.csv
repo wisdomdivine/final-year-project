@@ -1,91 +1,161 @@
-experiment_key,experiment_name,model_key,model_name,target_provenance,partition_interval,n_observations,MAE_bar,RMSE_bar,mean_residual_bar,MaxAE_bar
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlr,MLR,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.9774,1.2353,-0.282,2.4669
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlr,MLR,measured_anchor,Validation (Test 16),1,4.176,4.176,4.176,4.176
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlr,MLR,measured_anchor,Testing (Tests 20 & 21),2,29.0574,29.0615,29.0574,29.5431
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlr,MLR,physics_derived,Training (Hugin/Sleipner),1254,1.1144,1.5002,0.0031,6.11
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlr,MLR,physics_derived,Validation (Lower Sleipner),33,4.5169,4.5332,4.5169,5.5418
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlr,MLR,provisional_assumption,Testing (Skagerrak),110,29.2182,29.2248,29.2182,30.2592
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),random_forest,Random Forest,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.1342,0.3188,-0.1319,1.1363
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),random_forest,Random Forest,measured_anchor,Validation (Test 16),1,3.3675,3.3675,3.3675,3.3675
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),random_forest,Random Forest,measured_anchor,Testing (Tests 20 & 21),2,29.327,29.3398,29.327,30.1938
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),random_forest,Random Forest,physics_derived,Training (Hugin/Sleipner),1254,0.0614,0.149,0.0052,2.1211
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),random_forest,Random Forest,physics_derived,Validation (Lower Sleipner),33,2.9955,3.0767,2.9955,4.3344
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),random_forest,Random Forest,provisional_assumption,Testing (Skagerrak),110,29.754,29.7587,29.754,30.6622
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),catboost,CatBoost,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.0958,0.2064,-0.0627,0.7479
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),catboost,CatBoost,measured_anchor,Validation (Test 16),1,3.8577,3.8577,3.8577,3.8577
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),catboost,CatBoost,measured_anchor,Testing (Tests 20 & 21),2,30.2685,30.2754,30.2685,30.9149
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),catboost,CatBoost,physics_derived,Training (Hugin/Sleipner),1254,0.0476,0.0662,0.0005,0.4195
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),catboost,CatBoost,physics_derived,Validation (Lower Sleipner),33,3.7379,3.9123,3.7379,5.1779
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),catboost,CatBoost,provisional_assumption,Testing (Skagerrak),110,29.7323,29.7413,29.7323,31.8261
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),gradient_boosting,Gradient Boosting,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.0079,0.0112,-0.0001,0.0321
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),gradient_boosting,Gradient Boosting,measured_anchor,Validation (Test 16),1,0.2911,0.2911,0.2911,0.2911
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),gradient_boosting,Gradient Boosting,measured_anchor,Testing (Tests 20 & 21),2,27.3839,27.384,27.3839,27.4626
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),gradient_boosting,Gradient Boosting,physics_derived,Training (Hugin/Sleipner),1254,0.0053,0.0082,-0.0,0.1362
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),gradient_boosting,Gradient Boosting,physics_derived,Validation (Lower Sleipner),33,0.2303,0.2531,0.2303,0.4526
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),gradient_boosting,Gradient Boosting,provisional_assumption,Testing (Skagerrak),110,27.3931,27.3931,27.3931,27.5002
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlp,MLP,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.6589,0.9542,0.0495,2.0078
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlp,MLP,measured_anchor,Validation (Test 16),1,3.641,3.641,-3.641,3.641
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlp,MLP,measured_anchor,Testing (Tests 20 & 21),2,5.8189,6.0133,-1.5167,7.3356
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlp,MLP,physics_derived,Training (Hugin/Sleipner),1254,0.6003,0.902,0.1101,5.722
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlp,MLP,physics_derived,Validation (Lower Sleipner),33,2.8249,3.2346,-2.3074,5.8571
-exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlp,MLP,provisional_assumption,Testing (Skagerrak),110,3.1918,3.9276,0.3335,8.8419
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlr,MLR,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.8092,1.0443,-0.1213,2.2861
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlr,MLR,measured_anchor,Validation (Test 16),1,2.2286,2.2286,2.2286,2.2286
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlr,MLR,measured_anchor,Testing (Tests 20 & 21),2,13.2415,13.6016,13.2415,16.3507
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlr,MLR,physics_derived,Training (Hugin/Sleipner),1254,0.9593,1.2719,0.0014,4.1439
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlr,MLR,physics_derived,Validation (Lower Sleipner),33,2.4049,2.4714,2.4049,3.4874
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlr,MLR,provisional_assumption,Testing (Skagerrak),110,14.0929,14.1797,14.0929,16.4772
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",random_forest,Random Forest,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.0764,0.2249,-0.0661,0.8341
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",random_forest,Random Forest,measured_anchor,Validation (Test 16),1,1.0485,1.0485,1.0485,1.0485
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",random_forest,Random Forest,measured_anchor,Testing (Tests 20 & 21),2,28.0134,28.0139,28.0134,28.1697
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",random_forest,Random Forest,physics_derived,Training (Hugin/Sleipner),1254,0.0159,0.0753,0.0036,1.7966
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",random_forest,Random Forest,physics_derived,Validation (Lower Sleipner),33,0.8654,0.9149,0.8654,1.3618
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",random_forest,Random Forest,provisional_assumption,Testing (Skagerrak),110,27.8732,27.8737,27.8732,28.2648
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",catboost,CatBoost,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.0877,0.1765,-0.0579,0.625
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",catboost,CatBoost,measured_anchor,Validation (Test 16),1,4.4158,4.4158,4.4158,4.4158
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",catboost,CatBoost,measured_anchor,Testing (Tests 20 & 21),2,31.0225,31.0345,31.0225,31.8842
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",catboost,CatBoost,physics_derived,Training (Hugin/Sleipner),1254,0.0386,0.056,0.0005,0.4371
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",catboost,CatBoost,physics_derived,Validation (Lower Sleipner),33,3.995,4.1826,3.995,5.5245
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",catboost,CatBoost,provisional_assumption,Testing (Skagerrak),110,30.4778,30.4914,30.4778,32.8621
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",gradient_boosting,Gradient Boosting,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.0099,0.0132,-0.0003,0.03
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",gradient_boosting,Gradient Boosting,measured_anchor,Validation (Test 16),1,0.2522,0.2522,0.2522,0.2522
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",gradient_boosting,Gradient Boosting,measured_anchor,Testing (Tests 20 & 21),2,27.3449,27.3451,27.3449,27.4227
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",gradient_boosting,Gradient Boosting,physics_derived,Training (Hugin/Sleipner),1254,0.0051,0.0077,-0.0,0.0779
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",gradient_boosting,Gradient Boosting,physics_derived,Validation (Lower Sleipner),33,0.1821,0.2071,0.1821,0.3829
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",gradient_boosting,Gradient Boosting,provisional_assumption,Testing (Skagerrak),110,27.3503,27.3504,27.3503,27.4683
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlp,MLP,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.8007,1.0842,-0.1363,2.3184
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlp,MLP,measured_anchor,Validation (Test 16),1,4.2512,4.2512,-4.2512,4.2512
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlp,MLP,measured_anchor,Testing (Tests 20 & 21),2,9.1327,11.4311,-9.1327,16.0076
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlp,MLP,physics_derived,Training (Hugin/Sleipner),1254,0.6847,0.9909,0.0394,6.0987
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlp,MLP,physics_derived,Validation (Lower Sleipner),33,2.7128,3.0113,-1.354,4.9049
-exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlp,MLP,provisional_assumption,Testing (Skagerrak),110,4.9532,6.6494,-4.8948,17.283
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlr,MLR,measured_anchor,"Training (Tests 1-12, 14, 15)",14,1.0106,1.1576,-0.001,1.982
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlr,MLR,measured_anchor,Validation (Test 16),1,6.211,6.211,6.211,6.211
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlr,MLR,measured_anchor,Testing (Tests 20 & 21),2,39.7288,39.7625,39.7288,41.3643
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlr,MLR,physics_derived,Training (Hugin/Sleipner),1254,0.9673,1.4128,0.0,8.0519
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlr,MLR,physics_derived,Validation (Lower Sleipner),33,6.247,6.2563,6.247,7.0996
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlr,MLR,provisional_assumption,Testing (Skagerrak),110,39.02,39.0414,39.02,41.6775
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",random_forest,Random Forest,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.0518,0.0921,-0.0484,0.2295
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",random_forest,Random Forest,measured_anchor,Validation (Test 16),1,6.6622,6.6622,6.6622,6.6622
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",random_forest,Random Forest,measured_anchor,Testing (Tests 20 & 21),2,35.6522,35.6667,35.6522,36.6699
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",random_forest,Random Forest,physics_derived,Training (Hugin/Sleipner),1254,0.0994,0.2298,0.0051,3.1917
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",random_forest,Random Forest,physics_derived,Validation (Lower Sleipner),33,6.4617,6.4848,6.4617,7.5949
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",random_forest,Random Forest,provisional_assumption,Testing (Skagerrak),110,36.6274,36.6387,36.6274,37.7284
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",catboost,CatBoost,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.0794,0.1116,0.0097,0.3195
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",catboost,CatBoost,measured_anchor,Validation (Test 16),1,6.772,6.772,6.772,6.772
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",catboost,CatBoost,measured_anchor,Testing (Tests 20 & 21),2,36.3553,36.3554,36.3553,36.4291
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",catboost,CatBoost,physics_derived,Training (Hugin/Sleipner),1254,0.0943,0.126,0.0002,0.7841
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",catboost,CatBoost,physics_derived,Validation (Lower Sleipner),33,6.5793,6.6094,6.5793,7.6342
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",catboost,CatBoost,provisional_assumption,Testing (Skagerrak),110,38.0059,38.0152,38.0059,39.3788
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",gradient_boosting,Gradient Boosting,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.0928,0.129,-0.0479,0.2976
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",gradient_boosting,Gradient Boosting,measured_anchor,Validation (Test 16),1,6.3611,6.3611,6.3611,6.3611
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",gradient_boosting,Gradient Boosting,measured_anchor,Testing (Tests 20 & 21),2,35.3717,35.3752,35.3717,35.8671
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",gradient_boosting,Gradient Boosting,physics_derived,Training (Hugin/Sleipner),1254,0.1087,0.1541,0.0009,1.2506
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",gradient_boosting,Gradient Boosting,physics_derived,Validation (Lower Sleipner),33,6.3134,6.3293,6.3134,7.7509
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",gradient_boosting,Gradient Boosting,provisional_assumption,Testing (Skagerrak),110,37.22,37.245,37.22,38.5107
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlp,MLP,measured_anchor,"Training (Tests 1-12, 14, 15)",14,0.4138,0.4873,-0.0699,1.1172
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlp,MLP,measured_anchor,Validation (Test 16),1,3.1994,3.1994,3.1994,3.1994
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlp,MLP,measured_anchor,Testing (Tests 20 & 21),2,58.2695,58.8938,58.2695,66.8223
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlp,MLP,physics_derived,Training (Hugin/Sleipner),1254,0.4541,0.6333,-0.0234,5.7294
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlp,MLP,physics_derived,Validation (Lower Sleipner),33,4.9966,5.1594,4.9966,7.8458
-exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlp,MLP,provisional_assumption,Testing (Skagerrak),110,57.5979,58.7236,57.5979,78.2224
+model_key,model_name,target_provenance,partition,n_observations,MAE_bar,RMSE_bar,R2,MAPE_pct,MaxAE_bar,mean_residual_bar,description,experiment_key,experiment_name,partition_interval
+mlr,MLR,measured_anchor,All Partitions,17,5.3532,12.7785,0.2857,1.4843,38.9578,4.4254,All 17 primary measured pretest anchors,baseline,Baseline (Logs-Only),
+mlr,MLR,measured_anchor,Training,14,0.8121,0.9829,0.9568,0.2509,1.8264,-0.3144,"14 training anchors (Tests 1-12, 14, 15)",baseline,Baseline (Logs-Only),
+mlr,MLR,measured_anchor,Validation,1,5.8915,5.8915,,1.7241,5.8915,5.8915,1 independent validation anchor (Test 16),baseline,Baseline (Logs-Only),
+mlr,MLR,measured_anchor,Testing,2,36.8713,36.9302,-434897.9154,9.9986,38.9578,36.8713,2 independent test anchors (Tests 20 & 21),baseline,Baseline (Logs-Only),
+mlr,MLR,physics_derived,All Partitions,1287,1.346,2.1434,0.881,0.4071,10.6501,0.1568,"All 1,287 regime-equation/interpolated targets",baseline,Baseline (Logs-Only),
+mlr,MLR,physics_derived,Training,1254,1.2239,1.9414,0.8881,0.3718,10.6501,0.0035,"1,254 Hugin + upper/mid Sleipner derived targets",baseline,Baseline (Logs-Only),
+mlr,MLR,physics_derived,Validation,33,5.9822,5.9955,-4369.8154,1.751,6.9186,5.9822,33 lower Sleipner piece-wise interpolated targets,baseline,Baseline (Logs-Only),
+mlr,MLR,provisional_assumption,Testing,110,36.1347,36.1885,,9.7989,40.2719,36.1347,110 provisional constant-compartment Skagerrak rows (not independent physical ground truth),baseline,Baseline (Logs-Only),
+random_forest,Random Forest,measured_anchor,All Partitions,17,4.3412,11.1538,0.4558,1.1918,33.4108,4.0279,All 17 primary measured pretest anchors,baseline,Baseline (Logs-Only),
+random_forest,Random Forest,measured_anchor,Training,14,0.1927,0.498,0.9889,0.0593,1.8218,-0.1878,"14 training anchors (Tests 1-12, 14, 15)",baseline,Baseline (Logs-Only),
+random_forest,Random Forest,measured_anchor,Validation,1,6.9122,6.9122,,2.0228,6.9122,6.9122,1 independent validation anchor (Test 16),baseline,Baseline (Logs-Only),
+random_forest,Random Forest,measured_anchor,Testing,2,32.0953,32.1223,-329029.4545,8.7036,33.4108,32.0953,2 independent test anchors (Tests 20 & 21),baseline,Baseline (Logs-Only),
+random_forest,Random Forest,physics_derived,All Partitions,1287,0.3125,1.1065,0.9683,0.093,7.5489,0.1682,"All 1,287 regime-equation/interpolated targets",baseline,Baseline (Logs-Only),
+random_forest,Random Forest,physics_derived,Training,1254,0.1476,0.3296,0.9968,0.0448,3.4656,-0.0005,"1,254 Hugin + upper/mid Sleipner derived targets",baseline,Baseline (Logs-Only),
+random_forest,Random Forest,physics_derived,Validation,33,6.5777,6.6046,-5303.0051,1.9253,7.5489,6.5777,33 lower Sleipner piece-wise interpolated targets,baseline,Baseline (Logs-Only),
+random_forest,Random Forest,provisional_assumption,Testing,110,33.1743,33.1948,,8.9961,34.4112,33.1743,110 provisional constant-compartment Skagerrak rows (not independent physical ground truth),baseline,Baseline (Logs-Only),
+catboost,CatBoost,measured_anchor,All Partitions,17,4.1664,10.8072,0.4891,1.1424,31.8388,3.9648,All 17 primary measured pretest anchors,baseline,Baseline (Logs-Only),
+catboost,CatBoost,measured_anchor,Training,14,0.1452,0.2683,0.9968,0.0447,0.9418,-0.0996,"14 training anchors (Tests 1-12, 14, 15)",baseline,Baseline (Logs-Only),
+catboost,CatBoost,measured_anchor,Validation,1,6.4804,6.4804,,1.8964,6.4804,6.4804,1 independent validation anchor (Test 16),baseline,Baseline (Logs-Only),
+catboost,CatBoost,measured_anchor,Testing,2,31.1577,31.1652,-309714.6233,8.4493,31.8388,31.1577,2 independent test anchors (Tests 20 & 21),baseline,Baseline (Logs-Only),
+catboost,CatBoost,physics_derived,All Partitions,1287,0.2975,1.0329,0.9724,0.0888,7.6325,0.163,"All 1,287 regime-equation/interpolated targets",baseline,Baseline (Logs-Only),
+catboost,CatBoost,physics_derived,Training,1254,0.1395,0.2014,0.9988,0.0426,1.3851,0.0015,"1,254 Hugin + upper/mid Sleipner derived targets",baseline,Baseline (Logs-Only),
+catboost,CatBoost,physics_derived,Validation,33,6.3013,6.33,-4871.1342,1.8444,7.6325,6.3013,33 lower Sleipner piece-wise interpolated targets,baseline,Baseline (Logs-Only),
+catboost,CatBoost,provisional_assumption,Testing,110,33.58,33.5942,,9.1061,35.4199,33.58,110 provisional constant-compartment Skagerrak rows (not independent physical ground truth),baseline,Baseline (Logs-Only),
+gradient_boosting,Gradient Boosting,measured_anchor,All Partitions,17,4.1005,10.5598,0.5122,1.1256,32.1205,3.8094,All 17 primary measured pretest anchors,baseline,Baseline (Logs-Only),
+gradient_boosting,Gradient Boosting,measured_anchor,Training,14,0.1884,0.3167,0.9955,0.0581,0.9742,-0.165,"14 training anchors (Tests 1-12, 14, 15)",baseline,Baseline (Logs-Only),
+gradient_boosting,Gradient Boosting,measured_anchor,Validation,1,6.2552,6.2552,,1.8305,6.2552,6.2552,1 independent validation anchor (Test 16),baseline,Baseline (Logs-Only),
+gradient_boosting,Gradient Boosting,measured_anchor,Testing,2,30.4076,30.4558,-295776.3449,8.2459,32.1205,30.4076,2 independent test anchors (Tests 20 & 21),baseline,Baseline (Logs-Only),
+gradient_boosting,Gradient Boosting,physics_derived,All Partitions,1287,0.304,1.0394,0.972,0.0908,7.5999,0.1641,"All 1,287 regime-equation/interpolated targets",baseline,Baseline (Logs-Only),
+gradient_boosting,Gradient Boosting,physics_derived,Training,1254,0.1452,0.2154,0.9986,0.0444,1.7217,0.0017,"1,254 Hugin + upper/mid Sleipner derived targets",baseline,Baseline (Logs-Only),
+gradient_boosting,Gradient Boosting,physics_derived,Validation,33,6.3381,6.3537,-4907.6061,1.8552,7.5999,6.3381,33 lower Sleipner piece-wise interpolated targets,baseline,Baseline (Logs-Only),
+gradient_boosting,Gradient Boosting,provisional_assumption,Testing,110,33.0321,33.0979,,8.9576,35.0299,33.0321,110 provisional constant-compartment Skagerrak rows (not independent physical ground truth),baseline,Baseline (Logs-Only),
+mlp,MLP,measured_anchor,All Partitions,17,4.3413,10.7411,0.4953,1.2014,33.3831,3.1766,All 17 primary measured pretest anchors,baseline,Baseline (Logs-Only),
+mlp,MLP,measured_anchor,Training,14,0.8081,1.0444,0.9512,0.248,2.2567,-0.6062,"14 training anchors (Tests 1-12, 14, 15)",baseline,Baseline (Logs-Only),
+mlp,MLP,measured_anchor,Validation,1,0.27,0.27,,0.079,0.27,0.27,1 independent validation anchor (Test 16),baseline,Baseline (Logs-Only),
+mlp,MLP,measured_anchor,Testing,2,31.1097,31.1926,-310260.1489,8.4363,33.3831,31.1097,2 independent test anchors (Tests 20 & 21),baseline,Baseline (Logs-Only),
+mlp,MLP,physics_derived,All Partitions,1287,1.0414,1.5907,0.9345,0.3161,11.1011,0.032,"All 1,287 regime-equation/interpolated targets",baseline,Baseline (Logs-Only),
+mlp,MLP,physics_derived,Training,1254,0.9956,1.4993,0.9333,0.303,11.1011,-0.0285,"1,254 Hugin + upper/mid Sleipner derived targets",baseline,Baseline (Logs-Only),
+mlp,MLP,physics_derived,Validation,33,2.7809,3.6419,-1611.7215,0.814,8.2514,2.3282,33 lower Sleipner piece-wise interpolated targets,baseline,Baseline (Logs-Only),
+mlp,MLP,provisional_assumption,Testing,110,31.2473,31.4296,,8.4736,36.8874,31.2473,110 provisional constant-compartment Skagerrak rows (not independent physical ground truth),baseline,Baseline (Logs-Only),
+mlr,MLR,measured_anchor,,14,0.9774,1.2353,,,2.4669,-0.282,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),"Training (Tests 1-12, 14, 15)"
+mlr,MLR,measured_anchor,,1,4.176,4.176,,,4.176,4.176,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Validation (Test 16)
+mlr,MLR,measured_anchor,,2,29.0574,29.0615,,,29.5431,29.0574,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Testing (Tests 20 & 21)
+mlr,MLR,physics_derived,,1254,1.1144,1.5002,,,6.11,0.0031,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Training (Hugin/Sleipner)
+mlr,MLR,physics_derived,,33,4.5169,4.5332,,,5.5418,4.5169,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Validation (Lower Sleipner)
+mlr,MLR,provisional_assumption,,110,29.2182,29.2248,,,30.2592,29.2182,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Testing (Skagerrak)
+random_forest,Random Forest,measured_anchor,,14,0.1342,0.3188,,,1.1363,-0.1319,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),"Training (Tests 1-12, 14, 15)"
+random_forest,Random Forest,measured_anchor,,1,3.3675,3.3675,,,3.3675,3.3675,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Validation (Test 16)
+random_forest,Random Forest,measured_anchor,,2,29.327,29.3398,,,30.1938,29.327,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Testing (Tests 20 & 21)
+random_forest,Random Forest,physics_derived,,1254,0.0614,0.149,,,2.1211,0.0052,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Training (Hugin/Sleipner)
+random_forest,Random Forest,physics_derived,,33,2.9955,3.0767,,,4.3344,2.9955,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Validation (Lower Sleipner)
+random_forest,Random Forest,provisional_assumption,,110,29.754,29.7587,,,30.6622,29.754,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Testing (Skagerrak)
+catboost,CatBoost,measured_anchor,,14,0.0958,0.2064,,,0.7479,-0.0627,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),"Training (Tests 1-12, 14, 15)"
+catboost,CatBoost,measured_anchor,,1,3.8577,3.8577,,,3.8577,3.8577,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Validation (Test 16)
+catboost,CatBoost,measured_anchor,,2,30.2685,30.2754,,,30.9149,30.2685,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Testing (Tests 20 & 21)
+catboost,CatBoost,physics_derived,,1254,0.0476,0.0662,,,0.4195,0.0005,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Training (Hugin/Sleipner)
+catboost,CatBoost,physics_derived,,33,3.7379,3.9123,,,5.1779,3.7379,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Validation (Lower Sleipner)
+catboost,CatBoost,provisional_assumption,,110,29.7323,29.7413,,,31.8261,29.7323,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Testing (Skagerrak)
+gradient_boosting,Gradient Boosting,measured_anchor,,14,0.0079,0.0112,,,0.0321,-0.0001,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),"Training (Tests 1-12, 14, 15)"
+gradient_boosting,Gradient Boosting,measured_anchor,,1,0.2911,0.2911,,,0.2911,0.2911,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Validation (Test 16)
+gradient_boosting,Gradient Boosting,measured_anchor,,2,27.3839,27.384,,,27.4626,27.3839,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Testing (Tests 20 & 21)
+gradient_boosting,Gradient Boosting,physics_derived,,1254,0.0053,0.0082,,,0.1362,-0.0,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Training (Hugin/Sleipner)
+gradient_boosting,Gradient Boosting,physics_derived,,33,0.2303,0.2531,,,0.4526,0.2303,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Validation (Lower Sleipner)
+gradient_boosting,Gradient Boosting,provisional_assumption,,110,27.3931,27.3931,,,27.5002,27.3931,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Testing (Skagerrak)
+mlp,MLP,measured_anchor,,14,0.6589,0.9542,,,2.0078,0.0495,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),"Training (Tests 1-12, 14, 15)"
+mlp,MLP,measured_anchor,,1,3.641,3.641,,,3.641,-3.641,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Validation (Test 16)
+mlp,MLP,measured_anchor,,2,5.8189,6.0133,,,7.3356,-1.5167,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Testing (Tests 20 & 21)
+mlp,MLP,physics_derived,,1254,0.6003,0.902,,,5.722,0.1101,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Training (Hugin/Sleipner)
+mlp,MLP,physics_derived,,33,2.8249,3.2346,,,5.8571,-2.3074,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Validation (Lower Sleipner)
+mlp,MLP,provisional_assumption,,110,3.1918,3.9276,,,8.8419,0.3335,,exp_a,Experiment A (Depth-Aware: +TVD_MSL),Testing (Skagerrak)
+mlr,MLR,measured_anchor,,14,0.8092,1.0443,,,2.2861,-0.1213,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)","Training (Tests 1-12, 14, 15)"
+mlr,MLR,measured_anchor,,1,2.2286,2.2286,,,2.2286,2.2286,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Validation (Test 16)
+mlr,MLR,measured_anchor,,2,13.2415,13.6016,,,16.3507,13.2415,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Testing (Tests 20 & 21)
+mlr,MLR,physics_derived,,1254,0.9593,1.2719,,,4.1439,0.0014,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Training (Hugin/Sleipner)
+mlr,MLR,physics_derived,,33,2.4049,2.4714,,,3.4874,2.4049,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Validation (Lower Sleipner)
+mlr,MLR,provisional_assumption,,110,14.0929,14.1797,,,16.4772,14.0929,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Testing (Skagerrak)
+random_forest,Random Forest,measured_anchor,,14,0.0764,0.2249,,,0.8341,-0.0661,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)","Training (Tests 1-12, 14, 15)"
+random_forest,Random Forest,measured_anchor,,1,1.0485,1.0485,,,1.0485,1.0485,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Validation (Test 16)
+random_forest,Random Forest,measured_anchor,,2,28.0134,28.0139,,,28.1697,28.0134,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Testing (Tests 20 & 21)
+random_forest,Random Forest,physics_derived,,1254,0.0159,0.0753,,,1.7966,0.0036,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Training (Hugin/Sleipner)
+random_forest,Random Forest,physics_derived,,33,0.8654,0.9149,,,1.3618,0.8654,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Validation (Lower Sleipner)
+random_forest,Random Forest,provisional_assumption,,110,27.8732,27.8737,,,28.2648,27.8732,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Testing (Skagerrak)
+catboost,CatBoost,measured_anchor,,14,0.0877,0.1765,,,0.625,-0.0579,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)","Training (Tests 1-12, 14, 15)"
+catboost,CatBoost,measured_anchor,,1,4.4158,4.4158,,,4.4158,4.4158,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Validation (Test 16)
+catboost,CatBoost,measured_anchor,,2,31.0225,31.0345,,,31.8842,31.0225,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Testing (Tests 20 & 21)
+catboost,CatBoost,physics_derived,,1254,0.0386,0.056,,,0.4371,0.0005,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Training (Hugin/Sleipner)
+catboost,CatBoost,physics_derived,,33,3.995,4.1826,,,5.5245,3.995,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Validation (Lower Sleipner)
+catboost,CatBoost,provisional_assumption,,110,30.4778,30.4914,,,32.8621,30.4778,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Testing (Skagerrak)
+gradient_boosting,Gradient Boosting,measured_anchor,,14,0.0099,0.0132,,,0.03,-0.0003,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)","Training (Tests 1-12, 14, 15)"
+gradient_boosting,Gradient Boosting,measured_anchor,,1,0.2522,0.2522,,,0.2522,0.2522,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Validation (Test 16)
+gradient_boosting,Gradient Boosting,measured_anchor,,2,27.3449,27.3451,,,27.4227,27.3449,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Testing (Tests 20 & 21)
+gradient_boosting,Gradient Boosting,physics_derived,,1254,0.0051,0.0077,,,0.0779,-0.0,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Training (Hugin/Sleipner)
+gradient_boosting,Gradient Boosting,physics_derived,,33,0.1821,0.2071,,,0.3829,0.1821,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Validation (Lower Sleipner)
+gradient_boosting,Gradient Boosting,provisional_assumption,,110,27.3503,27.3504,,,27.4683,27.3503,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Testing (Skagerrak)
+mlp,MLP,measured_anchor,,14,0.8007,1.0842,,,2.3184,-0.1363,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)","Training (Tests 1-12, 14, 15)"
+mlp,MLP,measured_anchor,,1,4.2512,4.2512,,,4.2512,-4.2512,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Validation (Test 16)
+mlp,MLP,measured_anchor,,2,9.1327,11.4311,,,16.0076,-9.1327,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Testing (Tests 20 & 21)
+mlp,MLP,physics_derived,,1254,0.6847,0.9909,,,6.0987,0.0394,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Training (Hugin/Sleipner)
+mlp,MLP,physics_derived,,33,2.7128,3.0113,,,4.9049,-1.354,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Validation (Lower Sleipner)
+mlp,MLP,provisional_assumption,,110,4.9532,6.6494,,,17.283,-4.8948,,exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",Testing (Skagerrak)
+mlr,MLR,measured_anchor,,14,0.8546,1.0807,,,2.3028,-0.1068,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)","Training (Tests 1-12, 14, 15)"
+mlr,MLR,measured_anchor,,1,1.8121,1.8121,,,1.8121,1.8121,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Validation (Test 16)
+mlr,MLR,measured_anchor,,2,13.3481,13.4559,,,15.048,13.3481,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Testing (Tests 20 & 21)
+mlr,MLR,physics_derived,,1254,0.976,1.2856,,,4.1485,0.0012,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Training (Hugin/Sleipner)
+mlr,MLR,physics_derived,,33,2.1658,2.2094,,,3.005,2.1658,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Validation (Lower Sleipner)
+mlr,MLR,provisional_assumption,,110,13.5439,13.5839,,,15.1448,13.5439,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Testing (Skagerrak)
+random_forest,Random Forest,measured_anchor,,14,0.0734,0.2099,,,0.7748,-0.0677,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)","Training (Tests 1-12, 14, 15)"
+random_forest,Random Forest,measured_anchor,,1,1.2324,1.2324,,,1.2324,1.2324,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Validation (Test 16)
+random_forest,Random Forest,measured_anchor,,2,28.074,28.0774,,,28.5126,28.074,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Testing (Tests 20 & 21)
+random_forest,Random Forest,physics_derived,,1254,0.014,0.067,,,1.4838,0.0022,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Training (Hugin/Sleipner)
+random_forest,Random Forest,physics_derived,,33,1.1428,1.1959,,,1.5928,1.1428,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Validation (Lower Sleipner)
+random_forest,Random Forest,provisional_assumption,,110,27.9951,27.9966,,,28.572,27.9951,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Testing (Skagerrak)
+catboost,CatBoost,measured_anchor,,14,0.0913,0.2105,,,0.7533,-0.073,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)","Training (Tests 1-12, 14, 15)"
+catboost,CatBoost,measured_anchor,,1,4.0687,4.0687,,,4.0687,4.0687,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Validation (Test 16)
+catboost,CatBoost,measured_anchor,,2,30.2171,30.2182,,,30.4729,30.2171,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Testing (Tests 20 & 21)
+catboost,CatBoost,physics_derived,,1254,0.0414,0.0568,,,0.3577,0.0007,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Training (Hugin/Sleipner)
+catboost,CatBoost,physics_derived,,33,3.5713,3.7287,,,4.6823,3.5713,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Validation (Lower Sleipner)
+catboost,CatBoost,provisional_assumption,,110,29.7668,29.7785,,,31.7422,29.7668,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Testing (Skagerrak)
+gradient_boosting,Gradient Boosting,measured_anchor,,14,0.0094,0.0122,,,0.0283,0.0005,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)","Training (Tests 1-12, 14, 15)"
+gradient_boosting,Gradient Boosting,measured_anchor,,1,0.2657,0.2657,,,0.2657,0.2657,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Validation (Test 16)
+gradient_boosting,Gradient Boosting,measured_anchor,,2,27.3508,27.3509,,,27.4312,27.3508,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Testing (Tests 20 & 21)
+gradient_boosting,Gradient Boosting,physics_derived,,1254,0.005,0.0072,,,0.0774,-0.0,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Training (Hugin/Sleipner)
+gradient_boosting,Gradient Boosting,physics_derived,,33,0.2047,0.23,,,0.4219,0.2047,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Validation (Lower Sleipner)
+gradient_boosting,Gradient Boosting,provisional_assumption,,110,27.3639,27.364,,,27.4598,27.3639,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Testing (Skagerrak)
+mlp,MLP,measured_anchor,,14,0.8461,1.2151,,,3.0784,-0.364,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)","Training (Tests 1-12, 14, 15)"
+mlp,MLP,measured_anchor,,1,10.886,10.886,,,10.886,-10.886,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Validation (Test 16)
+mlp,MLP,measured_anchor,,2,42.677,44.7786,,,56.234,-42.677,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Testing (Tests 20 & 21)
+mlp,MLP,physics_derived,,1254,0.9136,1.3304,,,10.5816,-0.424,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Training (Hugin/Sleipner)
+mlp,MLP,physics_derived,,33,7.9769,8.7986,,,13.3162,-7.8839,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Validation (Lower Sleipner)
+mlp,MLP,provisional_assumption,,110,39.1247,39.667,,,55.7464,-39.1247,,exp_b_no_dtratio,"Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)",Testing (Skagerrak)
+mlr,MLR,measured_anchor,,14,1.0106,1.1576,,,1.982,-0.001,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)","Training (Tests 1-12, 14, 15)"
+mlr,MLR,measured_anchor,,1,6.211,6.211,,,6.211,6.211,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Validation (Test 16)
+mlr,MLR,measured_anchor,,2,39.7288,39.7625,,,41.3643,39.7288,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Testing (Tests 20 & 21)
+mlr,MLR,physics_derived,,1254,0.9673,1.4128,,,8.0519,0.0,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Training (Hugin/Sleipner)
+mlr,MLR,physics_derived,,33,6.247,6.2563,,,7.0996,6.247,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Validation (Lower Sleipner)
+mlr,MLR,provisional_assumption,,110,39.02,39.0414,,,41.6775,39.02,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Testing (Skagerrak)
+random_forest,Random Forest,measured_anchor,,14,0.0518,0.0921,,,0.2295,-0.0484,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)","Training (Tests 1-12, 14, 15)"
+random_forest,Random Forest,measured_anchor,,1,6.6622,6.6622,,,6.6622,6.6622,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Validation (Test 16)
+random_forest,Random Forest,measured_anchor,,2,35.6522,35.6667,,,36.6699,35.6522,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Testing (Tests 20 & 21)
+random_forest,Random Forest,physics_derived,,1254,0.0994,0.2298,,,3.1917,0.0051,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Training (Hugin/Sleipner)
+random_forest,Random Forest,physics_derived,,33,6.4617,6.4848,,,7.5949,6.4617,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Validation (Lower Sleipner)
+random_forest,Random Forest,provisional_assumption,,110,36.6274,36.6387,,,37.7284,36.6274,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Testing (Skagerrak)
+catboost,CatBoost,measured_anchor,,14,0.0794,0.1116,,,0.3195,0.0097,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)","Training (Tests 1-12, 14, 15)"
+catboost,CatBoost,measured_anchor,,1,6.772,6.772,,,6.772,6.772,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Validation (Test 16)
+catboost,CatBoost,measured_anchor,,2,36.3553,36.3554,,,36.4291,36.3553,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Testing (Tests 20 & 21)
+catboost,CatBoost,physics_derived,,1254,0.0943,0.126,,,0.7841,0.0002,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Training (Hugin/Sleipner)
+catboost,CatBoost,physics_derived,,33,6.5793,6.6094,,,7.6342,6.5793,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Validation (Lower Sleipner)
+catboost,CatBoost,provisional_assumption,,110,38.0059,38.0152,,,39.3788,38.0059,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Testing (Skagerrak)
+gradient_boosting,Gradient Boosting,measured_anchor,,14,0.0928,0.129,,,0.2976,-0.0479,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)","Training (Tests 1-12, 14, 15)"
+gradient_boosting,Gradient Boosting,measured_anchor,,1,6.3611,6.3611,,,6.3611,6.3611,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Validation (Test 16)
+gradient_boosting,Gradient Boosting,measured_anchor,,2,35.3717,35.3752,,,35.8671,35.3717,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Testing (Tests 20 & 21)
+gradient_boosting,Gradient Boosting,physics_derived,,1254,0.1087,0.1541,,,1.2506,0.0009,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Training (Hugin/Sleipner)
+gradient_boosting,Gradient Boosting,physics_derived,,33,6.3134,6.3293,,,7.7509,6.3134,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Validation (Lower Sleipner)
+gradient_boosting,Gradient Boosting,provisional_assumption,,110,37.22,37.245,,,38.5107,37.22,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Testing (Skagerrak)
+mlp,MLP,measured_anchor,,14,0.4138,0.4873,,,1.1172,-0.0699,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)","Training (Tests 1-12, 14, 15)"
+mlp,MLP,measured_anchor,,1,3.1994,3.1994,,,3.1994,3.1994,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Validation (Test 16)
+mlp,MLP,measured_anchor,,2,58.2695,58.8938,,,66.8223,58.2695,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Testing (Tests 20 & 21)
+mlp,MLP,physics_derived,,1254,0.4541,0.6333,,,5.7294,-0.0234,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Training (Hugin/Sleipner)
+mlp,MLP,physics_derived,,33,4.9966,5.1594,,,7.8458,4.9966,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Validation (Lower Sleipner)
+mlp,MLP,provisional_assumption,,110,57.5979,58.7236,,,78.2224,57.5979,,exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",Testing (Skagerrak)

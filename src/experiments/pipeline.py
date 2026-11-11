@@ -144,9 +144,9 @@ def run_single_experiment(
     partition_subsets = [
         ("Training (Valid)", train_mask & valid_mask),
         ("Validation (Valid)", val_mask & valid_mask),
-        ("Testing (Anchors: Tests 20 & 21)", test_mask & (df_targ["TARGET_PROVENANCE"].values == "measured_anchor")),
-        ("Testing (Provisional Assumption)", test_mask & (df_targ["TARGET_PROVENANCE"].values == "provisional_assumption")),
-        ("Full Dataset (All Valid)", valid_mask),
+        ("Testing (Measured Anchors Only: Tests 20 & 21)", test_mask & (df_targ["TARGET_PROVENANCE"].values == "measured_anchor")),
+        ("Testing (Provisional Skagerrak Assumption Only)", test_mask & (df_targ["TARGET_PROVENANCE"].values == "provisional_assumption")),
+        ("Full Dataset (All Valid Targets)", valid_mask),
     ]
 
     part_metrics_rows = []
@@ -305,8 +305,9 @@ def generate_experiment_figures(
     exp_c_pred_df: pd.DataFrame,
     station_comp_df: pd.DataFrame,
     figures_dir: Path,
+    exp_b_no_dt_pred_df: pd.DataFrame | None = None,
 ) -> List[Path]:
-    """Generate diagnostic comparative figures across baseline and experiments A, B, and C."""
+    """Generate diagnostic comparative figures across baseline and experiments A, B, B (no DT ratio), and C."""
     figures_dir.mkdir(parents=True, exist_ok=True)
     generated_figures: List[Path] = []
 
@@ -324,7 +325,9 @@ def generate_experiment_figures(
         ax.plot(targ_p, depths, color="black", lw=2.4, label="Target Profile (Valid)")
         ax.plot(baseline_pred_df[f"PRED_{m_key}_BAR"], depths, color="#7f7f7f", linestyle="--", lw=1.2, label="Baseline (Logs-Only)")
         ax.plot(exp_a_pred_df[f"PRED_{m_key}_BAR"], depths, color="#1f77b4", lw=1.3, label="Exp A (+TVD_MSL)")
-        ax.plot(exp_b_pred_df[f"PRED_{m_key}_BAR"], depths, color="#2ca02c", lw=1.3, label="Exp B (+Physics: Sv, Ph, Eff)")
+        ax.plot(exp_b_pred_df[f"PRED_{m_key}_BAR"], depths, color="#2ca02c", lw=1.3, label="Exp B (+Physics: Sv, Ph, Eff, DT_ratio)")
+        if exp_b_no_dt_pred_df is not None:
+            ax.plot(exp_b_no_dt_pred_df[f"PRED_{m_key}_BAR"], depths, color="#17becf", linestyle="-.", lw=1.3, label="Exp B Sensitivity (No DT_ratio)")
         ax.plot(exp_c_pred_df[f"PRED_{m_key}_BAR"], depths, color="#d62728", lw=1.3, label="Exp C (+Formation Flags)")
 
         # Pretest stations
@@ -339,7 +342,7 @@ def generate_experiment_figures(
         ax.set_xlim(310, 385)
         ax.set_xlabel("Pore Pressure (bar)", fontsize=10.5)
         ax.set_title(f"{m_title}: Controlled Experiments Comparison", fontsize=11.5, fontweight="bold")
-        ax.legend(loc="upper right", fontsize=8.0, framealpha=0.92)
+        ax.legend(loc="upper right", fontsize=7.8, framealpha=0.92)
         ax.grid(True, linestyle=":", alpha=0.6)
 
     ax_cb.invert_yaxis()
@@ -358,6 +361,164 @@ def generate_experiment_figures(
     generated_figures.append(fpath1)
 
     return generated_figures
+
+
+def build_individual_station_errors(
+    configs: List[Tuple[str, str, pd.DataFrame]],
+    station_comp_df: pd.DataFrame,
+    df_targ: pd.DataFrame,
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Build individual physical station error tables for Tests 16, 20, 21, and 19.
+    Returns:
+    1. df_long: One row per (Experiment, Model, Station) with actual, predicted, residual, and absolute error.
+    2. df_wide: Summary matrix with one row per (Experiment, Model) reporting metrics across stations.
+    """
+    models = [
+        ("mlr", "MLR"),
+        ("random_forest", "Random Forest"),
+        ("catboost", "CatBoost"),
+        ("gradient_boosting", "Gradient Boosting"),
+        ("mlp", "MLP"),
+    ]
+    eval_tests = [16, 20, 21, 19]
+    station_meta = {
+        16: {"label": "Test 16", "formation": "Sleipner", "partition": "Validation", "role": "Unseen Validation Checkpoint"},
+        20: {"label": "Test 20", "formation": "Skagerrak", "partition": "Testing", "role": "Testing Measured Anchor"},
+        21: {"label": "Test 21", "formation": "Skagerrak", "partition": "Testing", "role": "Testing Measured Anchor"},
+        19: {"label": "Test 19 (Excluded Memory)", "formation": "Skagerrak", "partition": "Testing", "role": "Excluded Conflicting Memory Pretest"},
+    }
+
+    long_rows = []
+    wide_rows = []
+
+    for exp_key, exp_name, pred_df in configs:
+        for m_key, m_name in models:
+            station_preds = {}
+            for t in eval_tests:
+                st_row = station_comp_df[station_comp_df["test_no"] == t].iloc[0]
+                grid_md = float(st_row["grid_md"])
+                idx = int(np.argmin(np.abs(df_targ["DEPTH"].values - grid_md)))
+                p_actual = float(st_row["reconciled_station_p_bar"])
+                p_pred = float(pred_df.loc[idx, f"PRED_{m_key.upper()}_BAR"])
+                res = p_actual - p_pred
+                abs_err = abs(res)
+
+                station_preds[t] = {
+                    "actual": p_actual,
+                    "pred": p_pred,
+                    "res": res,
+                    "abs_err": abs_err,
+                }
+
+                long_rows.append({
+                    "experiment_key": exp_key,
+                    "experiment_name": exp_name,
+                    "model_key": m_key,
+                    "model_name": m_name,
+                    "test_no": t,
+                    "station_label": station_meta[t]["label"],
+                    "formation": station_meta[t]["formation"],
+                    "partition": station_meta[t]["partition"],
+                    "station_role": station_meta[t]["role"],
+                    "station_md_m": float(st_row["station_md"]),
+                    "station_tvd_msl_m": float(df_targ.loc[idx, "TVD_MSL"]),
+                    "actual_pressure_bar": round(p_actual, 3),
+                    "predicted_pressure_bar": round(p_pred, 4),
+                    "residual_bar": round(res, 4),
+                    "abs_error_bar": round(abs_err, 4),
+                })
+
+            t20_21_mae = float(np.mean([station_preds[20]["abs_err"], station_preds[21]["abs_err"]]))
+            t20_21_rmse = float(np.sqrt(np.mean([station_preds[20]["res"] ** 2, station_preds[21]["res"] ** 2])))
+
+            wide_rows.append({
+                "experiment_key": exp_key,
+                "experiment_name": exp_name,
+                "model_key": m_key,
+                "model_name": m_name,
+                "val_test16_actual_bar": round(station_preds[16]["actual"], 3),
+                "val_test16_pred_bar": round(station_preds[16]["pred"], 4),
+                "val_test16_residual_bar": round(station_preds[16]["res"], 4),
+                "val_test16_abs_err_bar": round(station_preds[16]["abs_err"], 4),
+                "test20_actual_bar": round(station_preds[20]["actual"], 3),
+                "test20_pred_bar": round(station_preds[20]["pred"], 4),
+                "test20_residual_bar": round(station_preds[20]["res"], 4),
+                "test20_abs_err_bar": round(station_preds[20]["abs_err"], 4),
+                "test21_actual_bar": round(station_preds[21]["actual"], 3),
+                "test21_pred_bar": round(station_preds[21]["pred"], 4),
+                "test21_residual_bar": round(station_preds[21]["res"], 4),
+                "test21_abs_err_bar": round(station_preds[21]["abs_err"], 4),
+                "test20_21_mae_bar": round(t20_21_mae, 4),
+                "test20_21_rmse_bar": round(t20_21_rmse, 4),
+                "excluded_test19_reference_bar": round(station_preds[19]["actual"], 3),
+                "excluded_test19_pred_bar": round(station_preds[19]["pred"], 4),
+                "excluded_test19_diff_bar": round(station_preds[19]["res"], 4),
+                "excluded_test19_abs_diff_bar": round(station_preds[19]["abs_err"], 4),
+            })
+
+    df_long = pd.DataFrame(long_rows)
+    df_wide = pd.DataFrame(wide_rows)
+    return df_long, df_wide
+
+
+def compute_mlp_depth_sensitivity(
+    mlp_model: MLPModel,
+    scaler: StandardScaler,
+    feature_names: List[str],
+    df_pred: pd.DataFrame,
+    df_targ: pd.DataFrame,
+    tvd_start_m: float = 2800.0,
+    tvd_end_m: float = 3050.0,
+    n_points: int = 251,
+) -> pd.DataFrame:
+    """
+    Evaluate depth sensitivity profile of the Experiment A Depth-Aware MLP model.
+    Sweeps TVD_MSL across the well interval while holding petrophysical logs
+    at their median training values.
+    """
+    train_mask = (df_targ["PARTITION"] == "Training").values
+    from src.data.validation import EXPECTED_PREDICTORS
+
+    base_features = {}
+    for col in EXPECTED_PREDICTORS:
+        val = float(df_pred.loc[train_mask, col].median())
+        base_features[col] = val
+
+    tvd_sweep = np.linspace(tvd_start_m, tvd_end_m, n_points)
+    sweep_df = pd.DataFrame([base_features] * n_points)
+    sweep_df["TVD_MSL"] = tvd_sweep
+
+    # Apply log10 and scaler transformation
+    X_log = sweep_df.copy()
+    for col in LOG_TRANSFORM_COLS:
+        if col in X_log.columns:
+            X_log[col] = np.log10(np.clip(X_log[col].values, a_min=1e-6, a_max=None))
+
+    X_scaled = pd.DataFrame(scaler.transform(X_log), columns=feature_names)
+    p_pred = mlp_model.predict(X_scaled)
+    dP_dTVD = np.gradient(p_pred, tvd_sweep)
+
+    regime = []
+    for z in tvd_sweep:
+        if z < 2819.38:
+            regime.append("Pre-Training Shallow")
+        elif z <= 2933.64:
+            regime.append("Training Interval (Hugin & Upper Sleipner)")
+        elif z <= 2958.51:
+            regime.append("Validation Interval (Lower Sleipner)")
+        elif z <= 2983.34:
+            regime.append("Testing Interval (Skagerrak Compartment)")
+        else:
+            regime.append("Extrapolated Deep Sub-Skagerrak")
+
+    return pd.DataFrame({
+        "TVD_MSL_m": np.round(tvd_sweep, 2),
+        "predicted_pressure_bar": np.round(p_pred, 4),
+        "dP_dTVD_bar_per_m": np.round(dP_dTVD, 4),
+        "equivalent_fluid_density_g_cm3": np.round(dP_dTVD / 0.0980665, 3),
+        "stratigraphic_regime": regime,
+    })
 
 
 def run_all_experiments(base_dir: Path | None = None) -> Dict[str, Any]:
@@ -387,12 +548,15 @@ def run_all_experiments(base_dir: Path | None = None) -> Dict[str, Any]:
 
     # 1. Feature sets
     X_exp_a = build_experiment_a_features(df_pred, df_targ)
-    X_exp_b, meta_b = build_experiment_b_features(df_pred, df_targ, ovb_sens_df)
+    X_exp_b, meta_b = build_experiment_b_features(df_pred, df_targ, ovb_sens_df, include_dt_ratio=True)
+    X_exp_b_no_dt, meta_b_no_dt = build_experiment_b_features(df_pred, df_targ, ovb_sens_df, include_dt_ratio=False)
     X_exp_c, meta_c = build_experiment_c_features(df_pred, df_targ)
 
     # Save feature metadata
     with open(exp_metrics_dir / "experiment_b_physics_features_metadata.json", "w") as f:
         json.dump(meta_b, f, indent=2)
+    with open(exp_metrics_dir / "experiment_b_no_dtratio_physics_features_metadata.json", "w") as f:
+        json.dump(meta_b_no_dt, f, indent=2)
     with open(exp_metrics_dir / "experiment_c_formation_features_metadata.json", "w") as f:
         json.dump(meta_c, f, indent=2)
 
@@ -401,12 +565,17 @@ def run_all_experiments(base_dir: Path | None = None) -> Dict[str, Any]:
         "exp_a", "Experiment A (Depth-Aware: +TVD_MSL)", X_exp_a, df_targ, station_comp_df, models_cfg, exp_models_dir
     )
 
-    # 3. Run Experiment B (Physics-Informed)
+    # 3. Run Experiment B (Physics-Informed with DT_ratio)
     res_b = run_single_experiment(
         "exp_b", "Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)", X_exp_b, df_targ, station_comp_df, models_cfg, exp_models_dir
     )
 
-    # 4. Run Experiment C (Formation-Aware)
+    # 4. Run Experiment B Sensitivity (Physics-Informed without DT_ratio)
+    res_b_no_dt = run_single_experiment(
+        "exp_b_no_dtratio", "Experiment B (No DT_ratio: +Sv, +Ph, +sigma_v)", X_exp_b_no_dt, df_targ, station_comp_df, models_cfg, exp_models_dir
+    )
+
+    # 5. Run Experiment C (Formation-Aware)
     res_c = run_single_experiment(
         "exp_c", "Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)", X_exp_c, df_targ, station_comp_df, models_cfg, exp_models_dir
     )
@@ -417,6 +586,9 @@ def run_all_experiments(base_dir: Path | None = None) -> Dict[str, Any]:
 
     _save_dual(res_b["predictions_df"], exp_metrics_dir / "exp_b_predictions.csv", exp_metrics_dir / "exp_b_predictions.json")
     _save_dual(res_b["predictions_df"], exp_tables_dir / "exp_b_predictions.csv", exp_tables_dir / "exp_b_predictions.json")
+
+    _save_dual(res_b_no_dt["predictions_df"], exp_metrics_dir / "exp_b_no_dtratio_predictions.csv", exp_metrics_dir / "exp_b_no_dtratio_predictions.json")
+    _save_dual(res_b_no_dt["predictions_df"], exp_tables_dir / "exp_b_no_dtratio_predictions.csv", exp_tables_dir / "exp_b_no_dtratio_predictions.json")
 
     _save_dual(res_c["predictions_df"], exp_metrics_dir / "exp_c_predictions.csv", exp_metrics_dir / "exp_c_predictions.json")
     _save_dual(res_c["predictions_df"], exp_tables_dir / "exp_c_predictions.csv", exp_tables_dir / "exp_c_predictions.json")
@@ -473,6 +645,21 @@ def run_all_experiments(base_dir: Path | None = None) -> Dict[str, Any]:
                     "MaxAE_bar",
                 ]
             ],
+            res_b_no_dt["partition_metrics"][
+                [
+                    "experiment_key",
+                    "experiment_name",
+                    "model_key",
+                    "model_name",
+                    "partition_subset",
+                    "n_valid",
+                    "MAE_bar",
+                    "RMSE_bar",
+                    "R2",
+                    "mean_residual_bar",
+                    "MaxAE_bar",
+                ]
+            ],
             res_c["partition_metrics"][
                 [
                     "experiment_key",
@@ -500,84 +687,31 @@ def run_all_experiments(base_dir: Path | None = None) -> Dict[str, Any]:
     baseline_st_benchmarks["experiment_key"] = "baseline"
     baseline_st_benchmarks["experiment_name"] = "Baseline (Logs-Only)"
 
+    st_bench_cols = [
+        "experiment_key",
+        "experiment_name",
+        "model_key",
+        "model_name",
+        "train_15_stations_RMSE_bar",
+        "val_test16_pred_bar",
+        "val_test16_residual_bar",
+        "test20_pred_bar",
+        "test20_residual_bar",
+        "test21_pred_bar",
+        "test21_residual_bar",
+        "test20_21_MAE_bar",
+        "test20_21_RMSE_bar",
+        "excluded_test19_pred_bar",
+        "excluded_test19_diff_bar",
+    ]
+
     combined_st_benchmarks = pd.concat(
         [
-            baseline_st_benchmarks[
-                [
-                    "experiment_key",
-                    "experiment_name",
-                    "model_key",
-                    "model_name",
-                    "train_15_stations_RMSE_bar",
-                    "val_test16_pred_bar",
-                    "val_test16_residual_bar",
-                    "test20_pred_bar",
-                    "test20_residual_bar",
-                    "test21_pred_bar",
-                    "test21_residual_bar",
-                    "test20_21_MAE_bar",
-                    "test20_21_RMSE_bar",
-                    "excluded_test19_pred_bar",
-                    "excluded_test19_diff_bar",
-                ]
-            ],
-            res_a["station_benchmarks"][
-                [
-                    "experiment_key",
-                    "experiment_name",
-                    "model_key",
-                    "model_name",
-                    "train_15_stations_RMSE_bar",
-                    "val_test16_pred_bar",
-                    "val_test16_residual_bar",
-                    "test20_pred_bar",
-                    "test20_residual_bar",
-                    "test21_pred_bar",
-                    "test21_residual_bar",
-                    "test20_21_MAE_bar",
-                    "test20_21_RMSE_bar",
-                    "excluded_test19_pred_bar",
-                    "excluded_test19_diff_bar",
-                ]
-            ],
-            res_b["station_benchmarks"][
-                [
-                    "experiment_key",
-                    "experiment_name",
-                    "model_key",
-                    "model_name",
-                    "train_15_stations_RMSE_bar",
-                    "val_test16_pred_bar",
-                    "val_test16_residual_bar",
-                    "test20_pred_bar",
-                    "test20_residual_bar",
-                    "test21_pred_bar",
-                    "test21_residual_bar",
-                    "test20_21_MAE_bar",
-                    "test20_21_RMSE_bar",
-                    "excluded_test19_pred_bar",
-                    "excluded_test19_diff_bar",
-                ]
-            ],
-            res_c["station_benchmarks"][
-                [
-                    "experiment_key",
-                    "experiment_name",
-                    "model_key",
-                    "model_name",
-                    "train_15_stations_RMSE_bar",
-                    "val_test16_pred_bar",
-                    "val_test16_residual_bar",
-                    "test20_pred_bar",
-                    "test20_residual_bar",
-                    "test21_pred_bar",
-                    "test21_residual_bar",
-                    "test20_21_MAE_bar",
-                    "test20_21_RMSE_bar",
-                    "excluded_test19_pred_bar",
-                    "excluded_test19_diff_bar",
-                ]
-            ],
+            baseline_st_benchmarks[st_bench_cols],
+            res_a["station_benchmarks"][st_bench_cols],
+            res_b["station_benchmarks"][st_bench_cols],
+            res_b_no_dt["station_benchmarks"][st_bench_cols],
+            res_c["station_benchmarks"][st_bench_cols],
         ],
         ignore_index=True,
     )
@@ -586,21 +720,70 @@ def run_all_experiments(base_dir: Path | None = None) -> Dict[str, Any]:
     _save_dual(combined_st_benchmarks, exp_tables_dir / "experiment_station_benchmarks.csv", exp_tables_dir / "experiment_station_benchmarks.json")
 
     # Combine Provenance Metrics
-    combined_prov_metrics = pd.concat([res_a["provenance_metrics"], res_b["provenance_metrics"], res_c["provenance_metrics"]], ignore_index=True)
+    baseline_prov_metrics = pd.read_csv(base_dir / "outputs" / "metrics" / "provenance_metrics.csv")
+    baseline_prov_metrics["experiment_key"] = "baseline"
+    baseline_prov_metrics["experiment_name"] = "Baseline (Logs-Only)"
+
+    combined_prov_metrics = pd.concat(
+        [
+            baseline_prov_metrics,
+            res_a["provenance_metrics"],
+            res_b["provenance_metrics"],
+            res_b_no_dt["provenance_metrics"],
+            res_c["provenance_metrics"],
+        ],
+        ignore_index=True,
+    )
     _save_dual(combined_prov_metrics, exp_metrics_dir / "experiment_provenance_metrics.csv", exp_metrics_dir / "experiment_provenance_metrics.json")
     _save_dual(combined_prov_metrics, exp_tables_dir / "experiment_provenance_metrics.csv", exp_tables_dir / "experiment_provenance_metrics.json")
 
+    # Build Individual Physical Station Errors (Long and Wide Matrices)
+    eval_configs = [
+        ("baseline", "Baseline (Logs-Only: 13 Features)", baseline_pred_df),
+        ("exp_a", "Experiment A (Depth-Aware: +TVD_MSL)", res_a["predictions_df"]),
+        ("exp_b", "Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)", res_b["predictions_df"]),
+        ("exp_b_no_dtratio", "Experiment B Sensitivity (No DT_ratio: +Sv, +Ph, +sigma_v)", res_b_no_dt["predictions_df"]),
+        ("exp_c", "Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)", res_c["predictions_df"]),
+    ]
+
+    df_st_long, df_st_wide = build_individual_station_errors(eval_configs, station_comp_df, df_targ)
+    _save_dual(df_st_long, exp_metrics_dir / "individual_physical_station_errors.csv", exp_metrics_dir / "individual_physical_station_errors.json")
+    _save_dual(df_st_long, exp_tables_dir / "individual_physical_station_errors.csv", exp_tables_dir / "individual_physical_station_errors.json")
+
+    _save_dual(df_st_wide, exp_metrics_dir / "individual_station_benchmark_matrix.csv", exp_metrics_dir / "individual_station_benchmark_matrix.json")
+    _save_dual(df_st_wide, exp_tables_dir / "individual_station_benchmark_matrix.csv", exp_tables_dir / "individual_station_benchmark_matrix.json")
+
+    # Compute Depth Sensitivity Profile for Experiment A MLP
+    exp_a_scaler = joblib.load(exp_models_dir / "exp_a_scaler.joblib")
+    exp_a_mlp = res_a["trained_models"]["mlp"]
+    df_mlp_sensitivity = compute_mlp_depth_sensitivity(
+        exp_a_mlp, exp_a_scaler, res_a["features"], df_pred, df_targ
+    )
+    _save_dual(df_mlp_sensitivity, exp_metrics_dir / "mlp_depth_sensitivity_profile.csv", exp_metrics_dir / "mlp_depth_sensitivity_profile.json")
+    _save_dual(df_mlp_sensitivity, exp_tables_dir / "mlp_depth_sensitivity_profile.csv", exp_tables_dir / "mlp_depth_sensitivity_profile.json")
+
     # Generate diagnostic figures
     fig_paths = generate_experiment_figures(
-        df_targ, baseline_pred_df, res_a["predictions_df"], res_b["predictions_df"], res_c["predictions_df"], station_comp_df, exp_figures_dir
+        df_targ,
+        baseline_pred_df,
+        res_a["predictions_df"],
+        res_b["predictions_df"],
+        res_c["predictions_df"],
+        station_comp_df,
+        exp_figures_dir,
+        exp_b_no_dt_pred_df=res_b_no_dt["predictions_df"],
     )
 
     return {
         "exp_a": res_a,
         "exp_b": res_b,
+        "exp_b_no_dt": res_b_no_dt,
         "exp_c": res_c,
         "combined_part_metrics": combined_part_metrics,
         "combined_st_benchmarks": combined_st_benchmarks,
         "combined_prov_metrics": combined_prov_metrics,
+        "individual_station_errors": df_st_long,
+        "individual_station_matrix": df_st_wide,
+        "mlp_depth_sensitivity": df_mlp_sensitivity,
         "fig_paths": fig_paths,
     }

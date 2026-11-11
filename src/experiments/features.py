@@ -56,10 +56,12 @@ def build_experiment_b_features(
     df_pred: pd.DataFrame,
     df_targ: pd.DataFrame,
     ovb_sensitivity_df: pd.DataFrame,
+    include_dt_ratio: bool = True,
 ) -> Tuple[pd.DataFrame, Dict[str, Dict[str, str]]]:
     """
     Construct Experiment B feature matrix:
-    Baseline 13 logs + 4 physically derived features. Total: 17 predictors.
+    Baseline 13 logs + 3 or 4 physically derived features.
+    Total: 17 predictors if include_dt_ratio is True, or 16 predictors if False.
 
     Derived features:
     1. SV_OVERBURDEN_BAR: Total vertical overburden stress Sv (bar) integrated
@@ -67,7 +69,7 @@ def build_experiment_b_features(
     2. PH_HYDROSTATIC_BAR: Normal brine hydrostatic reference pressure Ph (bar)
        assuming seabed at 91 m TVD MSL (seawater 1.025 g/cm3) and formation brine 1.030 g/cm3.
     3. SIGMA_V_HYDRO_BAR: Nominal hydrostatic effective stress Sv - Ph (bar).
-    4. DT_NCT_RATIO: Slowness compaction ratio DT / DT_nct(TVD_MSL) relative to
+    4. DT_NCT_RATIO (optional): Slowness compaction ratio DT / DT_nct(TVD_MSL) relative to
        regional North Sea normal compaction baseline DT_nct = 195 * exp(-0.00045 * TVD).
 
     Documentation metadata dictionary returned alongside the DataFrame.
@@ -94,15 +96,6 @@ def build_experiment_b_features(
     sigma_v = sv_bar - ph_bar
     df_out["SIGMA_V_HYDRO_BAR"] = sigma_v
 
-    # 4. Regional Normal Compaction Trend transit time and compaction ratio
-    dt_nct = predict_normal_transit_time(
-        tvd_msl,
-        dt0_us_ft=REGIONAL_DT0_US_FT,
-        compaction_coeff_c=REGIONAL_COMPACTION_C,
-    )
-    dt_ratio = df_pred["DT"].values / dt_nct
-    df_out["DT_NCT_RATIO"] = dt_ratio
-
     metadata = {
         "SV_OVERBURDEN_BAR": {
             "equation": "Sv(z) = P_water + P_shallow + integral(rhob * g * dz)",
@@ -125,14 +118,27 @@ def build_experiment_b_features(
             "uncertainty": "+/- 1.4 bar composite uncertainty from Sv and Ph",
             "pressure_data_used": "None",
         },
-        "DT_NCT_RATIO": {
+    }
+
+    # 4. Regional Normal Compaction Trend transit time and compaction ratio (optional)
+    if include_dt_ratio:
+        dt_nct = predict_normal_transit_time(
+            tvd_msl,
+            dt0_us_ft=REGIONAL_DT0_US_FT,
+            compaction_coeff_c=REGIONAL_COMPACTION_C,
+        )
+        dt_ratio = df_pred["DT"].values / dt_nct
+        df_out["DT_NCT_RATIO"] = dt_ratio
+
+        metadata["DT_NCT_RATIO"] = {
             "equation": "DT_ratio = DT / (DT0 * exp(-c * TVD_MSL))",
             "inputs": "Sonic slowness DT (us/ft), Trajectory 1 TVD MSL, regional DT0=195.0 us/ft, c=0.00045 m^-1",
             "assumptions": "Regional mechanical compaction trend in pure mudstones; ratio > 1.0 indicates undercompaction",
             "uncertainty": "+/- 5 us/ft in baseline DT0; chemical cementation in sandstones creates structural divergence",
             "pressure_data_used": "None (regional geological constants only)",
-        },
-    }
+        }
+
+    return df_out, metadata
 
     return df_out, metadata
 
@@ -203,3 +209,4 @@ def build_experiment_c_features(
     }
 
     return df_out, metadata
+
