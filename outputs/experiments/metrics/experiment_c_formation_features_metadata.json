@@ -1,0 +1,26 @@
+{
+  "IS_HUGIN": {
+    "definition": "1 if MD <= 3263.5 m, else 0",
+    "source": "Well 15/9-F-12 completion report / NPD lithostratigraphy",
+    "certainty": "Established sequence stratigraphic boundary (sharp gamma ray and core contact)",
+    "training_coverage": "Rows 0 to 891 (100% within training set)"
+  },
+  "IS_SLEIPNER": {
+    "definition": "1 if 3263.5 < MD <= 3386.5 m, else 0",
+    "source": "Well 15/9-F-12 completion report / NPD lithostratigraphy",
+    "certainty": "Flurial-deltaic sequence containing coal, siltstone, and discrete sandstone bodies",
+    "training_coverage": "Rows 892 to 1267 (partially in training, partially in validation and transition)"
+  },
+  "IS_SKAGERRAK": {
+    "definition": "1 if MD > 3386.5 m, else 0",
+    "source": "Regional biostratigraphic correlation across regional unconformity",
+    "certainty": "Geological interpretation across interbedded transition; no physical impermeable seal directly observed",
+    "training_coverage": "0% in training set (all zeros; unseen category during model fitting)"
+  },
+  "CALCITE_HARDGROUND": {
+    "definition": "1 if within 3286.5-3290.8 m, 3296.8-3299.2 m, or 3326.3-3330.1 m MD, else 0",
+    "source": "Core description and high-density / acoustic spikes on wireline logs",
+    "certainty": "Observed petrophysical / diagenetic cementation zones creating hydraulic baffles",
+    "training_coverage": "Intervals 1 and 2 covered in training set; interval 3 in validation transition"
+  }
+}

@@ -1,0 +1,21 @@
+experiment_key,experiment_name,model_key,model_name,train_15_stations_RMSE_bar,val_test16_pred_bar,val_test16_residual_bar,test20_pred_bar,test20_residual_bar,test21_pred_bar,test21_residual_bar,test20_21_MAE_bar,test20_21_RMSE_bar,excluded_test19_pred_bar,excluded_test19_diff_bar
+baseline,Baseline (Logs-Only),mlr,MLR,0.9893,335.8215,5.8915,333.9213,34.7847,329.8602,38.9578,36.8713,36.9302,329.8602,27.8538
+baseline,Baseline (Logs-Only),random_forest,Random Forest,0.4814,334.8008,6.9122,335.2952,33.4108,338.0382,30.7798,32.0953,32.1222,338.0382,19.6758
+baseline,Baseline (Logs-Only),catboost,CatBoost,0.2826,335.2326,6.4804,336.8672,31.8388,338.3413,30.4767,31.1577,31.1652,338.3413,19.3727
+baseline,Baseline (Logs-Only),gradient_boosting,Gradient Boosting,0.3072,335.4578,6.2552,336.5855,32.1205,340.1232,28.6948,30.4076,30.4559,340.1232,17.5908
+baseline,Baseline (Logs-Only),mlp,MLP,1.0164,341.443,0.27,335.3229,33.3831,339.9817,28.8363,31.1097,31.1927,339.9817,17.7323
+exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlr,MLR,1.1957,337.537,4.176,339.1629,29.5431,340.2463,28.5717,29.0574,29.0615,340.2463,17.4677
+exp_a,Experiment A (Depth-Aware: +TVD_MSL),random_forest,Random Forest,0.3106,338.3455,3.3675,338.5122,30.1938,340.3577,28.4603,29.327,29.3399,340.3577,17.3563
+exp_a,Experiment A (Depth-Aware: +TVD_MSL),catboost,CatBoost,0.2113,337.8553,3.8577,337.7911,30.9149,339.196,29.622,30.2685,30.2754,339.196,18.518
+exp_a,Experiment A (Depth-Aware: +TVD_MSL),gradient_boosting,Gradient Boosting,0.0221,341.4219,0.2911,341.4008,27.3052,341.3554,27.4626,27.3839,27.384,341.3554,16.3586
+exp_a,Experiment A (Depth-Aware: +TVD_MSL),mlp,MLP,0.9644,345.354,-3.641,364.4039,4.3021,376.1536,-7.3356,5.8188,6.0133,376.1536,-18.4396
+exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlr,MLR,1.0487,339.4844,2.2286,352.3553,16.3507,358.6857,10.1323,13.2415,13.6016,358.6857,-0.9717
+exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",random_forest,Random Forest,0.2182,340.6645,1.0485,340.5363,28.1697,340.9608,27.8572,28.0135,28.0139,340.9608,16.7532
+exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",catboost,CatBoost,0.1779,337.2972,4.4158,336.8218,31.8842,338.6572,30.1608,31.0225,31.0345,338.6572,19.0568
+exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",gradient_boosting,Gradient Boosting,0.0293,341.4608,0.2522,341.4388,27.2672,341.3953,27.4227,27.3449,27.3451,341.3953,16.3187
+exp_b,"Experiment B (Physics-Informed: +Sv, +Ph, +sigma_v, +DT_nct_ratio)",mlp,MLP,1.0488,345.9642,-4.2512,370.9638,-2.2578,384.8256,-16.0076,9.1327,11.4311,384.8256,-27.1116
+exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlr,MLR,1.2003,335.502,6.211,330.6127,38.0933,327.4537,41.3643,39.7288,39.7624,327.4537,30.2603
+exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",random_forest,Random Forest,0.093,335.0508,6.6622,332.0361,36.6699,334.1836,34.6344,35.6522,35.6667,334.1836,23.5304
+exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",catboost,CatBoost,0.1336,334.941,6.772,332.2769,36.4291,332.5365,36.2815,36.3553,36.3554,332.5365,25.1775
+exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",gradient_boosting,Gradient Boosting,0.1291,335.3519,6.3611,332.8389,35.8671,333.9416,34.8764,35.3717,35.3752,333.9416,23.7724
+exp_c,"Experiment C (Formation-Aware: +Stratigraphy, +Hardgrounds)",mlp,MLP,0.4721,338.5136,3.1994,301.8837,66.8223,319.1014,49.7166,58.2695,58.8938,319.1014,38.6126

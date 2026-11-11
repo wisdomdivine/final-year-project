@@ -1,0 +1,30 @@
+{
+  "SV_OVERBURDEN_BAR": {
+    "equation": "Sv(z) = P_water + P_shallow + integral(rhob * g * dz)",
+    "inputs": "Trajectory 1 TVD MSL, seawater depth 91.0 m (1.025 g/cm3), shallow density 1.90 g/cm3, bulk density log (RHOB)",
+    "assumptions": "Vertical principle stress alignment; reference shallow density 1.90 g/cm3 for 91-262 m TVD MSL",
+    "uncertainty": "+/- 1.26 bar (+/- 0.21%) across shallow density range 1.80 to 1.95 g/cm3",
+    "pressure_data_used": "None (pure density integration)"
+  },
+  "PH_HYDROSTATIC_BAR": {
+    "equation": "Ph(z) = P_seabed + rho_brine * g * (z - z_water)",
+    "inputs": "Trajectory 1 TVD MSL, seabed 91.0 m, seawater 1.025 g/cm3, brine 1.030 g/cm3",
+    "assumptions": "Continuous normally pressured formation water column; uniform salinity",
+    "uncertainty": "+/- 0.5 bar across formation brine density range 1.025 to 1.035 g/cm3",
+    "pressure_data_used": "None (pure hydrostatic column)"
+  },
+  "SIGMA_V_HYDRO_BAR": {
+    "equation": "sigma_v_hydro(z) = Sv(z) - Ph(z)",
+    "inputs": "SV_OVERBURDEN_BAR, PH_HYDROSTATIC_BAR",
+    "assumptions": "Nominal vertical effective stress under hypothetical normal pore fluid pressure",
+    "uncertainty": "+/- 1.4 bar composite uncertainty from Sv and Ph",
+    "pressure_data_used": "None"
+  },
+  "DT_NCT_RATIO": {
+    "equation": "DT_ratio = DT / (DT0 * exp(-c * TVD_MSL))",
+    "inputs": "Sonic slowness DT (us/ft), Trajectory 1 TVD MSL, regional DT0=195.0 us/ft, c=0.00045 m^-1",
+    "assumptions": "Regional mechanical compaction trend in pure mudstones; ratio > 1.0 indicates undercompaction",
+    "uncertainty": "+/- 5 us/ft in baseline DT0; chemical cementation in sandstones creates structural divergence",
+    "pressure_data_used": "None (regional geological constants only)"
+  }
+}
