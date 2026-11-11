@@ -174,3 +174,58 @@ def test_skagerrak_overpressure_reconciliation_trajectory_1():
     assert pytest.approx(float(overpressure_old), abs=0.5) == 64.04
 
 
+def test_skagerrak_apparent_gradient_and_brine_rejection():
+    """Verify Skagerrak apparent gradient between Tests 20 and 21 and rejection of brine model."""
+    import pandas as pd
+    from pathlib import Path
+
+    p_table = Path("tables/schlumberger_test_point_table.csv")
+    assert p_table.exists()
+    df = pd.read_csv(p_table)
+
+    t20 = df[df["test_no"] == 20].iloc[0]
+    t21 = df[df["test_no"] == 21].iloc[0]
+
+    delta_tvd = t21["tvd_m"] - t20["tvd_m"]
+    delta_p = t21["formation_pressure_bar"] - t20["formation_pressure_bar"]
+
+    assert pytest.approx(delta_tvd, abs=0.01) == 9.99
+    assert pytest.approx(delta_p, abs=0.001) == 0.112
+
+    apparent_gradient = delta_p / delta_tvd
+    assert pytest.approx(apparent_gradient, abs=1e-4) == 0.01121
+
+    # Expected brine delta over 9.99 m is ~1.009 bar
+    brine_gradient = 0.1010  # bar/m
+    expected_brine_delta = delta_tvd * brine_gradient
+    assert pytest.approx(expected_brine_delta, abs=0.01) == 1.009
+
+    # Forcing a brine gradient creates a ~0.90 bar error
+    brine_forcing_error = abs(expected_brine_delta - delta_p)
+    assert pytest.approx(brine_forcing_error, abs=0.01) == 0.897
+
+
+def test_test_19_memory_recovery_preservation():
+    """Verify Test 19 recovered memory pressure preservation and conflict with Test 21."""
+    import pandas as pd
+    from pathlib import Path
+
+    p_table = Path("tables/schlumberger_test_point_table.csv")
+    assert p_table.exists()
+    df = pd.read_csv(p_table)
+
+    t19 = df[df["test_no"] == 19].iloc[0]
+    t21 = df[df["test_no"] == 21].iloc[0]
+
+    assert pytest.approx(t19["formation_pressure_bar"], abs=0.001) == 357.714
+    assert pytest.approx(t21["formation_pressure_bar"], abs=0.001) == 368.818
+    assert pytest.approx(t19["drawdown_mobility_md_cp"], abs=0.01) == 5.37
+
+    delta_md = abs(t21["md_m"] - t19["md_m"])
+    assert pytest.approx(delta_md, abs=0.01) == 0.04  # 4 cm apart
+
+    conflict_delta_p = t21["formation_pressure_bar"] - t19["formation_pressure_bar"]
+    assert pytest.approx(conflict_delta_p, abs=0.001) == 11.104
+
+
+
