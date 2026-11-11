@@ -87,3 +87,35 @@ def test_scaler_leakage_prevention(predictor_df):
         train_std = float(train_sc[feat].std(ddof=0))
         assert pytest.approx(train_mean, abs=1e-5) == 0.0
         assert pytest.approx(train_std, abs=1e-4) == 1.0
+
+
+def test_phase2_audit_deliverables():
+    """Verify Phase 2 pre-execution audit tables exist and meet integrity criteria."""
+    import pandas as pd
+    from pathlib import Path
+
+    audit_dir = Path("outputs/audit")
+
+    # 1. Trajectory reconciliation
+    traj_path = audit_dir / "trajectory_reconciliation.csv"
+    assert traj_path.exists()
+    df_traj = pd.read_csv(traj_path)
+    assert len(df_traj) == 1811
+    assert (df_traj["delta_TVD_MSL_m"] >= 33.8).all()
+    assert (df_traj["delta_TVD_MSL_m"] <= 34.5).all()
+
+    # 2. Pressure station reconciliation
+    press_path = audit_dir / "pressure_station_reconciliation.csv"
+    assert press_path.exists()
+    df_press = pd.read_csv(press_path)
+    assert len(df_press) == 24
+    for t in [18, 19, 20, 21]:
+        assert t in df_press["test_no"].values
+
+    # 3. Overburden sensitivity
+    ovb_path = audit_dir / "overburden_sensitivity.csv"
+    assert ovb_path.exists()
+    df_ovb = pd.read_csv(ovb_path)
+    assert len(df_ovb) == 1811
+    assert (df_ovb["Sv_traj2_mid_1.88_bar"].diff().dropna() > 0).all()
+
