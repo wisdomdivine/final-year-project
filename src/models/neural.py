@@ -18,13 +18,16 @@ class MLPModel(BaseModel):
             "activation": "relu",
             "solver": "adam",
             "alpha": 0.001,
-            "max_iter": 500,
+            "learning_rate_init": 0.005,
+            "max_iter": 1000,
             "random_state": 42,
             "early_stopping": True,
-            "n_iter_no_change": 20,
+            "n_iter_no_change": 25,
         }
         if self.params:
             default_params.update(self.params)
+        if isinstance(default_params.get("hidden_layer_sizes"), list):
+            default_params["hidden_layer_sizes"] = tuple(default_params["hidden_layer_sizes"])
         self.params = default_params
         self.model = MLPRegressor(**self.params)
 

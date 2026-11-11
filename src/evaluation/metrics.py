@@ -43,7 +43,7 @@ def compute_regression_metrics(
     mae = float(mean_absolute_error(yt, yp))
     mse = float(mean_squared_error(yt, yp))
     rmse = float(np.sqrt(mse))
-    r2 = float(r2_score(yt, yp))
+    r2 = float(r2_score(yt, yp)) if len(yt) >= 2 and np.std(yt) > 1e-12 else np.nan
     max_ae = float(np.max(np.abs(yt - yp)))
 
     # Safe MAPE calculation

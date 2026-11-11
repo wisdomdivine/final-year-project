@@ -3,7 +3,7 @@
 from src.models.base import BaseModel
 from src.models.linear import MultipleLinearRegressionModel
 from src.models.tree import RandomForestModel
-from src.models.boosting import CatBoostModel
+from src.models.boosting import CatBoostModel, GradientBoostingModel
 from src.models.neural import MLPModel
 
 __all__ = [
@@ -11,6 +11,8 @@ __all__ = [
     "MultipleLinearRegressionModel",
     "RandomForestModel",
     "CatBoostModel",
+    "GradientBoostingModel",
     "MLPModel",
 ]
+
 

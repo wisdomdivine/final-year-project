@@ -1,0 +1,41 @@
+model_key,model_name,target_provenance,partition,n_observations,MAE_bar,RMSE_bar,R2,MAPE_pct,MaxAE_bar,mean_residual_bar,description
+mlr,MLR,measured_anchor,All Partitions,17,5.3532,12.7785,0.2857,1.4843,38.9578,4.4254,All 17 primary measured pretest anchors
+mlr,MLR,measured_anchor,Training,14,0.8121,0.9829,0.9568,0.2509,1.8264,-0.3144,"14 training anchors (Tests 1-12, 14, 15)"
+mlr,MLR,measured_anchor,Validation,1,5.8915,5.8915,,1.7241,5.8915,5.8915,1 independent validation anchor (Test 16)
+mlr,MLR,measured_anchor,Testing,2,36.8713,36.9302,-434897.9154,9.9986,38.9578,36.8713,2 independent test anchors (Tests 20 & 21)
+mlr,MLR,physics_derived,All Partitions,1287,1.346,2.1434,0.881,0.4071,10.6501,0.1568,"All 1,287 regime-equation/interpolated targets"
+mlr,MLR,physics_derived,Training,1254,1.2239,1.9414,0.8881,0.3718,10.6501,0.0035,"1,254 Hugin + upper/mid Sleipner derived targets"
+mlr,MLR,physics_derived,Validation,33,5.9822,5.9955,-4369.8154,1.751,6.9186,5.9822,33 lower Sleipner piece-wise interpolated targets
+mlr,MLR,provisional_assumption,Testing,110,36.1347,36.1885,,9.7989,40.2719,36.1347,110 provisional constant-compartment Skagerrak rows (not independent physical ground truth)
+random_forest,Random Forest,measured_anchor,All Partitions,17,4.3412,11.1538,0.4558,1.1918,33.4108,4.0279,All 17 primary measured pretest anchors
+random_forest,Random Forest,measured_anchor,Training,14,0.1927,0.498,0.9889,0.0593,1.8218,-0.1878,"14 training anchors (Tests 1-12, 14, 15)"
+random_forest,Random Forest,measured_anchor,Validation,1,6.9122,6.9122,,2.0228,6.9122,6.9122,1 independent validation anchor (Test 16)
+random_forest,Random Forest,measured_anchor,Testing,2,32.0953,32.1223,-329029.4545,8.7036,33.4108,32.0953,2 independent test anchors (Tests 20 & 21)
+random_forest,Random Forest,physics_derived,All Partitions,1287,0.3125,1.1065,0.9683,0.093,7.5489,0.1682,"All 1,287 regime-equation/interpolated targets"
+random_forest,Random Forest,physics_derived,Training,1254,0.1476,0.3296,0.9968,0.0448,3.4656,-0.0005,"1,254 Hugin + upper/mid Sleipner derived targets"
+random_forest,Random Forest,physics_derived,Validation,33,6.5777,6.6046,-5303.0051,1.9253,7.5489,6.5777,33 lower Sleipner piece-wise interpolated targets
+random_forest,Random Forest,provisional_assumption,Testing,110,33.1743,33.1948,,8.9961,34.4112,33.1743,110 provisional constant-compartment Skagerrak rows (not independent physical ground truth)
+catboost,CatBoost,measured_anchor,All Partitions,17,4.1664,10.8072,0.4891,1.1424,31.8388,3.9648,All 17 primary measured pretest anchors
+catboost,CatBoost,measured_anchor,Training,14,0.1452,0.2683,0.9968,0.0447,0.9418,-0.0996,"14 training anchors (Tests 1-12, 14, 15)"
+catboost,CatBoost,measured_anchor,Validation,1,6.4804,6.4804,,1.8964,6.4804,6.4804,1 independent validation anchor (Test 16)
+catboost,CatBoost,measured_anchor,Testing,2,31.1577,31.1652,-309714.6233,8.4493,31.8388,31.1577,2 independent test anchors (Tests 20 & 21)
+catboost,CatBoost,physics_derived,All Partitions,1287,0.2975,1.0329,0.9724,0.0888,7.6325,0.163,"All 1,287 regime-equation/interpolated targets"
+catboost,CatBoost,physics_derived,Training,1254,0.1395,0.2014,0.9988,0.0426,1.3851,0.0015,"1,254 Hugin + upper/mid Sleipner derived targets"
+catboost,CatBoost,physics_derived,Validation,33,6.3013,6.33,-4871.1342,1.8444,7.6325,6.3013,33 lower Sleipner piece-wise interpolated targets
+catboost,CatBoost,provisional_assumption,Testing,110,33.58,33.5942,,9.1061,35.4199,33.58,110 provisional constant-compartment Skagerrak rows (not independent physical ground truth)
+gradient_boosting,Gradient Boosting,measured_anchor,All Partitions,17,4.1005,10.5598,0.5122,1.1256,32.1205,3.8094,All 17 primary measured pretest anchors
+gradient_boosting,Gradient Boosting,measured_anchor,Training,14,0.1884,0.3167,0.9955,0.0581,0.9742,-0.165,"14 training anchors (Tests 1-12, 14, 15)"
+gradient_boosting,Gradient Boosting,measured_anchor,Validation,1,6.2552,6.2552,,1.8305,6.2552,6.2552,1 independent validation anchor (Test 16)
+gradient_boosting,Gradient Boosting,measured_anchor,Testing,2,30.4076,30.4558,-295776.3449,8.2459,32.1205,30.4076,2 independent test anchors (Tests 20 & 21)
+gradient_boosting,Gradient Boosting,physics_derived,All Partitions,1287,0.304,1.0394,0.972,0.0908,7.5999,0.1641,"All 1,287 regime-equation/interpolated targets"
+gradient_boosting,Gradient Boosting,physics_derived,Training,1254,0.1452,0.2154,0.9986,0.0444,1.7217,0.0017,"1,254 Hugin + upper/mid Sleipner derived targets"
+gradient_boosting,Gradient Boosting,physics_derived,Validation,33,6.3381,6.3537,-4907.6061,1.8552,7.5999,6.3381,33 lower Sleipner piece-wise interpolated targets
+gradient_boosting,Gradient Boosting,provisional_assumption,Testing,110,33.0321,33.0979,,8.9576,35.0299,33.0321,110 provisional constant-compartment Skagerrak rows (not independent physical ground truth)
+mlp,MLP,measured_anchor,All Partitions,17,4.3413,10.7411,0.4953,1.2014,33.3831,3.1766,All 17 primary measured pretest anchors
+mlp,MLP,measured_anchor,Training,14,0.8081,1.0444,0.9512,0.248,2.2567,-0.6062,"14 training anchors (Tests 1-12, 14, 15)"
+mlp,MLP,measured_anchor,Validation,1,0.27,0.27,,0.079,0.27,0.27,1 independent validation anchor (Test 16)
+mlp,MLP,measured_anchor,Testing,2,31.1097,31.1926,-310260.1489,8.4363,33.3831,31.1097,2 independent test anchors (Tests 20 & 21)
+mlp,MLP,physics_derived,All Partitions,1287,1.0414,1.5907,0.9345,0.3161,11.1011,0.032,"All 1,287 regime-equation/interpolated targets"
+mlp,MLP,physics_derived,Training,1254,0.9956,1.4993,0.9333,0.303,11.1011,-0.0285,"1,254 Hugin + upper/mid Sleipner derived targets"
+mlp,MLP,physics_derived,Validation,33,2.7809,3.6419,-1611.7215,0.814,8.2514,2.3282,33 lower Sleipner piece-wise interpolated targets
+mlp,MLP,provisional_assumption,Testing,110,31.2473,31.4296,,8.4736,36.8874,31.2473,110 provisional constant-compartment Skagerrak rows (not independent physical ground truth)

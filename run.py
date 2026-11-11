@@ -308,10 +308,16 @@ def run_tests() -> int:
 
 
 def run_train() -> None:
-    """Run baseline machine learning model training workflow."""
-    LOGGER.info("Starting baseline model training workflow...")
-    # Will be expanded in next handover phase
-    LOGGER.info("Baseline model architecture scaffold initialized and ready for training.")
+    """Run machine learning model training, evaluation, and diagnostics workflow."""
+    from src.evaluation.pipeline import run_training_pipeline
+
+    LOGGER.info("Starting model training, evaluation, and diagnostics workflow...")
+    results = run_training_pipeline(PROJECT_ROOT)
+    LOGGER.info(
+        f"Training and evaluation complete. Trained {len(results['trained_registry'])} models "
+        f"and generated {len(results['figure_paths'])} diagnostic figures."
+    )
+
 
 
 def main() -> None:

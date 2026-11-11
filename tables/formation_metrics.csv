@@ -1,0 +1,36 @@
+model_key,model_name,formation,subset,n_valid,MAE_bar,RMSE_bar,R2,MAPE_pct,MaxAE_bar,mean_residual_bar,mean_predicted_bar,mean_target_bar
+mlr,MLR,Hugin,Training,892,0.8387,1.0708,0.5676,0.2599,4.2443,-0.332,323.1674,322.8354
+mlr,MLR,Sleipner,Training,376,2.1224,3.1443,-0.615,0.6326,10.6501,0.7877,334.0252,334.8129
+mlr,MLR,Sleipner,Validation (Valid Lower Sleipner),34,5.9796,5.9925,-4418.0656,1.7502,6.9186,5.9796,335.6645,341.6441
+mlr,MLR,Sleipner,All Valid Sleipner,410,2.4423,3.4705,-0.3144,0.7253,10.6501,1.2183,334.1612,335.3794
+mlr,MLR,Skagerrak,Testing (Measured Anchors: Tests 20 & 21),2,36.8713,36.9302,-434897.9154,9.9986,38.9578,36.8713,331.8907,368.762
+mlr,MLR,Skagerrak,Testing (Provisional Assumption: n=110),110,36.1347,36.1885,,9.7989,40.2719,36.1347,332.6273,368.762
+mlr,MLR,Skagerrak,Testing (All 112 Rows),112,36.1479,36.2019,-23403123.0811,9.8025,40.2719,36.1479,332.6141,368.762
+random_forest,Random Forest,Hugin,Training,892,0.1049,0.2179,0.9821,0.0325,1.9072,-0.0545,322.8899,322.8354
+random_forest,Random Forest,Sleipner,Training,376,0.2507,0.5088,0.9577,0.0746,3.4656,0.1205,334.6924,334.8129
+random_forest,Random Forest,Sleipner,Validation (Valid Lower Sleipner),34,6.5875,6.6139,-5382.0329,1.9281,7.5489,6.5875,335.0566,341.6441
+random_forest,Random Forest,Sleipner,All Valid Sleipner,410,0.7762,1.9659,0.5782,0.2283,7.5489,0.6568,334.7226,335.3794
+random_forest,Random Forest,Skagerrak,Testing (Measured Anchors: Tests 20 & 21),2,32.0953,32.1223,-329029.4545,8.7036,33.4108,32.0953,336.6667,368.762
+random_forest,Random Forest,Skagerrak,Testing (Provisional Assumption: n=110),110,33.1743,33.1948,,8.9961,34.4112,33.1743,335.5877,368.762
+random_forest,Random Forest,Skagerrak,Testing (All 112 Rows),112,33.155,33.1759,-19654312.7879,8.9909,34.4112,33.155,335.607,368.762
+catboost,CatBoost,Hugin,Training,892,0.1256,0.1791,0.9879,0.0389,1.3033,-0.0129,322.8483,322.8354
+catboost,CatBoost,Sleipner,Training,376,0.1725,0.2487,0.9899,0.0515,1.3851,0.0318,334.7811,334.8129
+catboost,CatBoost,Sleipner,Validation (Valid Lower Sleipner),34,6.3066,6.3345,-4936.8758,1.8459,7.6325,6.3066,335.3375,341.6441
+catboost,CatBoost,Sleipner,All Valid Sleipner,410,0.6812,1.8396,0.6307,0.2003,7.6325,0.5521,334.8273,335.3794
+catboost,CatBoost,Skagerrak,Testing (Measured Anchors: Tests 20 & 21),2,31.1577,31.1652,-309714.6233,8.4493,31.8388,31.1577,337.6043,368.762
+catboost,CatBoost,Skagerrak,Testing (Provisional Assumption: n=110),110,33.58,33.5942,,9.1061,35.4199,33.58,335.182,368.762
+catboost,CatBoost,Skagerrak,Testing (All 112 Rows),112,33.5367,33.5524,-20102870.2939,9.0944,35.4199,33.5367,335.2253,368.762
+gradient_boosting,Gradient Boosting,Hugin,Training,892,0.1305,0.1811,0.9876,0.0404,0.9742,-0.0163,322.8517,322.8354
+gradient_boosting,Gradient Boosting,Sleipner,Training,376,0.1818,0.284,0.9868,0.0543,1.7217,0.0381,334.7748,334.8129
+gradient_boosting,Gradient Boosting,Sleipner,Validation (Valid Lower Sleipner),34,6.3357,6.3508,-4962.3218,1.8544,7.5999,6.3357,335.3084,341.6441
+gradient_boosting,Gradient Boosting,Sleipner,All Valid Sleipner,410,0.6921,1.849,0.6269,0.2036,7.5999,0.5604,334.819,335.3794
+gradient_boosting,Gradient Boosting,Skagerrak,Testing (Measured Anchors: Tests 20 & 21),2,30.4076,30.4558,-295776.3449,8.2459,32.1205,30.4076,338.3544,368.762
+gradient_boosting,Gradient Boosting,Skagerrak,Testing (Provisional Assumption: n=110),110,33.0321,33.0979,,8.9576,35.0299,33.0321,335.7299,368.762
+gradient_boosting,Gradient Boosting,Skagerrak,Testing (All 112 Rows),112,32.9852,33.0526,-19508430.2353,8.9448,35.0299,32.9852,335.7768,368.762
+mlp,MLP,Hugin,Training,892,0.7586,1.0712,0.5673,0.2349,8.037,-0.143,322.9784,322.8354
+mlp,MLP,Sleipner,Training,376,1.551,2.1944,0.2133,0.4625,11.1011,0.2217,334.5913,334.8129
+mlp,MLP,Sleipner,Validation (Valid Lower Sleipner),34,2.7071,3.5882,-1583.4343,0.7924,8.2514,2.2677,339.3764,341.6441
+mlp,MLP,Sleipner,All Valid Sleipner,410,1.6468,2.3418,0.4015,0.4899,11.1011,0.3913,334.9881,335.3794
+mlp,MLP,Skagerrak,Testing (Measured Anchors: Tests 20 & 21),2,31.1097,31.1926,-310260.1489,8.4363,33.3831,31.1097,337.6523,368.762
+mlp,MLP,Skagerrak,Testing (Provisional Assumption: n=110),110,31.2473,31.4296,,8.4736,36.8874,31.2473,337.5147,368.762
+mlp,MLP,Skagerrak,Testing (All 112 Rows),112,31.2448,31.4253,-17634850.4263,8.4729,36.8874,31.2448,337.5172,368.762

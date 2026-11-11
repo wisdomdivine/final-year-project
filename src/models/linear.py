@@ -25,3 +25,16 @@ class MultipleLinearRegressionModel(BaseModel):
             raise RuntimeError("Model must be fitted before predict.")
         return np.asarray(self.model.predict(X))
 
+    @property
+    def coef_(self) -> np.ndarray:
+        if not self.is_fitted:
+            raise RuntimeError("Model must be fitted to access coefficients.")
+        return np.asarray(self.model.coef_, dtype=float)
+
+    @property
+    def intercept_(self) -> float:
+        if not self.is_fitted:
+            raise RuntimeError("Model must be fitted to access intercept.")
+        return float(self.model.intercept_)
+
+

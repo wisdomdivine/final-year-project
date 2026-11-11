@@ -1,0 +1,66 @@
+model_key,model_name,feature,native_importance_type,native_importance_raw,native_signed_value,native_importance_pct,perm_train_rmse_increase_bar,perm_train_rmse_std_bar,perm_train_importance_pct,perm_val_rmse_increase_bar,perm_val_rmse_std_bar
+mlr,MLR,DT,abs_standardized_coefficient,0.199709,-0.199709,1.2955,0.02085,0.00588,0.2001,0.00766,0.00178
+mlr,MLR,GR,abs_standardized_coefficient,0.446772,0.446772,2.8981,0.09794,0.01117,0.9402,-0.00275,0.00058
+mlr,MLR,NPHI,abs_standardized_coefficient,0.387676,-0.387676,2.5148,0.08066,0.00729,0.7743,0.0076,0.00256
+mlr,MLR,RD,abs_standardized_coefficient,1.96314,-1.96314,12.7344,1.43809,0.03166,13.8059,-0.00066,0.00271
+mlr,MLR,RHOB,abs_standardized_coefficient,1.482281,-1.482281,9.6152,0.90863,0.04124,8.723,0.02933,0.00857
+mlr,MLR,RS,abs_standardized_coefficient,0.515493,-0.515493,3.3439,0.1325,0.01004,1.272,-0.00065,0.00072
+mlr,MLR,RT,abs_standardized_coefficient,2.100185,2.100185,13.6234,1.59389,0.0418,15.3015,0.03886,0.00419
+mlr,MLR,ROP,abs_standardized_coefficient,4.116294,4.116294,26.7014,4.18284,0.06984,40.1558,0.00079,0.00027
+mlr,MLR,BVW,abs_standardized_coefficient,0.323575,0.323575,2.0989,0.05456,0.00648,0.5238,-0.00224,0.00169
+mlr,MLR,K,abs_standardized_coefficient,1.07848,1.07848,6.9958,0.5272,0.0281,5.0612,0.08342,0.01911
+mlr,MLR,PHIF,abs_standardized_coefficient,1.561486,-1.561486,10.129,1.00273,0.0338,9.6263,0.11174,0.01686
+mlr,MLR,SW,abs_standardized_coefficient,0.571681,0.571681,3.7084,0.16216,0.01357,1.5567,-0.00193,0.00093
+mlr,MLR,VCL,abs_standardized_coefficient,0.669267,0.669267,4.3414,0.21449,0.01527,2.0592,-0.00371,0.00109
+random_forest,Random Forest,DT,tree_split_or_gain_importance,0.010118,0.010118,1.0118,0.15819,0.01393,1.6935,-0.00121,0.00241
+random_forest,Random Forest,GR,tree_split_or_gain_importance,0.020228,0.020228,2.0228,0.31886,0.01386,3.4135,0.00609,0.002
+random_forest,Random Forest,NPHI,tree_split_or_gain_importance,0.010944,0.010944,1.0944,0.19357,0.00998,2.0722,0.01503,0.00452
+random_forest,Random Forest,RD,tree_split_or_gain_importance,0.185123,0.185123,18.5123,2.14866,0.02806,23.0023,0.06114,0.0084
+random_forest,Random Forest,RHOB,tree_split_or_gain_importance,0.041982,0.041982,4.1982,0.31028,0.01131,3.3217,0.03256,0.00784
+random_forest,Random Forest,RS,tree_split_or_gain_importance,0.151789,0.151789,15.1789,0.65836,0.01711,7.048,0.01434,0.00294
+random_forest,Random Forest,RT,tree_split_or_gain_importance,0.083637,0.083637,8.3637,0.40116,0.00702,4.2946,0.02152,0.00263
+random_forest,Random Forest,ROP,tree_split_or_gain_importance,0.335947,0.335947,33.5947,3.62146,0.04893,38.7692,0.00594,0.00296
+random_forest,Random Forest,BVW,tree_split_or_gain_importance,0.048963,0.048963,4.8963,0.25215,0.01159,2.6994,0.00045,0.00445
+random_forest,Random Forest,K,tree_split_or_gain_importance,0.013676,0.013676,1.3676,0.24095,0.00647,2.5794,0.01044,0.00377
+random_forest,Random Forest,PHIF,tree_split_or_gain_importance,0.015393,0.015393,1.5393,0.17051,0.00712,1.8253,0.02131,0.00569
+random_forest,Random Forest,SW,tree_split_or_gain_importance,0.060482,0.060482,6.0482,0.48952,0.01369,5.2405,0.01605,0.00502
+random_forest,Random Forest,VCL,tree_split_or_gain_importance,0.021716,0.021716,2.1716,0.37741,0.014,4.0403,0.00205,0.00159
+catboost,CatBoost,DT,tree_split_or_gain_importance,2.772931,2.772931,2.7729,0.40985,0.03413,3.4894,0.01459,0.00742
+catboost,CatBoost,GR,tree_split_or_gain_importance,2.774472,2.774472,2.7745,0.4465,0.01896,3.8014,-0.00082,0.00227
+catboost,CatBoost,NPHI,tree_split_or_gain_importance,3.880371,3.880371,3.8804,0.41116,0.01271,3.5005,0.03454,0.00931
+catboost,CatBoost,RD,tree_split_or_gain_importance,10.120362,10.120362,10.1204,1.90629,0.03495,16.2298,0.09214,0.00926
+catboost,CatBoost,RHOB,tree_split_or_gain_importance,1.938944,1.938944,1.9389,0.36876,0.01278,3.1395,0.04298,0.01054
+catboost,CatBoost,RS,tree_split_or_gain_importance,6.615004,6.615004,6.615,0.87917,0.01996,7.485,0.01579,0.00251
+catboost,CatBoost,RT,tree_split_or_gain_importance,2.738657,2.738657,2.7387,0.36964,0.01273,3.1471,0.01935,0.00242
+catboost,CatBoost,ROP,tree_split_or_gain_importance,55.390097,55.390097,55.3901,5.16467,0.07923,43.971,0.00246,0.00352
+catboost,CatBoost,BVW,tree_split_or_gain_importance,2.422043,2.422043,2.422,0.2746,0.00921,2.3379,0.01193,0.00303
+catboost,CatBoost,K,tree_split_or_gain_importance,1.957395,1.957395,1.9574,0.24245,0.01187,2.0642,0.01422,0.00466
+catboost,CatBoost,PHIF,tree_split_or_gain_importance,2.181286,2.181286,2.1813,0.30923,0.0116,2.6327,0.04866,0.00909
+catboost,CatBoost,SW,tree_split_or_gain_importance,2.146992,2.146992,2.147,0.46301,0.01876,3.942,0.01593,0.00329
+catboost,CatBoost,VCL,tree_split_or_gain_importance,5.061446,5.061446,5.0614,0.5003,0.01924,4.2594,0.02538,0.00518
+gradient_boosting,Gradient Boosting,DT,tree_split_or_gain_importance,0.001589,0.001589,0.1589,0.1004,0.00812,0.8272,0.00272,0.00181
+gradient_boosting,Gradient Boosting,GR,tree_split_or_gain_importance,0.011644,0.011644,1.1644,0.31249,0.01484,2.5744,0.00195,0.00087
+gradient_boosting,Gradient Boosting,NPHI,tree_split_or_gain_importance,0.00806,0.00806,0.806,0.37041,0.01703,3.0515,0.05734,0.00829
+gradient_boosting,Gradient Boosting,RD,tree_split_or_gain_importance,0.035895,0.035895,3.5895,1.55418,0.04645,12.8037,0.03619,0.00534
+gradient_boosting,Gradient Boosting,RHOB,tree_split_or_gain_importance,0.006576,0.006576,0.6576,0.22781,0.01067,1.8768,0.00968,0.00221
+gradient_boosting,Gradient Boosting,RS,tree_split_or_gain_importance,0.003398,0.003398,0.3398,0.12532,0.00408,1.0325,0.00337,0.00071
+gradient_boosting,Gradient Boosting,RT,tree_split_or_gain_importance,0.004227,0.004227,0.4227,0.89382,0.01754,7.3636,0.00938,0.00208
+gradient_boosting,Gradient Boosting,ROP,tree_split_or_gain_importance,0.897989,0.897989,89.7989,7.44938,0.08449,61.37,-0.0019,0.00206
+gradient_boosting,Gradient Boosting,BVW,tree_split_or_gain_importance,0.001195,0.001195,0.1195,0.0518,0.00254,0.4267,0.00927,0.00137
+gradient_boosting,Gradient Boosting,K,tree_split_or_gain_importance,0.00416,0.00416,0.416,0.21006,0.00979,1.7305,0.05173,0.00733
+gradient_boosting,Gradient Boosting,PHIF,tree_split_or_gain_importance,0.000527,0.000527,0.0527,0.03152,0.00141,0.2597,0.00799,0.00128
+gradient_boosting,Gradient Boosting,SW,tree_split_or_gain_importance,0.009059,0.009059,0.9059,0.38243,0.02295,3.1505,-0.00097,0.00082
+gradient_boosting,Gradient Boosting,VCL,tree_split_or_gain_importance,0.01568,0.01568,1.568,0.42886,0.01724,3.533,0.0089,0.00293
+mlp,MLP,DT,not_applicable,,,,0.52049,0.04173,0.1919,0.23711,0.08953
+mlp,MLP,GR,not_applicable,,,,16.421,0.26127,6.0532,2.50898,0.31572
+mlp,MLP,NPHI,not_applicable,,,,2.07677,0.08516,0.7656,-0.50551,0.22625
+mlp,MLP,RD,not_applicable,,,,3.95075,0.08748,1.4564,-0.08741,0.11789
+mlp,MLP,RHOB,not_applicable,,,,10.02994,0.15705,3.6973,1.42371,0.31729
+mlp,MLP,RS,not_applicable,,,,4.4145,0.13864,1.6273,0.16189,0.21822
+mlp,MLP,RT,not_applicable,,,,34.8354,0.42204,12.8413,2.32913,0.55662
+mlp,MLP,ROP,not_applicable,,,,3.99964,0.12281,1.4744,-0.00523,0.00273
+mlp,MLP,BVW,not_applicable,,,,23.87959,0.48632,8.8027,16.12651,1.10038
+mlp,MLP,K,not_applicable,,,,18.1616,0.3792,6.6949,-0.08072,0.28101
+mlp,MLP,PHIF,not_applicable,,,,43.64403,0.43516,16.0884,32.28609,3.06145
+mlp,MLP,SW,not_applicable,,,,98.11359,0.99739,36.1673,18.70438,2.675
+mlp,MLP,VCL,not_applicable,,,,11.22961,0.34996,4.1395,1.00686,0.35058
