@@ -162,6 +162,52 @@ def test_individual_physical_station_errors_artifacts():
     df_mat = pd.read_csv(mat_csv)
     assert len(df_mat) == 25  # 5 configs * 5 models
 
+    # Authoritative station benchmark error assertions
+    # 1. Baseline Test 16 errors (nearest grid node 3324.606 m, actual 341.713 bar)
+    base_mlp = df_mat[(df_mat["experiment_key"] == "baseline") & (df_mat["model_key"] == "mlp")].iloc[0]
+    base_cb = df_mat[(df_mat["experiment_key"] == "baseline") & (df_mat["model_key"] == "catboost")].iloc[0]
+    base_rf = df_mat[(df_mat["experiment_key"] == "baseline") & (df_mat["model_key"] == "random_forest")].iloc[0]
+    base_mlr = df_mat[(df_mat["experiment_key"] == "baseline") & (df_mat["model_key"] == "mlr")].iloc[0]
+    base_gb = df_mat[(df_mat["experiment_key"] == "baseline") & (df_mat["model_key"] == "gradient_boosting")].iloc[0]
+
+    assert abs(base_mlp["val_test16_abs_err_bar"] - 0.2700) < 0.001
+    assert abs(base_cb["val_test16_abs_err_bar"] - 6.4804) < 0.001
+    assert abs(base_rf["val_test16_abs_err_bar"] - 6.9122) < 0.001
+    assert abs(base_mlr["val_test16_abs_err_bar"] - 5.8915) < 0.001
+    assert abs(base_gb["val_test16_abs_err_bar"] - 6.2552) < 0.001
+
+    # 2. Experiment B MLP station errors (Test 20, Test 21, and combined MAE)
+    exp_b_mlp = df_mat[(df_mat["experiment_key"] == "exp_b") & (df_mat["model_key"] == "mlp")].iloc[0]
+    assert abs(exp_b_mlp["test20_abs_err_bar"] - 2.2578) < 0.001
+    assert abs(exp_b_mlp["test21_abs_err_bar"] - 16.0076) < 0.001
+    assert abs(exp_b_mlp["test20_21_mae_bar"] - 9.1327) < 0.001
+
+
+def test_physics_features_collinearity_and_rank():
+    """Verify exact rank-2 collinearity between Sv, Ph, and nominal effective stress sigma_v."""
+    df_pred = pd.read_csv(BASE_DIR / "dataset" / "F12_predictor_dataset_1811.csv")
+    df_targ = pd.read_csv(BASE_DIR / "tables" / "target_vectors_1811.csv")
+    ovb_df = pd.read_csv(BASE_DIR / "outputs" / "audit" / "overburden_sensitivity.csv")
+
+    from src.experiments.features import build_experiment_b_features
+    df_b, _ = build_experiment_b_features(df_pred, df_targ, ovb_df, include_dt_ratio=False)
+
+    sv = df_b["SV_OVERBURDEN_BAR"].values
+    ph = df_b["PH_HYDROSTATIC_BAR"].values
+    sig = df_b["SIGMA_V_HYDRO_BAR"].values
+
+    # Exact definition: sigma_v = Sv - Ph
+    np.testing.assert_allclose(sig, sv - ph, atol=1e-10)
+
+    # Matrix rank must be 2 (not 3)
+    M = np.column_stack([sv, ph, sig])
+    assert np.linalg.matrix_rank(M) == 2
+
+    # Standardized condition number must exceed 10^12 indicating extreme collinearity
+    M_std = (M - np.mean(M, axis=0)) / np.std(M, axis=0)
+    cond_num = np.linalg.cond(M_std)
+    assert cond_num > 1e12
+
 
 def test_mlp_depth_sensitivity_profile_artifacts():
     """Verify MLP depth sensitivity profile exists and demonstrates super-linear acceleration."""

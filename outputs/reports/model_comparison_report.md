@@ -415,6 +415,43 @@ A rigorous audit was conducted to investigate whether the Experiment B predictor
 
 ---
 
+### 10.3 Collinearity Quantification and Multi-Layer Perceptron / MLR Mechanics
+
+To understand why the linear model and neural network behave drastically differently when physics-informed features are introduced and ablated, the algebraic structure of the predictor subspace was investigated.
+
+#### 1. Exact Linear Dependency and Multicollinearity Matrix
+By physical construction, nominal hydrostatic effective stress is defined identically as the difference between total vertical overburden stress and normal brine hydrostatic pressure:
+$$\sigma_{v,\text{hydro}}(z) \equiv S_v(z) - P_h(z)$$
+Across all 1,811 borehole predictor grid nodes, the maximum absolute deviation $|\sigma_{v,\text{hydro}} - (S_v - P_h)| = 0.0\text{ bar}$.
+
+Evaluation of the $1811 \times 3$ matrix $[S_v, P_h, \sigma_{v,\text{hydro}}]$ establishes:
+- **Matrix Rank:** Exactly **2** (exact linear rank deficiency; 3 features spanning a 2D plane).
+- **Singular Values (Standardized Matrix):** $[73.70, 1.32, 3.61 \times 10^{-12}]$. The third singular value is zero to numerical machine precision.
+- **Standardized Condition Number:** $\kappa = 2.04 \times 10^{13}$, confirming severe numerical collinearity.
+- **Pairwise Pearson Correlation Coefficients:**
+  - $r(S_v, P_h) = 0.99970$
+  - $r(S_v, \sigma_{v,\text{hydro}}) = 0.99982$
+  - $r(P_h, \sigma_{v,\text{hydro}}) = 0.99904$
+
+#### 2. Why Physics-Informed MLR Performs Invariantly With and Without $DT_{\text{ratio}}$
+Inspection of the Multiple Linear Regression (MLR) coefficients reveals why the removal of $DT_{\text{ratio}}$ has virtually no impact on MLR predictions (Tests 20 & 21 MAE = 13.242 bar with $DT_{\text{ratio}}$ vs 13.348 bar without):
+- In the 17-feature Experiment B MLR, the standardized coefficients on $DT$ and $DT_{\text{nct_ratio}}$ are:
+  $$\beta(DT) = +15.36041, \quad \beta(DT_{\text{nct_ratio}}) = -14.94585$$
+- Over the training interval (MD 3,127.7 to 3,320.8 m), $DT_{\text{nct}}(z)$ varies by only $\sim 3\ \mu\text{s/ft}$ (from $51.5$ to $54.5\ \mu\text{s/ft}$). Consequently, $DT_{\text{nct_ratio}} \approx DT / 53$, making $DT$ and $DT_{\text{nct_ratio}}$ strongly collinear ($r = 0.9998$).
+- In ordinary least squares, $DT$ and $DT_{\text{nct_ratio}}$ formed an oppositely signed cancelling dipole ($+15.36$ vs $-14.95$), contributing almost zero net variance to the prediction.
+- When $DT_{\text{nct_ratio}}$ is ablated in `exp_b_no_dtratio`, the coefficient on $DT$ collapses from $+15.36$ to $-0.41$. The linear extrapolation capability of MLR is driven almost entirely by the linear depth slope provided by $P_h(z)$ ($\beta(P_h) = -47.84$, $\beta(\sigma_v) = +47.61$, net $S_v$ contribution $+4.46$).
+
+#### 3. Why the Multi-Layer Perceptron (MLP) Diverges Without $DT_{\text{ratio}}$
+While MLR handles rank deficiency via singular value decomposition (collapsing the collinear subspace algebraically), neural networks trained via backpropagation (Adam) have an infinitely degenerate solution manifold when inputs are collinear:
+- In Experiment B with 17 features, $DT_{\text{nct_ratio}}$ acted as an empirical numerical damping factor across the hidden layer weights, preventing unbounded weight accumulation along the $S_v - P_h$ null space.
+- When $DT_{\text{nct_ratio}}$ was removed in `exp_b_no_dtratio`, the unregularized rank-2 collinearity between $S_v, P_h$, and $\sigma_{v,\text{hydro}}$ allowed hidden neuron weights along the null direction to drift unconstrained during optimization.
+- Upon extrapolation into the deep Skagerrak interval ($\text{TVD} > 2,970$ m), these unconstrained weights produced runaway positive feedback, causing the MLP prediction at Test 21 to spike catastrophically to **425.052 bar** (residual -56.234 bar; MAE 42.677 bar).
+
+#### 4. Explicit Disclosure: No Independent Physical Discovery
+Crucially, the ability of linear models to scale into the 350 to 360 bar range in Experiment B must **not be interpreted as an independent discovery of overpressure physics**. Because the normal brine hydrostatic feature $P_h(z)$ was constructed using the identical $0.101\text{ bar/m}$ fluid gradient that the target-generation methodology applied across the Sleipner sands, providing $P_h(z)$ hardcodes the target depth slope into the feature set. The model simply learns an affine offset ($w \approx 1.0$, offset $\approx +48.65$ bar) rather than discovering petrophysical compaction relationships.
+
+---
+
 ## 11. Sonic NCT Equation Investigation and Matrix Bounds Analysis
 
 The equation currently used in Experiment B is:
@@ -424,11 +461,17 @@ $$DT_{\text{nct}}(2900) = 195 \exp(-0.00045 \times 2900) = 195 \exp(-1.305) = 19
 
 This produces a fundamental scientific discrepancy: an earlier investigation of mudstone intervals in Well 15/9-F-12 established normal shale compaction transit times of approximately **111 to 114 $\mu$s/ft** at 2,500 to 2,600 m depth (`tables/shale_sonic_depth_bins.csv`). A rigorous investigation identified five fatal flaws in the current equation:
 
-### 1. Imperial-to-Metric Unit Mismatch
-In classical petroleum literature (e.g., Eaton 1975, Magara 1978, Chapman 1983):
-- A surface mudline transit time $DT_0 \approx 195$ to $200\ \mu$s/ft is standard for unconsolidated seafloor muds ($V_p \approx 1,560$ m/s).
-- However, the exponential compaction coefficient $c \approx 0.00025$ to $0.00045$ is specified per **foot** of depth ($c \approx 0.00045\text{ ft}^{-1}$), not per meter!
-- Because $1\text{ meter} \approx 3.28084\text{ feet}$, applying $c = 0.00045\text{ m}^{-1}$ directly to depth in meters effectively triples the compaction rate. The depth required to compact to a given transit time is compressed by a factor of 3.28.
+### 1. Provenance and Mathematical Analysis of the Compaction Coefficient
+A detailed investigation of the compaction coefficient $c = 0.00045$ in `configs/target_generation.yaml` revealed two critical issues:
+
+1. **Unknown Provenance:** The origin, dimensional basis, and physical derivation of $c = 0.00045$ cannot be substantiated from any documented primary source in the Well 15/9-F-12 reports, NPD factpages, or regional North Sea literature. Its provenance is formally classified as **unknown**.
+2. **Mathematical Dimensional Conversion:** An earlier preliminary review suggested that applying an imperial coefficient to metric depth overestimates the compaction rate by 3.281. However, formal dimensional analysis shows the reverse mathematical relationship:
+   - If a compaction coefficient is specified per foot of depth ($c_{\text{ft}} = 0.00045\text{ ft}^{-1}$), then because $z_{\text{ft}} = 3.28084 \cdot z_{\text{m}}$, the equivalent metric compaction coefficient in depth $z_{\text{m}}$ is:
+     $$c_{\text{m}} = c_{\text{ft}} \times 3.28084 = 0.001476\text{ m}^{-1}$$
+   - Conversely, if the dimensionless value $0.00045$ was borrowed from an imperial formula and applied directly to depth in meters without conversion ($\exp(-0.00045 \cdot z_{\text{m}})$), the effective imperial rate would be $0.00045 / 3.28084 = 0.000137\text{ ft}^{-1}$, which represents a 3.28-fold *slower* compaction rate per foot, not a faster one.
+   - Because the dimensional origin is unknown, neither conversion can be substantiated from project records.
+
+Irrespective of dimensional provenance, the current formulation remains fundamentally defective and physically unsuitable for four independent reasons:
 
 ### 2. Violation of Mineral Matrix Slowness Bounds
 In physical acoustics, the acoustic transit time of a porous rock cannot be lower than the transit time of its solid mineral matrix ($DT_{\text{matrix}}$):
@@ -509,6 +552,44 @@ Inspection of Table 4 provides conclusive physical evidence:
 ## 13. Comprehensive Individual Physical Station Error Matrix and Benchmark Summary
 
 To avoid the masking effects of aggregate MAE and RMSE metrics, model performance is reported on an individual station-by-station basis for every candidate model across all five experimental configurations.
+
+### 13.0 Reconciliation of Physical Station Predictions and Evaluation Methodology
+
+#### 1. Resolution of Transcription Discrepancy
+A discrepancy was identified between the validated on-disk benchmark artifacts and preliminary summary tables. Specifically, a summary table presented in prior correspondence reported values (e.g., Baseline Test 16 errors of 0.866 bar for MLP, 2.508 bar for CatBoost, 2.404 bar for Random Forest, 1.834 bar for MLR, 2.518 bar for Gradient Boosting; and Exp B MLP MAE of 24.321 bar) that contradicted the established project benchmarks.
+
+A systematic audit across all saved prediction arrays, evaluation pipelines, and model artifacts confirms:
+- **Root Cause:** The discrepancy was caused by an isolated manual transcription error during text generation, where summary metrics from partition averages were inadvertently transcribed into station error columns.
+- **Authoritative Integrity:** The underlying model artifacts, prediction arrays (`outputs/metrics/model_predictions_1811.csv`, `outputs/experiments/metrics/exp_*.csv`), and persistent tabular files (`tables/experiments/individual_station_benchmark_matrix.csv`, `tables/experiments/individual_physical_station_errors.csv`) were verified to be 100% correct, fully reproducible, and untouched.
+- **Authoritative Baseline Test 16 Errors:**
+  - MLP: **0.2700 bar** (Pred: 341.4430 bar, Actual: 341.713 bar)
+  - CatBoost: **6.4804 bar** (Pred: 335.2326 bar, Actual: 341.713 bar)
+  - Random Forest: **6.9122 bar** (Pred: 334.8008 bar, Actual: 341.713 bar)
+  - MLR: **5.8915 bar** (Pred: 335.8215 bar, Actual: 341.713 bar)
+  - Gradient Boosting: **6.2552 bar** (Pred: 335.4578 bar, Actual: 341.713 bar)
+- **Authoritative Experiment B MLP Station Errors:**
+  - Test 20 (368.706 bar): Pred = 370.9638 bar, Error = **2.2578 bar**
+  - Test 21 (368.818 bar): Pred = 384.8256 bar, Error = **16.0076 bar**
+  - Combined Tests 20 & 21 MAE = **9.1327 bar** (~9.133 bar).
+
+#### 2. Evaluation Methodology: Nearest Grid-Node Matching vs. Linear Depth Interpolation
+To establish a single, documented, and rigorous evaluation standard across all 25 model runs, two evaluation methods were tested and compared:
+
+1. **Nearest Grid-Node Matching (Authoritative Project Standard):**
+   - The borehole predictor dataset is discretized on a regular 0.1524 m (0.5 ft) MD grid ($N=1,811$ points).
+   - Each physical pretest station is mapped to its nearest continuous grid node index:
+     - **Test 16:** Station MD = 3,324.65 m $\rightarrow$ Nearest Grid Node = 3,324.6060 m (idx 1292, depth offset $-0.044$ m).
+     - **Test 20:** Station MD = 3,386.99 m $\rightarrow$ Nearest Grid Node = 3,386.9376 m (idx 1701, depth offset $-0.052$ m).
+     - **Test 21:** Station MD = 3,403.57 m $\rightarrow$ Nearest Grid Node = 3,403.5492 m (idx 1810, depth offset $-0.021$ m).
+     - **Test 19:** Station MD = 3,403.53 m $\rightarrow$ Nearest Grid Node = 3,403.5492 m (idx 1810, depth offset $+0.019$ m).
+   - Predictions are extracted directly from the model prediction array at index `idx`.
+2. **Exact Station-Depth Linear Interpolation:**
+   - Predictions are evaluated by linearly interpolating between the two bounding grid nodes:
+     $$\hat{P}(\text{MD}_{\text{station}}) = \hat{P}(d_0) + \frac{\text{MD}_{\text{station}} - d_0}{d_1 - d_0} [\hat{P}(d_1) - \hat{P}(d_0)]$$
+   - Comparison results:
+     - On Test 16 (Baseline), linear interpolation yields errors of: MLP = 0.4606 bar (vs 0.2700 bar), CatBoost = 6.4732 bar (vs 6.4804 bar), Random Forest = 6.9564 bar (vs 6.9122 bar), MLR = 5.8999 bar (vs 5.8915 bar), Gradient Boosting = 6.2623 bar (vs 6.2552 bar). The maximum difference is under 0.19 bar.
+     - On Test 21 (MD 3,403.57 m), the physical test station lies 0.021 m deeper than the terminal depth of the predictor grid (3,403.5492 m). Because there is no bounding grid node below Test 21, linear interpolation is ill-posed and would require unconstrained boundary extrapolation.
+   - **Methodological Conclusion:** Nearest grid-node matching is retained as the authoritative standard. The fine grid resolution (0.1524 m) ensures negligible depth offset ($\le 0.052$ m), and nearest-node matching naturally handles boundary stations without arbitrary extrapolation.
 
 ### 13.1 Key Physical Evaluation Stations
 - **Test 16 (Validation Checkpoint):** MD 3,324.65 m, TVD MSL 2,935.92 m, Lower Sleipner Formation. Physical measured buildup = **341.713 bar**. Evaluates generalization across the intermediate hydrodynamic step.
