@@ -726,7 +726,109 @@ Based on rigorous data integrity audits, mathematical extrapolation mechanics, a
 
 ---
 
-## 15. Complete Deliverable Manifest
+## 15. Research Design and Methodology Audit: Target Validity, Scope, and Scientific Limitations
+
+A comprehensive research-design and methodology audit was conducted to establish exactly what this study has demonstrated, what it has not demonstrated, and how the findings must be bounded in academic reporting.
+
+---
+
+### 15.1 Target Validity and Provenance-Segregated Inferences
+
+Supervised machine learning requires continuous labeled targets for optimization. However, downhole pressure pretests in petroleum wells are intrinsically discrete, sparse point measurements ($N = 17$ valid pretests across 275.8 m in Well 15/9-F-12). To bridge this operational gap, the target vector was constructed as a hybrid dataset with strict metadata provenance tracking.
+
+#### 1. Measured Pressure Anchors ($N = 17$)
+- **Distribution:** 14 in Training (Tests 1-15, excluding Test 13 buildup reconciliation), 1 in Validation (Test 16), and 2 in Testing (Tests 20 and 21). Test 19 ($357.714$ bar) is preserved as an excluded memory reference.
+- **Legitimate Inferences:**
+  - Provide empirical ground-truth anchor points for calibrating fluid gradients and verifying prediction accuracy.
+  - Test 16 ($341.713$ bar) provides an independent single-station physical validation checkpoint across an 8-9 bar hydrodynamic pressure step.
+  - Tests 20 ($368.706$ bar) and 21 ($368.818$ bar) provide the sole independent ground-truth verification of whether algorithms can predict the deep overpressured compartment.
+- **Methodological Limitations:** Sparse point measurements cannot train high-capacity non-linear models (Random Forest, CatBoost, MLP) continuously across depth without severe sample starvation ($N = 14$ training points).
+
+#### 2. Physics-Derived Continuous Targets ($N = 1,287$ Valid Targets)
+- **Distribution:** 1,254 rows in Training (Hugin oil zone and Sleipner middle/lower sands); 33 rows in Validation (lower Sleipner permeable sand).
+- **Construction:** Generated from hydrostatic column equations ($P(z) = P_{	ext{anchor}} + ho_{	ext{fluid}} g \Delta z$) anchored to physical pretests and bounded by petrophysical cutoff criteria ($	ext{VCL} \le 0.40$, $	ext{PHIF} \ge 0.08$).
+- **Legitimate Inferences:**
+  - Evaluates whether machine learning algorithms can learn complex, non-linear mappings between continuous wireline log responses (resistivity, density, sonic, porosity, clay volume) and reservoir hydrostatic fluid gradients.
+  - Demonstrates the capacity of tree ensembles to achieve near-perfect interpolation within calibrated reservoir sand intervals (CatBoost training RMSE: 0.202 bar, $R^2 = 0.999$).
+- **Methodological Limitations:** Model performance against these targets evaluates fidelity to the surrogate physical construction, not direct observation of real downhole pore pressure. They cannot be cited as empirical sensor measurements.
+
+#### 3. Provisional Assumed Targets ($N = 110$, Skagerrak Formation)
+- **Distribution:** 110 rows in Testing (MD 3,386.5 to 3,403.5 m).
+- **Construction:** Built upon a provisional constant-compartment assumption ($368.762$ bar) anchored to Tests 20 and 21 ($0.112$ bar difference over 9.99 m TVD).
+- **Legitimate Inferences:**
+  - Serves strictly as an internal computational baseline to evaluate whether continuous model predictions remain bounded or experience numerical oscillations across a sandstone body.
+- **Forbidden / Illegitimate Inferences:**
+  - **Must never be described or reported as measured ground truth.**
+  - Model metrics against these 110 provisional rows (e.g., CatBoost MAE of 33.58 bar, MLP MAE of 31.25 bar) must be segregated from physical station errors.
+  - A low error against provisional targets cannot be cited as proof that a model independently predicted the subsurface pressure profile.
+
+#### 4. Unsupported Transition-Zone Targets ($N = 397$, Excluded)
+- **Distribution:** MD 3,326.0 to 3,386.5 m (238 rows in Validation; 159 rows in Testing).
+- **Protocol:** Formally classified as invalid (`IS_TARGET_VALID = False`) and strictly excluded from model loss calculations, training optimization, and primary evaluation metrics.
+
+#### Summary on Target Defensibility:
+The hybrid continuous target vector is methodologically defensible for supervised learning because it enables continuous functional mapping from wireline logs while preserving data integrity through explicit provenance segregation. However, claims of physical model validity must be supported solely by performance against discrete measured anchors (Tests 16, 20, and 21).
+
+---
+
+### 15.2 Geological Scope and Stratigraphic Boundaries
+
+Pore-pressure prediction claims must be strictly bounded by the structural and stratigraphic architecture of the Central Graben:
+
+#### 1. Primary Calibrated Interval (Hugin and Sleipner Formations)
+- **Stratigraphic Interval:** MD 3,127.70 to 3,326.00 m (extending to Test 16 at 3,324.65 m MD).
+- **Scope Restriction:** Primary predictive claims of accurate pore-pressure estimation are legitimate **only within this calibrated reservoir interval**.
+- **Geological Justification:** The Hugin Formation is an open, high-permeability oil reservoir with a thoroughly documented fluid gradient ($0.07028\text{ bar/m}$, 12 calibration pretests). The Sleipner Formation consists of stacked deltaic sands separated by intraformational shale baffles and calcite hardgrounds, with a well-constrained hydrodynamic step verified by Tests 13-15 and Test 16.
+
+#### 2. Presentation of the Skagerrak Formation Interval
+- **Stratigraphic Interval:** MD 3,386.50 to 3,403.55 m (terminal borehole depth).
+- **Scope Restriction:** The Skagerrak interval must be presented exclusively as an **out-of-compartment extrapolation stress test**, not as a calibrated predictive regime.
+- **Geological Justification:**
+  - The Skagerrak Formation is a tight, highly overpressured Triassic reservoir isolated from the overlying Middle Jurassic by the Base Cretaceous Unconformity and intra-Sleipner sealing shales.
+  - Final physical evaluation in the Skagerrak rests on **only two independent pretests** (Test 20 at $368.706$ bar and Test 21 at $368.818$ bar), separated by only 8.57 m TVD / 16.58 m MD.
+  - Logging-while-drilling and wireline logs in tight sandstones do not register the external tectonic and hydrodynamic causes of the +27 bar overpressure step.
+  - The failure of baseline logs-only models to predict this overpressure (+30 to +38 bar underprediction) is a legitimate scientific demonstration of petrophysical limits, not an algorithmic defect.
+
+---
+
+### 15.3 Research Objectives and Model Comparison Scope
+
+The research objectives established in the approved project title (*"Pore Pressure Prediction in Well 15/9-F-12 Using Machine Learning"*) are systematically addressed:
+
+#### 1. Sufficiency of Algorithms and Experimental Variations
+The combination of five model families and three experimental variations provides a complete, structured taxonomy:
+- **Baseline Models (5 Families):** Covers parametric linear modeling (MLR), bagging ensembles (Random Forest), symmetric gradient boosted trees (CatBoost), stagewise gradient boosting (Gradient Boosting), and artificial neural networks (MLP).
+- **Experimental Variations (3 Suites):** Systematically tests geometric depth (+TVD), physics-informed geomechanics (+Sv, +Ph, +effective stress, +/- DT ratio), and categorical stratigraphy (+formations, +hardgrounds).
+- **Algorithmic Parsimony:** Introducing additional regression algorithms (such as XGBoost, LightGBM, Support Vector Regression, or K-Nearest Neighbors) would be methodologically redundant. The existing models comprehensively cover tree-based splitting, gradient-based loss optimization, and continuous linear/neural transformations.
+
+#### 2. Research Objectives That CANNOT Be Supported by the Available Data
+To maintain academic integrity, the following objectives cannot be claimed:
+1. **Continuous Overpressure Profile Discovery in Mudstones / Shales:** Wireline pretest tools (FPWD/MDT) can only measure formation pressure in permeable reservoir sands. The dataset contains zero direct pressure measurements in the low-permeability shales. Models cannot claim to predict shale pore pressure.
+2. **Field-Wide or Cross-Well Generalisation:** All observations originate from a single borehole (Well 15/9-F-12). Generalisation to offset Volve wells (e.g., 15/9-19A, 15/9-F-1) cannot be claimed without cross-well testing.
+3. **Autonomous Discovery of Fault Seals and Compartments:** Wireline petrophysical logs measure local rock properties (porosity, density, resistivity) but cannot sense distal structural faults or regional hydraulic barriers. Machine learning algorithms cannot autonomously infer sudden compartment overpressure steps from petrophysical logs alone.
+
+---
+
+### 15.4 Scientific Limitations
+
+To prevent overstatement of results, the scientific limitations of this study are categorized into internal model validity limitations and external generalisation limitations.
+
+#### Category A: Limitations Affecting Model Validity (Internal Mechanics and Inferences)
+1. **Target-Construction Slope Coupling (Experiment B):** Supplying normal hydrostatic pressure ($P_h(z)$) gives linear models the exact fluid gradient ($0.101\text{ bar/m}$) used in target generation across the Sleipner sands. MLR fits an affine offset rather than discovering petrophysical overpressure relationships.
+2. **Collinearity and Rank Deficiency of Physics Features:** Nominal effective stress is defined as $\sigma_{v,\text{hydro}} \equiv S_v - P_h$, producing an exact rank-2 linear subspace with condition number $\kappa = 2.04 \times 10^{13}$. While MLR handles this algebraically via SVD, neural networks (MLP) suffer severe weight divergence along the null space during depth extrapolation (predicting 425 bar at Test 21).
+3. **Physical Invalidation of the Sonic NCT Equation:** The exponential compaction equation $DT_{\text{nct}}(z) = 195 \exp(-0.00045 \cdot z)$ has an unknown provenance, lacks a mineral matrix floor, predicts unphysical sub-quartz slownesses (~53 $\mu$s/ft at 2,900 m TVD), conflicts with empirical F-12 shale compaction trends (100 to 108 $\mu$s/ft), and is lithologically incompatible with cemented Jurassic sandstones.
+4. **Mathematical Extrapolation Artifacts in Neural Networks (Experiment A):** The depth-aware MLP's apparently low error on Tests 20 & 21 is driven by an unconstrained, accelerating depth derivative ($1.37\text{ bar/m}$, equivalent to $14.0\text{ g/cm}^3$ fluid density). This unphysical trend degraded the intermediate validation station (Test 16) by 3.64 bar.
+5. **Surrogate Nature of Continuous Targets:** Continuous training targets were generated from hydrostatic equations anchored to discrete tests. Consequently, model evaluation against continuous targets measures alignment with the target-generation model, not observed pore pressure.
+
+#### Category B: Limitations Affecting Generalisation (External Transferability)
+1. **Single-Borehole Dataset:** The study is limited to Well 15/9-F-12. Inter-well structural variations, facies changes, and differential depletion across the Volve Field are unrepresented.
+2. **Sparsity of Measured Downhole Pretests:** With only 17 physical pressure pretests across 275.8 m (and only 2 in the deep test partition), statistical validation of point predictions relies on a very small physical sample size.
+3. **Geological Compartmentalization:** Pore pressure in fault-bounded basins is fundamentally non-continuous across structural seals. Models conditioned on continuous depth or local log responses cannot generalise across sealing fault planes.
+4. **Decision Tree Bounded Extrapolation Limits:** Decision tree ensembles (Random Forest, CatBoost, Gradient Boosting) are mathematically incapable of predicting values outside the range of their training targets ($[320.02, 336.43]$ bar), fundamentally capping their ability to extrapolate into deeper overpressured compartments without retraining.
+
+---
+
+## 16. Complete Deliverable Manifest
 
 All baseline and experimental models, metrics, tables, and figures are dual-saved and verified:
 
@@ -751,5 +853,5 @@ All baseline and experimental models, metrics, tables, and figures are dual-save
   - `tests/test_model_training.py` (7 tests pass)
   - `tests/test_physics_models.py` (11 tests pass)
   - `tests/test_target_generation.py` (8 tests pass)
-  - `tests/test_experiments.py` (7 tests pass)
-  - **Total Test Suite:** 40 tests, 100% pass rate.
+  - `tests/test_experiments.py` (8 tests pass)
+  - **Total Test Suite:** 41 tests, 100% pass rate.
