@@ -1,6 +1,6 @@
-# final-year-project
+# A Machine Learning Approach to Determining Pore Pressure in Oil Wells
 
-Pore Pressure Prediction in Well 15/9-F-12 Using Machine Learning
+## Case Study: Well 15/9-F-12 (Volve Field, Norwegian North Sea)
 
 ## Overview
 

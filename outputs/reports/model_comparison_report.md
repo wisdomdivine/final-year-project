@@ -1,11 +1,13 @@
 # Machine Learning Model Training, Evaluation, and Comparison Report
-## Formation Pore-Pressure Prediction in Well 15/9-F-12 (Volve Field)
+## Research Case Study: Well 15/9-F-12 (Volve Field, Norwegian North Sea)
+### Approved Project Title: "A Machine Learning Approach to Determining Pore Pressure in Oil Wells"
 
 **Document Reference:** `outputs/reports/model_comparison_report.md`  
 **Execution Baseline Commit:** `d0ea70d`  
 **Evaluation Date:** 2026-11-11  
 **Target Variable:** Formation Pore Pressure ($P_p$, bar)  
 **Total Observations:** 1,811 (1,414 valid targets; 397 excluded transition-zone observations)  
+**Target Clarification:** The 1,414 valid targets represent a continuous, physically constructed pressure profile designed to enable supervised functional learning from wireline logs. They do NOT represent 1,414 independent measured pressure observations. Measured ground truth consists strictly of 17 discrete downhole formation-pressure pretests (Tests 1-16 and 20-21).  
 
 ---
 
@@ -22,8 +24,8 @@ This report delivers a rigorous comparative evaluation of five candidate machine
 - **Training Set Fidelity:** Tree ensembles achieved outstanding fit on the 1,268 training rows (CatBoost RMSE: 0.202 bar, $R^2 = 0.999$; Gradient Boosting RMSE: 0.217 bar, $R^2 = 0.999$; Random Forest RMSE: 0.332 bar, $R^2 = 0.997$).
 - **Intermediate Validation Generalization (Test 16 Checkpoint):** The Multi-Layer Perceptron (MLP) demonstrated superior out-of-interval generalization in the lower Sleipner Formation, predicting Test 16 at **341.44 bar** against the physical measured value of **341.713 bar** (an absolute error of only **0.270 bar**). By contrast, tree models (Random Forest, CatBoost, Gradient Boosting) and MLR were constrained by training feature partitions and predicted 334.80 to 335.82 bar (residuals of +5.89 to +6.91 bar).
 - **Physical Extrapolation and Mathematical Mechanics Across Architectures (Tests 20 & 21):** All five models exhibited an underprediction bias of 28.7 to 38.9 bar in the deep Skagerrak Formation. The underlying mathematical mechanisms differ fundamentally across model families:
-  - *Random Forest (Averaging Ensemble):* Predicts via convex combinations of training labels across leaf nodes ($\hat{y} = \frac{1}{B}\sum_{b=1}^B \bar{y}_{\mathcal{L}_b}$). Its predictions are strictly bounded by the minimum and maximum of the training targets ($[320.020, 335.610]$ bar for measured anchors, or $[320.020, 336.428]$ bar for derived targets).
-  - *Gradient Boosting and CatBoost (Additive Expansions):* Predict via staged sums of terminal leaves ($F_M(x) = F_0 + \sum_{m=1}^M \eta h_m(x)$). Because positive leaf outputs across trees accumulate additively, boosted trees can mathematically exceed the maximum training target (e.g., Gradient Boosting reached 340.123 bar on Test 21, and CatBoost reached 338.341 bar). However, outside the training feature support, decision rules plateau into constant step functions, preventing them from bridging the 30 bar tectonic compartment jump.
+  - *Random Forest (Averaging Ensemble):* In standard regression implementations, Random Forest predictions are strictly bounded by the minimum and maximum of the training targets ($[320.020, 336.428]$ bar), because each tree predicts the average of the training targets falling within its terminal leaf ($\hat{y} = \frac{1}{B}\sum_{b=1}^B \bar{y}_{\mathcal{L}_b}$).
+  - *Additive Boosted Trees (CatBoost and Gradient Boosting):* Unlike Random Forest, additive gradient boosting models predict via staged expansions ($F_M(x) = F_0 + \sum_{m=1}^M \eta h_m(x)$) and can mathematically predict outside the training target range as positive leaf residuals accumulate additively. In this study, Gradient Boosting reached 340.123 bar on Test 21 and CatBoost reached 338.341 bar (exceeding the maximum training target of 336.428 bar). However, once feature values exceed the training split thresholds, decision rules plateau into constant step functions, preventing them from bridging the +27 bar Skagerrak overpressure step.
   - *Parametric (MLR) and Neural (MLP) Architectures:* Map continuous affine transformations ($w^T x + b$) and piecewise-linear ReLU paths, permitting unbounded linear extrapolation, but were limited here because logging tools alone in hard cemented sandstones do not reflect the isolated reservoir overpressure step without depth coordinates or compartment priors.
 - **Model Selection Nuance:** No single architecture is universally superior. CatBoost achieves the lowest error and highest stability within calibrated in-distribution reservoir sandstones (14-station anchor RMSE = 0.268 bar; 15-station pretest RMSE = 0.283 bar). However, the Multi-Layer Perceptron (MLP) achieves the best validation generalization across uncalibrated stratigraphy (validation MAE = 2.707 bar; Test 16 error = +0.270 bar).
 - **Ensemble Justification:** A stacking ensemble is explicitly **not recommended** because all models share the same fundamental physical constraint: logging tools alone in this vertical sequence do not encode the structural pressure compartment offset across the unmeasured transition seal without incorporating depth memorization or physics-based regional compartmentalization priors.
@@ -219,7 +221,24 @@ In `outputs/figures/learning_curves.png`:
 
 ## 6. Feature Importance and Petrophysical Interpretation
 
-Feature importance was analyzed using both native split/gain metrics and model-independent permutation importance ($N=15$ repeats on the training partition). Detailed numerical values are preserved in `outputs/metrics/feature_importance.csv` and visualized in `outputs/figures/feature_importance_comparison.png`.
+Feature importance was evaluated using both native algorithmic split/gain metrics and model-independent permutation importance ($N=15$ repeats on the training partition). Detailed numerical values are preserved in `outputs/metrics/feature_importance.csv` and visualized in `outputs/figures/feature_importance_comparison.png`.
+
+### 6.1 Separation of Native Split Gain vs. Permutation Sensitivity
+Inspection of Table 4 and Figure 4.2 reveals distinct behavior between native model importance and permutation sensitivity:
+1. **Dominance of ROP in Native Tree Splitting:** Rate of Penetration (`ROP`) is the single most dominant feature across all native tree split rankings:
+   - **Gradient Boosting:** `ROP` accounts for **89.80%** of total native importance.
+   - **CatBoost:** `ROP` accounts for **55.39%** of total native importance.
+   - **Random Forest:** `ROP` accounts for **33.59%** of total native importance.
+   - **Multiple Linear Regression:** `ROP` contributes **26.70%** of standardized feature variance.
+   Behind ROP, deep resistivity (`RD`), shallow resistivity (`RS`), and true formation resistivity (`RT`) contribute secondary native split utility.
+2. **Permutation Importance on Validation Data:**
+   - In the Multi-Layer Perceptron (MLP), permutation sensitivity on the lower Sleipner validation partition is heavily dominated by petrophysical rock and fluid parameters: porosity (`PHIF`, 32.29 bar RMSE increase), water saturation (`SW`, 18.70 bar RMSE increase), bulk volume water (`BVW`, 16.13 bar RMSE increase), gamma ray (`GR`, 2.51 bar), and true resistivity (`RT`, 2.33 bar).
+   - In tree models and MLR, permutation RMSE increases across the validation interval are modest (0.01 to 0.11 bar), led by `PHIF`, `RD`, `RHOB`, and `NPHI`.
+
+### 6.2 Methodological Distinction: Importance vs. Physical Causation
+Crucially, high feature importance in machine learning models establishes **statistical predictive utility or proxy association within the training sample**, but does **NOT establish physical causation**:
+- `ROP` is a mechanical drilling parameter governed by bit type, weight-on-bit, rotary speed, mud hydraulics, and lithological drillability. Its dominance in tree splitting reflects its utility as an operational proxy for stratigraphic boundaries and formation drillability, not a physical cause of formation pore-fluid pressure.
+- Petrophysical logs (`RHOB`, `DT`, `RT`, `PHIF`) possess established physical links to porosity and effective stress under mechanical compaction theory, but their relative statistical weights in decision trees are frequently superseded by sharp operational contrasts captured in drilling parameters.
 
 ### Table 4: Feature Importance Ranking Summary
 
@@ -746,7 +765,8 @@ Supervised machine learning requires continuous labeled targets for optimization
 
 #### 2. Physics-Derived Continuous Targets ($N = 1,287$ Valid Targets)
 - **Distribution:** 1,254 rows in Training (Hugin oil zone and Sleipner middle/lower sands); 33 rows in Validation (lower Sleipner permeable sand).
-- **Construction:** Generated from hydrostatic column equations ($P(z) = P_{	ext{anchor}} + ho_{	ext{fluid}} g \Delta z$) anchored to physical pretests and bounded by petrophysical cutoff criteria ($	ext{VCL} \le 0.40$, $	ext{PHIF} \ge 0.08$).
+- **Construction:** Generated from hydrostatic column equations ($P(z) = P_{	ext{anchor}} + 
+ho_{	ext{fluid}} g \Delta z$) anchored to physical pretests and bounded by petrophysical cutoff criteria ($	ext{VCL} \le 0.40$, $	ext{PHIF} \ge 0.08$).
 - **Legitimate Inferences:**
   - Evaluates whether machine learning algorithms can learn complex, non-linear mappings between continuous wireline log responses (resistivity, density, sonic, porosity, clay volume) and reservoir hydrostatic fluid gradients.
   - Demonstrates the capacity of tree ensembles to achieve near-perfect interpolation within calibrated reservoir sand intervals (CatBoost training RMSE: 0.202 bar, $R^2 = 0.999$).
@@ -783,17 +803,18 @@ Pore-pressure prediction claims must be strictly bounded by the structural and s
 #### 2. Presentation of the Skagerrak Formation Interval
 - **Stratigraphic Interval:** MD 3,386.50 to 3,403.55 m (terminal borehole depth).
 - **Scope Restriction:** The Skagerrak interval must be presented exclusively as an **out-of-compartment extrapolation stress test**, not as a calibrated predictive regime.
-- **Geological Justification:**
-  - The Skagerrak Formation is a tight, highly overpressured Triassic reservoir isolated from the overlying Middle Jurassic by the Base Cretaceous Unconformity and intra-Sleipner sealing shales.
-  - Final physical evaluation in the Skagerrak rests on **only two independent pretests** (Test 20 at $368.706$ bar and Test 21 at $368.818$ bar), separated by only 8.57 m TVD / 16.58 m MD.
-  - Logging-while-drilling and wireline logs in tight sandstones do not register the external tectonic and hydrodynamic causes of the +27 bar overpressure step.
-  - The failure of baseline logs-only models to predict this overpressure (+30 to +38 bar underprediction) is a legitimate scientific demonstration of petrophysical limits, not an algorithmic defect.
+- **Rigorous Distinction of Pressure, Compartment, and Sealing Interpretations:**
+  1. *Measured Pressure Differences:* Direct pretests establish a formation pressure of $341.713$ bar at Test 16 (Lower Sleipner, 2,935.92 m TVD MSL) and $368.706$ / $368.818$ bar at Tests 20 & 21 (Skagerrak, 2,973.36 to 2,983.34 m TVD MSL). This establishes an empirical measured pressure jump of **+27.1 bar** across a vertical interval of $\sim 37.4$ m TVD.
+  2. *Interpreted Compartment Boundaries:* Regional stratigraphy and well completion reports interpret the Base Cretaceous Unconformity and intervening transition zone (MD 3,326.0 to 3,386.5 m) as a structural boundary separating distinct Middle Jurassic and Triassic hydrodynamic regimes.
+  3. *Unverified Sealing Mechanisms:* The exact physical mechanism maintaining this +27.1 bar pressure step (e.g., fault gouge sealing, intraformational mudstone capillary barriers, lateral fluid transfer, or compaction disequilibrium) represents an unverified geological hypothesis. It cannot be directly measured or verified from 1D wireline logs in Well 15/9-F-12 alone.
+  - Final physical evaluation in the Skagerrak rests on **only two independent pretests** (Test 20 at $368.706$ bar and Test 21 at $368.818$ bar), separated by approximately 9.99 m TVD (9.98 m on Trajectory 1 grid) and 16.58 m MD.
+  - The failure of baseline logs-only models to predict this overpressure (+30 to +38 bar underprediction) is a legitimate scientific demonstration that 1D petrophysical logs do not register external, unmeasured structural sealing mechanisms.
 
 ---
 
 ### 15.3 Research Objectives and Model Comparison Scope
 
-The research objectives established in the approved project title (*"Pore Pressure Prediction in Well 15/9-F-12 Using Machine Learning"*) are systematically addressed:
+The research objectives established in the approved project title (*"A Machine Learning Approach to Determining Pore Pressure in Oil Wells"*, with Well 15/9-F-12 serving as the detailed empirical case study) are systematically addressed:
 
 #### 1. Sufficiency of Algorithms and Experimental Variations
 The combination of five model families and three experimental variations provides a complete, structured taxonomy:
@@ -824,7 +845,7 @@ To prevent overstatement of results, the scientific limitations of this study ar
 1. **Single-Borehole Dataset:** The study is limited to Well 15/9-F-12. Inter-well structural variations, facies changes, and differential depletion across the Volve Field are unrepresented.
 2. **Sparsity of Measured Downhole Pretests:** With only 17 physical pressure pretests across 275.8 m (and only 2 in the deep test partition), statistical validation of point predictions relies on a very small physical sample size.
 3. **Geological Compartmentalization:** Pore pressure in fault-bounded basins is fundamentally non-continuous across structural seals. Models conditioned on continuous depth or local log responses cannot generalise across sealing fault planes.
-4. **Decision Tree Bounded Extrapolation Limits:** Decision tree ensembles (Random Forest, CatBoost, Gradient Boosting) are mathematically incapable of predicting values outside the range of their training targets ($[320.02, 336.43]$ bar), fundamentally capping their ability to extrapolate into deeper overpressured compartments without retraining.
+4. **Decision Tree Extrapolation Limits and Boundedness:** Standard Random Forest regression is mathematically bounded by the range of its training targets ($[320.02, 336.43]$ bar) because leaf predictions are weighted averages. Additive boosted trees (CatBoost and Gradient Boosting) can predict outside the training range via accumulated residual expansions (reaching 338.34 bar and 340.12 bar on Test 21), but once split variables exceed training thresholds, their predictions plateau into constant step functions, preventing them from bridging the +27 bar Skagerrak overpressure jump without retraining.
 
 ---
 
