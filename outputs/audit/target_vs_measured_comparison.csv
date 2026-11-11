@@ -1,22 +1,22 @@
-test_no,station_md,grid_md,distance_m,measured_p_bar,generated_target_bar,target_residual_bar,target_provenance,partition,remarks,status
-1,3127.71,3127.7052,0.0048,320.02,320.02,0.0,measured_anchor,Training,Good Test,matched
-2,3127.99,3128.01,0.02,320.042,320.042,0.0,measured_anchor,Training,Good Test,matched
-3,3136.74,3136.6968,0.0432,320.385,320.385,0.0,measured_anchor,Training,Good Test,matched
-4,3144.07,3144.012,0.058,320.713,320.713,0.0,measured_anchor,Training,Good Test,matched
-5,3152.61,3152.5464,0.0636,321.05,321.05,0.0,measured_anchor,Training,Good Test,matched
-6,3170.73,3170.682,0.048,321.827,321.827,0.0,measured_anchor,Training,Good Test,matched
-7,3191.85,3191.8656,0.0156,322.677,322.677,0.0,measured_anchor,Training,Good Test,matched
-8,3221.68,3221.736,0.056,323.892,323.892,0.0,measured_anchor,Training,Good Test,matched
-9,3240.73,3240.786,0.056,324.698,324.698,0.0,measured_anchor,Training,Good Test,matched
-10,3254.85,3254.8068,0.0432,325.298,325.298,0.0,measured_anchor,Training,Good Test,matched
-11,3263.51,3263.4936,0.0164,325.702,325.702,0.0,measured_anchor,Training,Good Test,matched
-12,3262.78,3262.7316,0.0484,325.686,325.686,0.0,measured_anchor,Training,Good Test,matched
-13,3293.55,3293.5164,0.0336,328.056,334.074,6.018,physics_derived,Training,Good Test,unresolved_conflict
-14,3294.0,3293.9736,0.0264,334.101,334.101,0.0,measured_anchor,Training,Good Test,matched
-15,3307.73,3307.6896,0.0404,335.61,335.61,0.0,measured_anchor,Training,Good Test,matched
-16,3324.65,3324.606,0.044,341.713,341.713,0.0,measured_anchor,Validation,Good Test,matched
-17,3333.57,3333.5976,0.0276,69.279,,,invalid_unsupported,Validation,Dry Test,unsupported_transition
-18,3386.51,3386.4804,0.0296,354.001,,,invalid_unsupported,Testing,Fair Test,unsupported_transition
-19,3403.53,3403.5492,0.0192,357.714,368.818,11.104,measured_anchor,Testing,Good Test,unresolved_conflict
-20,3386.99,3386.9376,0.0524,368.706,368.706,0.0,measured_anchor,Testing,Good Test,matched
-21,3403.57,3403.5492,0.0208,368.818,368.818,0.0,measured_anchor,Testing,Good Test,matched
+test_no,station_role,station_md,reconciled_station_p_bar,conflicting_table_p_bar,grid_md,distance_m,grid_target_bar,target_residual_bar,target_source_test_no,target_provenance,station_provenance,partition,remarks,status
+1,training_calibration_anchor,3127.71,320.02,,3127.7052,0.0048,320.02,0.0,1.0,measured_anchor,measured_anchor,Training,Good Test,matched
+2,training_calibration_anchor,3127.99,320.042,,3128.01,0.02,320.042,0.0,2.0,measured_anchor,measured_anchor,Training,Good Test,matched
+3,training_calibration_anchor,3136.74,320.385,,3136.6968,0.0432,320.385,0.0,3.0,measured_anchor,measured_anchor,Training,Good Test,matched
+4,training_calibration_anchor,3144.07,320.713,,3144.012,0.058,320.713,0.0,4.0,measured_anchor,measured_anchor,Training,Good Test,matched
+5,training_calibration_anchor,3152.61,321.05,,3152.5464,0.0636,321.05,0.0,5.0,measured_anchor,measured_anchor,Training,Good Test,matched
+6,training_calibration_anchor,3170.73,321.827,,3170.682,0.048,321.827,0.0,6.0,measured_anchor,measured_anchor,Training,Good Test,matched
+7,training_calibration_anchor,3191.85,322.677,,3191.8656,0.0156,322.677,0.0,7.0,measured_anchor,measured_anchor,Training,Good Test,matched
+8,training_calibration_anchor,3221.68,323.892,,3221.736,0.056,323.892,0.0,8.0,measured_anchor,measured_anchor,Training,Good Test,matched
+9,training_calibration_anchor,3240.73,324.698,,3240.786,0.056,324.698,0.0,9.0,measured_anchor,measured_anchor,Training,Good Test,matched
+10,training_calibration_anchor,3254.85,325.298,,3254.8068,0.0432,325.298,0.0,10.0,measured_anchor,measured_anchor,Training,Good Test,matched
+11,training_calibration_anchor,3263.51,325.702,,3263.4936,0.0164,325.702,0.0,11.0,measured_anchor,measured_anchor,Training,Good Test,matched
+12,training_calibration_anchor,3262.78,325.686,,3262.7316,0.0484,325.686,0.0,12.0,measured_anchor,measured_anchor,Training,Good Test,matched
+13,aborted_pretest_reconciled,3293.55,334.161,328.056,3293.5164,0.0336,334.074,-0.087,,physics_derived,reconciled_buildup_plot,Training,FPWD plot reached 334.161 bar buildup; table 328.056 bar was investigation drawdown; companion Test 14 anchored at 334.101 bar.,reconciled_via_plot
+14,training_calibration_anchor,3294.0,334.101,,3293.9736,0.0264,334.101,0.0,14.0,measured_anchor,measured_anchor,Training,Good Test,matched
+15,training_calibration_anchor,3307.73,335.61,,3307.6896,0.0404,335.61,0.0,15.0,measured_anchor,measured_anchor,Training,Good Test,matched
+16,unseen_validation_checkpoint,3324.65,341.713,,3324.606,0.044,341.713,0.0,16.0,measured_anchor,measured_anchor,Validation,Good Test,matched
+17,dry_test_excluded,3333.57,69.279,,3333.5976,0.0276,,,,invalid_unsupported,unsupported_tight_facies,Validation,Dry test in tight formation (69.279 bar); located in unsupported transition zone; excluded from quantitative targets.,unsupported_transition
+18,initial_pretest_fair_quality,3386.51,354.001,,3386.4804,0.0296,,,,invalid_unsupported,unsupported_transition_boundary,Testing,Initial incomplete pretest (354.001 bar); located in transition zone boundary; companion repeat Test 20 stabilized at 368.706 bar.,unsupported_transition
+19,alternative_memory_observation,3403.53,357.714,,3403.5492,0.0192,368.818,11.104,21.0,measured_anchor,uncalibrated_memory_conflict,Testing,Tool telemetry shutdown; post-run memory recovery 357.714 bar; excluded from primary calibration; grid target originates exclusively from companion Test 21.,unresolved_memory_conflict
+20,independent_test_evaluation_station,3386.99,368.706,,3386.9376,0.0524,368.706,0.0,20.0,measured_anchor,measured_anchor,Testing,Good Test,matched
+21,independent_test_evaluation_station,3403.57,368.818,,3403.5492,0.0208,368.818,0.0,21.0,measured_anchor,measured_anchor,Testing,Primary stabilized reference for Skagerrak reservoir sand; companion repeat for Test 19; source of grid target 368.818 bar.,matched

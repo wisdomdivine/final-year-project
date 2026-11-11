@@ -138,3 +138,38 @@ def test_target_splits_alignment():
     assert np.allclose(y_train["DEPTH"].values, X_train["DEPTH"].values)
     assert np.allclose(y_val["DEPTH"].values, X_val["DEPTH"].values)
     assert np.allclose(y_test["DEPTH"].values, X_test["DEPTH"].values)
+
+
+def test_station_comparison_audit_reconciliation():
+    """Verify Test 13 plot reconciliation and Test 19/21 decoupling in station comparison audit."""
+    comp_path = Path("outputs/audit/target_vs_measured_comparison.csv")
+    assert comp_path.exists()
+    comp_df = pd.read_csv(comp_path)
+
+    # 1. Test 13 reconciliation
+    t13 = comp_df[comp_df["test_no"] == 13].iloc[0]
+    assert pytest.approx(t13["reconciled_station_p_bar"], abs=1e-3) == 334.161
+    assert pytest.approx(t13["conflicting_table_p_bar"], abs=1e-3) == 328.056
+    assert pytest.approx(t13["target_residual_bar"], abs=0.01) == -0.087
+    assert t13["status"] == "reconciled_via_plot"
+
+    # 2. Test 19 vs Test 21 grid-node collision decoupling
+    t19 = comp_df[comp_df["test_no"] == 19].iloc[0]
+    t21 = comp_df[comp_df["test_no"] == 21].iloc[0]
+
+    # Both map to grid node 3403.5492 m
+    assert pytest.approx(t19["grid_md"], abs=1e-3) == 3403.549
+    assert pytest.approx(t21["grid_md"], abs=1e-3) == 3403.549
+
+    # Grid target is strictly sourced from Test 21
+    assert t19["target_source_test_no"] == 21
+    assert t21["target_source_test_no"] == 21
+
+    # Provenance separation: Test 19 is uncalibrated memory conflict, Test 21 is measured anchor
+    assert t19["station_provenance"] == "uncalibrated_memory_conflict"
+    assert t19["station_role"] == "alternative_memory_observation"
+    assert t21["station_provenance"] == "measured_anchor"
+    assert t21["station_role"] == "independent_test_evaluation_station"
+    assert t21["status"] == "matched"
+
+

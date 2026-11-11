@@ -1700,7 +1700,7 @@ observation_index,DEPTH,TVD_MSL,TVD_RKB,FORMATION,PARTITION,IS_TARGET_VALID,TARG
 1698,3386.4804,2973.088103306626,3027.9881033066267,Transition_Zone,Testing,False,invalid_unsupported,,,,,none_unmeasured_transition,368.69725516033054,368.706,368.706
 1699,3386.6328,2973.179724147869,3028.079724147869,Skagerrak,Testing,True,provisional_assumption,368.762,0.15,,,skagerrak_provisional_constant_compartment,368.762,368.762,368.762
 1700,3386.7852,2973.2713439682743,3028.1713439682744,Skagerrak,Testing,True,provisional_assumption,368.762,0.15,,,skagerrak_provisional_constant_compartment,368.762,368.762,368.762
-1701,3386.9376,2973.362962767792,3028.262962767792,Skagerrak,Testing,True,measured_anchor,368.706,0.15,20.0,368.706,measured_pretest_anchor,368.706,368.706,368.706
+1701,3386.9376,2973.362962767792,3028.262962767792,Skagerrak,Testing,True,measured_anchor,368.706,0.15,20.0,368.706,measured_pretest_anchor (Test 20),368.706,368.706,368.706
 1702,3387.09,2973.454580546369,3028.354580546369,Skagerrak,Testing,True,provisional_assumption,368.762,0.15,,,skagerrak_provisional_constant_compartment,368.762,368.762,368.762
 1703,3387.2424,2973.546197303954,3028.4461973039542,Skagerrak,Testing,True,provisional_assumption,368.762,0.15,,,skagerrak_provisional_constant_compartment,368.762,368.762,368.762
 1704,3387.3948,2973.637813040496,3028.537813040496,Skagerrak,Testing,True,provisional_assumption,368.762,0.15,,,skagerrak_provisional_constant_compartment,368.762,368.762,368.762
@@ -1809,4 +1809,4 @@ observation_index,DEPTH,TVD_MSL,TVD_RKB,FORMATION,PARTITION,IS_TARGET_VALID,TARG
 1807,3403.092,2983.068755501405,3037.968755501405,Skagerrak,Testing,True,provisional_assumption,368.762,0.15,,,skagerrak_provisional_constant_compartment,368.762,368.762,368.762
 1808,3403.2444,2983.1602647671048,3038.060264767105,Skagerrak,Testing,True,provisional_assumption,368.762,0.15,,,skagerrak_provisional_constant_compartment,368.762,368.762,368.762
 1809,3403.3968,2983.251773006333,3038.1517730063333,Skagerrak,Testing,True,provisional_assumption,368.762,0.15,,,skagerrak_provisional_constant_compartment,368.762,368.762,368.762
-1810,3403.5492,2983.343280219038,3038.2432802190383,Skagerrak,Testing,True,measured_anchor,368.818,0.15,21.0,368.818,measured_pretest_anchor,368.818,368.818,368.818
+1810,3403.5492,2983.343280219038,3038.2432802190383,Skagerrak,Testing,True,measured_anchor,368.818,0.15,21.0,368.818,measured_pretest_anchor (Test 21),368.818,368.818,368.818
