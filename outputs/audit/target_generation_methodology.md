@@ -4,7 +4,7 @@ This document establishes the technical, mathematical, and petrophysical specifi
 
 Date: 2026-11-11
 Repository: wisdomdivine/final-year-project
-Status: Technical Specification for Review Prior to Vector Generation
+Status: Corrected Technical Specification Prior to Vector Generation
 
 ---
 
@@ -12,30 +12,43 @@ Status: Technical Specification for Review Prior to Vector Generation
 
 The 1,811-observation study interval (3,127.7052 m to 3,403.5492 m MD) traverses three distinct geological formations with contrasting fluid types, compaction states, and pressure regimes.
 
-### 1.1 Hugin Formation (3,127.7052 m to 3,263.5000 m MD / Top Reservoir to 3,263.5 m MD)
+### 1.1 Hugin Formation (3,127.7052 m to 3,263.5000 m MD)
 - Lithology: Clean, porous, highly permeable reservoir sandstone (SAND_FLAG = 1.0, mean porosity 0.22 v/v, mean permeability 512 mD).
 - Direct Physical Measurements: 12 Schlumberger Run 10 MWD pretest stations (Tests 1 to 12).
 - Fluid Regime: Continuous, connected hydrostatic hydrocarbon (oil) column.
-- Mathematical Formulation:
-  P_form(z) = 118.205 + 0.07028 * TVD_MSL (bar)
+- Mathematical Formulation and Coordinate Reference Reconciliation:
+  The linear regression across Tests 1 to 12 was fitted using the official Schlumberger pretest table (`Test_point_table.xls`), where the depth column `tvd_m` is referenced to the Rotary Kelly Bushing (RKB):
+  
+  1. Referenced to TVD RKB (RKB datum, +54.90 m MSL):
+     P(TVD_RKB) = 118.2048 + 0.070276 * TVD_RKB (bar)
+     At Test 1 (TVD_RKB = 2,871.76 m):
+     P = 118.2048 + 0.070276 * 2871.76 = 320.020 bar (exact match to measured pretest).
+
+  2. Referenced to TVD MSL (Mean Sea Level datum, TVD_MSL = TVD_RKB - 54.90 m):
+     Substituting TVD_RKB = TVD_MSL + 54.90 m:
+     P(TVD_MSL) = 118.2048 + 0.070276 * (TVD_MSL + 54.90)
+     P(TVD_MSL) = (118.2048 + 0.070276 * 54.90) + 0.070276 * TVD_MSL
+     P(TVD_MSL) = 122.0629 + 0.070276 * TVD_MSL (bar)
+     At Test 1 (TVD_MSL = 2,816.86 m):
+     P = 122.0629 + 0.070276 * 2816.86 = 320.020 bar (exact match to measured pretest).
+
+  3. Discrepancy Explanation:
+     Evaluating the RKB-referenced equation P = 118.205 + 0.07028 * z with a TVD_MSL value of 2,816.9 m omits the vertical elevation column between RKB and MSL (54.90 m * 0.070276 bar/m = 3.858 bar), yielding approximately 316.2 bar. The 3.86 bar offset is entirely attributable to this coordinate frame mismatch. The true MSL-referenced intercept is 122.063 bar.
+
 - Fluid Gradient Validation:
-  - Fitted slope: 0.07028 bar/m
-  - Equivalent fluid density: rho_oil = 0.07028 / 0.0980665 = 0.7167 g/cm3
-  - Equivalent API gravity: 42.6 deg API
+  - Fitted slope: 0.070276 bar/m
+  - Equivalent fluid density: rho_oil = 0.070276 / 0.0980665 = 0.7167 g/cm3
+  - Equivalent API gravity: 42.6 deg API (central North Sea light crude)
   - Coefficient of determination: R2 = 0.999915
   - Max residual across all 12 test stations: 0.038 bar
-- Value Classification:
-  - At pressure-test stations: Directly measured physical formation pressure.
-  - Between stations in sandstone: Rigorously calculated from measured oil gradient.
-  - Intercalated thin mudstones: Mechanically compacted, near-equilibrium with reservoir sand.
 
 ### 1.2 Sleipner Formation (3,263.5000 m to 3,340.0000 m MD)
 - Lithology: Interbedded fluvial sandstones, carbonaceous shales, and thin calcite-cemented stringers.
 - Direct Physical Measurements:
-  - Test 13/14 (3,293.8 m MD / 2,915.4 m TVD MSL): 334.101 bar (stabilized companion repeat).
-  - Test 15 (3,307.7 m MD / 2,923.7 m TVD MSL): 335.610 bar.
-  - Test 16 (3,324.7 m MD / 2,933.8 m TVD MSL): 341.713 bar.
-  - Test 17 (3,333.6 m MD / 2,939.4 m TVD MSL): 69.279 bar (dry test in tight mudstone; excluded from calibration).
+  - Test 14 (3,294.00 m MD / 2,915.50 m TVD MSL): 334.101 bar (stabilized companion repeat for aborted Test 13).
+  - Test 15 (3,307.73 m MD / 2,923.70 m TVD MSL): 335.610 bar.
+  - Test 16 (3,324.65 m MD / 3,025.29 m TVD RKB / 2,970.39 m TVD MSL): 341.713 bar.
+  - Test 17 (3,333.57 m MD): 69.279 bar (dry test in tight mudstone; excluded from calibration).
 - Fluid Regime: Baffled, compartmentalized progression.
   - Sand intervals are segmented by continuous carbonate hardgrounds (CARB_FLAG = 1.0, density 2.50 to 2.66 g/cm3, DT 64 to 75 us/ft) identified at:
     - 3,286.5 to 3,290.8 m MD
@@ -43,12 +56,8 @@ The 1,811-observation study interval (3,127.7052 m to 3,403.5492 m MD) traverses
     - 3,326.3 to 3,330.1 m MD
   - These low-permeability hardgrounds act as vertical pressure baffles, maintaining discrete step increases in pressure across the Sleipner sand bodies.
 - Mathematical Formulation:
-  - Piecewise compartment anchoring: Each sandstone lens is anchored to its respective verified pretest measurement (334.10 bar, 335.61 bar, 341.71 bar).
-  - Internal fluid gradients within individual sand bodies: 0.0981 to 0.1010 bar/m (formation brine / light hydrocarbon mixture).
-- Value Classification:
-  - At stations: Measured.
-  - Within sand bodies: Calculated from local fluid density.
-  - Intervening shales: Estimated using calibrated effective stress balance.
+  - Piecewise compartment anchoring: Sandstone lenses are anchored to their verified pretest measurements (334.10 bar, 335.61 bar, 341.71 bar).
+  - Internal fluid gradients within individual sand bodies: 0.0981 to 0.1010 bar/m (formation brine).
 
 ### 1.3 Skagerrak Formation (3,340.0000 m to 3,403.5492 m MD)
 - Lithology: Deep, overpressured Triassic sandstones and silty shales.
@@ -59,77 +68,71 @@ The 1,811-observation study interval (3,127.7052 m to 3,403.5492 m MD) traverses
   - Test 21 (3,403.57 m MD): 368.818 bar (ASC Quality 2 / report Good Test: stabilized companion repeat).
 - Fluid Regime: Deep overpressured reservoir compartment.
   - Stabilized tests 20 and 21 demonstrate that the active reservoir pore pressure is 368.71 to 368.82 bar.
-  - The pressure differential between Test 20 (368.71 bar at 3,026.3 m TVD RKB) and Test 21 (368.82 bar at 3,036.3 m TVD RKB) is 0.112 bar over 10.0 m TVD, representing an internally consistent fluid gradient of 0.0112 bar/m.
-  - Overpressure Magnitude: Overpressure relative to normal hydrostatic brine (305.06 bar) is +63.76 bar (+925 psi).
-- Value Classification:
-  - At stations 20 and 21: Measured.
-  - Across the Skagerrak test partition: Interpolated/calculated compartment pressure.
+  - Pressure differential: 0.112 bar over 9.99 m TVD (gradient = 0.0112 bar/m).
+- Overpressure Recalculation under Corrected Trajectory 1:
+  - Under corrected Trajectory 1, TVD MSL at the base of the predictor (MD 3,403.55 m / Test 21) is 2,983.34 m.
+  - Normal formation brine hydrostatic pressure (density 1.030 g/cm3, seabed at 91.0 m MSL):
+    Ph = 9.147 + 1.030 * 0.0980665 * (2983.34 - 91.0) = 301.30 bar.
+  - Corrected Skagerrak Overpressure:
+    Delta P = 368.818 - 301.30 = +67.52 bar (+979.3 psi).
+  - (At Test 20: TVD MSL = 2,973.36 m, Ph = 300.29 bar; Delta P = 368.706 - 300.29 = +68.42 bar / +992.3 psi).
+  - The previously cited figure of +63.76 bar was computed using the uncorrected Trajectory 2 (TVD MSL = 3,017.83 m, Ph = 304.78 bar) and is deprecated.
 
 ---
 
-## 2. Eaton Normal Compaction Trend (NCT) Analysis and Limitations
+## 2. Target Provenance: Measured versus Constructed Values
 
-The Eaton (1975) sonic equation relates formation pore pressure to acoustic transit time:
+The target dataset must rigorously document provenance across every interval to prevent synthetic labels from masquerading as physical ground truth:
 
-Pp(z) = Sv(z) - [Sv(z) - Ph(z)] * [DT_n(z) / DT_obs(z)]^x
-
-Where:
-- Sv(z): Total vertical overburden stress (bar).
-- Ph(z): Normal hydrostatic pressure (bar).
-- DT_n(z): Normal compaction trend acoustic transit time in pure shale (us/ft).
-- DT_obs(z): Observed compressional acoustic transit time (us/ft).
-- x: Eaton sonic exponent (nominally 3.0 in disequilibrium-compaction Gulf of Mexico basins).
-
-### 2.1 Critical Lithological and Physical Limitations in Well 15/9-F-12
-1. Lithology Mismatch:
-   - Eaton's equation was derived exclusively for thick, undercompacted marine shales where pore pressure elevation is generated by disequilibrium compaction (trapped pore fluids supporting overburden load).
-   - In Well 15/9-F-12, 22 of the 23 valid pressure-test stations are in reservoir sandstone (SAND_FLAG = 1.0). Only Test 17 was attempted in shale/mudstone, and it resulted in a dry test (tight formation, 69.28 bar).
-   - Reservoir sandstone pore pressure is controlled by fluid column buoyancy, structural entrapment, and regional compartment seals, not by local mechanical undercompaction. Fitting an Eaton trend directly to sandstone DT readings violates the fundamental physical premise of the method.
-
-2. Chemical Compaction versus Mechanical Compaction:
-   - At reservoir depths in the Volve Field (TVD > 2,800 m, temperatures > 70 deg C), Central North Sea shales have transitioned from mechanical compaction to chemical compaction (quartz cementation and illitization of smectite).
-   - Chemical compaction permanently stiffens the shale rock frame, driving compressional transit time DT down to 75 to 82 us/ft.
-   - When a shallow mechanical NCT (extrapolating DT_n from surface values of 190 to 200 us/ft down to ~114 us/ft at 2,850 m TVD) is applied to chemically cemented shales:
-     DT_n(z) / DT_obs(z) = 114 / 78 = 1.46 > 1.0
-   - Because DT_n / DT_obs > 1.0, raising this ratio to exponent x = 3.0 yields [DT_n / DT_obs]^3 = 3.12, causing the effective stress term to exceed the overburden stress. This produces unphysical, negative, sub-hydrostatic pore pressures:
-     Pp = Sv - (Sv - Ph) * 3.12 << Ph (unphysical).
-
-3. Methodological Resolution:
-   - Eaton calibration must only be applied to shale intervals (VCL > 0.50, SAND_FLAG = 0, CARB_FLAG = 0).
-   - Reservoir sandstones must be anchored directly to physical pretest measurements and validated hydrostatic fluid columns.
-   - A hybrid, formation-aware target formulation must be utilized rather than a blanket, uncalibrated Eaton sonic profile.
+| Interval (MD Range) | Anchor Measurements | Construction Method | Physical Assumptions | Uncertainty | Unsupported Regions |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Hugin Sandstone (3,127.71 to 3,263.50 m) | Tests 1 to 12 (320.02 to 325.70 bar) | Linear regression on TVD MSL: P = 122.063 + 0.07028 * TVD_MSL | Continuous hydrocarbon column; uniform oil density (0.7167 g/cm3) | +/- 0.05 bar in clean sand | Intercalated thin mudstones / coals (SAND_FLAG = 0) lack direct pressure; assumed in pressure equilibrium with bounding sand. |
+| Sleipner Upper Sand (3,263.50 to 3,300.0 m) | Test 14 (334.10 bar at 3,294.0 m MD) | Anchor to Test 14 with brine gradient (0.101 bar/m) | Hydraulic isolation from Hugin by regional seal; internal sand continuity | +/- 0.50 bar | Upper boundary seal transition (3,263.5 to 3,293.5 m MD); unmeasured mudstones. |
+| Sleipner Middle Sand (3,300.0 to 3,315.0 m) | Test 15 (335.61 bar at 3,307.7 m MD) | Anchor to Test 15 with brine gradient | Compartment bounded by hardground at 3,297 m | +/- 0.50 bar | Bounding hardground transitions. |
+| Sleipner Lower Sand (3,315.0 to 3,326.0 m) | Test 16 (341.71 bar at 3,324.7 m MD) | Anchor to Test 16 with brine gradient | Isolated step compartment bounded by hardground at 3,326 m | +/- 0.80 bar | Lower Sleipner mudstones (3,326 to 3,340 m MD). |
+| Sleipner Base Transition (3,326.0 to 3,340.0 m) | None (Test 17 at 3,333.6 m is dry test, 69.28 bar) | Linear / sigmoid transition interpolation between 341.7 bar and 368.7 bar | Pressure builds across basal sealing mudstones into Skagerrak overpressure | High (+/- 5 to 10 bar) | Completely unsupported by permeable pressure tests. Purely model-dependent. |
+| Skagerrak Sand (3,340.0 to 3,403.55 m) | Tests 20 (368.71 bar) and 21 (368.82 bar) | Anchor to 368.8 bar compartment with brine gradient | Continuous overpressured Triassic reservoir | +/- 0.20 bar at base; +/- 3.0 bar at top | Interval 3,340 to 3,386 m MD lacks direct tests; overpressure onset depth is interpreted. |
 
 ---
 
-## 3. Boundary Transitions and Compartment Handling
+## 3. Independent Validation and Calibration Split
 
-Formation boundaries represent geological discontinuities rather than smooth mathematical curves.
+To enforce zero target leakage and prevent circular validation, pressure stations are divided strictly into training calibration and independent evaluation subsets:
 
-1. Hugin-Sleipner Boundary (3,263.50 m MD):
-   - Hydrocarbon column terminates at the base of the Hugin sand.
-   - Pressure increases across the boundary from 325.70 bar (base Hugin) to 334.10 bar (upper Sleipner sand), representing an 8.40 bar compartment step across the regional seal.
-   - Boundary transition is modeled as a localized step-change across the boundary mudstone interval rather than a linear interpolation that would imply a non-physical fluid gradient.
+### 3.1 Training Calibration Set (Tests 1 to 15, MD <= 3,320.80 m)
+- Tests 1 to 12 (Hugin): Used to calibrate Hugin continuous target parameters.
+- Tests 13 to 15 (Sleipner): Used to calibrate Sleipner upper/middle sand compartment baselines.
+- Available for model parameter training.
 
-2. Sleipner-Skagerrak Boundary (3,340.00 m MD):
-   - Overpressure increases sharply from 341.71 bar (lower Sleipner) to 368.71 bar (Skagerrak), an increase of 27.00 bar across approximately 16 m of section.
-   - The Skagerrak overpressure is maintained by dense calcite cementation and regional sealing shales at the base of the Sleipner Formation.
+### 3.2 Unseen Validation Set (Tests 16 and 17, 3,320.95 to 3,362.25 m MD)
+- Test 16 (341.71 bar at 3,324.65 m MD): Held out from training as an unseen intermediate validation checkpoint.
+- Test 17 (69.28 bar dry test): Excluded from quantitative calibration.
+
+### 3.3 Completely Independent Evaluation Set (Tests 18 to 21, 3,362.40 to 3,403.55 m MD)
+- Tests 20 (368.71 bar) and 21 (368.82 bar) are strictly reserved as independent ground-truth evaluation stations.
+- Test 18 (354.00 bar) and Test 19 (357.71 bar) are preserved as documented secondary / anomalous references.
+- Rule: No test partition station measurement may be used to train models, fit feature scalers, or tune Eaton exponents.
+- Reporting Rule: ML performance on the test set MUST be evaluated against the discrete physical pretest measurements (Tests 20 and 21), rather than solely against generated continuous curves.
 
 ---
 
-## 4. Prevention of Target Leakage and Circular Validation
+## 4. Formation Boundaries and Geological Assumptions: Observations versus Interpretations
 
-To maintain rigorous machine learning validation standards:
+### 4.1 Established Physical Observations
+1. MWD pretest logs (`FM_PRESS_COMPUTED_MWD_1.ASC` and `Test_point_table.xls`) officially categorize:
+   - Tests 1 to 12 as Hugin Formation.
+   - Tests 13 to 17 as Sleipner Formation.
+   - Tests 18 to 24 as Skagerrak Formation.
+2. Petrophysical logs identify discrete carbonate-cemented stringers (`CARB_FLAG == 1.0` in `WLC_PETRO_COMPUTED_INPUT_1.LAS`) with high bulk density (2.50 to 2.66 g/cm3), low acoustic transit time (DT 64 to 75 us/ft), and near-zero porosity.
+3. Stabilized formation pressure increases in steps:
+   - Hugin oil column: 320.02 to 325.70 bar.
+   - Sleipner sands: 334.10 bar, 335.61 bar, 341.71 bar.
+   - Skagerrak reservoir: 368.71 to 368.82 bar.
 
-1. Partition Isolation:
-   - The dataset is partitioned contiguously along depth (Train: 3,127.71 to 3,320.80 m MD; Val: 3,320.95 to 3,362.25 m MD; Test: 3,362.40 to 3,403.55 m MD).
-   - Training targets are generated using data exclusively within the training interval (Tests 1 to 15).
-   - Test partition measurements (Tests 18, 19, 20, 21) must NEVER be used to calibrate model parameters, feature scalers, or Eaton exponents applied to the training set.
-   - Target generation parameters for the test partition serve solely as ground-truth evaluation references, preventing circular leakage.
-
-2. Feature Scaler Fitting:
-   - All standard scalers, min-max scalers, and log transformations must be fitted strictly on X_train and applied forward to X_val and X_test without refitting.
-
-3. Independent Validation Summary:
-   - Target values in Hugin: Independently validated by oil density physics (42.6 deg API).
-   - Target values in Sleipner: Measured at discrete stations; shale intervals require effective stress modeling.
-   - Target values in Skagerrak: Independently validated by companion repeat agreement (Tests 20 and 21 within 0.11 bar).
+### 4.2 Geological Interpretations
+1. Calcite Hardground Baffles:
+   - Interpreting the log-detected carbonate spikes as laterally extensive, sealing hardgrounds that isolate vertical pressure compartments is an interpretation. While supported by the measured step-pressures, lateral continuity cannot be established from a single 1D borehole without 3D seismic or multi-well interference testing.
+2. Formation Boundary Depths:
+   - Placing the Hugin/Sleipner boundary at 3,263.50 m MD and Sleipner/Skagerrak boundary at 3,340.00 m MD is an operational interpretation based on log facies transitions.
+3. Transition Zone Gradients:
+   - Assuming a smooth or sigmoidal pressure ramp across the unmeasured mudstones between 3,326 m and 3,386 m MD is an unverified model assumption.

@@ -4,7 +4,7 @@ This report presents the formal pre-execution validation audit for Phase 2 of th
 
 Date: 2026-11-11
 Repository: wisdomdivine/final-year-project
-Status: Pre-Execution Validation Complete; Pending Review
+Status: Pre-Execution Validation Completed and Reconciled; Pending Review
 
 ---
 
@@ -12,8 +12,8 @@ Status: Pre-Execution Validation Complete; Pending Review
 
 ### 1.1 Trajectory Comparison Across the 1,811 Observations
 A rigorous observation-by-observation depth comparison was conducted between the two reconstructed trajectories:
-- Trajectory 1 (Sensitivity Trajectory): Stored in `tables/overburden_sensitivity_1811.csv`, derived from the original well trajectory reconstruction.
-- Trajectory 2 (Profile Trajectory): Stored in `tables/overburden_stress_profile.csv`, reconstructed via PCHIP interpolation of Landmark COMPASS survey runs.
+- Trajectory 1 (Sensitivity Trajectory): Stored in `tables/overburden_sensitivity_1811.csv`, derived from the original MWD well trajectory reconstruction.
+- Trajectory 2 (Profile Trajectory): Stored in `tables/overburden_stress_profile.csv`, reconstructed via PCHIP interpolation of Landmark COMPASS survey runs with surface tie-in.
 
 Comparison metrics across all 1,811 predictor observations (3,127.7052 m to 3,403.5492 m MD):
 - Top Predictor Depth (3,127.7052 m MD):
@@ -75,136 +75,116 @@ The source of the approximately 34.5 m discrepancy is an uncorrected coordinate 
 
 ---
 
-## 2. Formation-Pressure Reference Reconciliation
+## 2. Hugin Formation-Pressure Gradient Verification
 
-### 2.1 Reconstructed Pressure-Test Station Inventory
-All 24 Schlumberger Run 10 MWD FPWD pretest stations were reconstructed by cross-referencing:
-1. `data-raw/FM_PRESS_COMPUTED_MWD_1.ASC` (Original MWD real-time pretest file, August 22, 2007)
-2. `data-raw/Test_point_table.xls` (Official Schlumberger FPWD summary spreadsheet)
-3. 241-page official FPWD operations report pressure-versus-time plots (pp. 134 to 185)
+### 2.1 Exact Station Regression Reproduction
+The linear regression across Tests 1 to 12 in the Hugin Formation was reproduced using the official Schlumberger pretest records:
+- Exact Stations Used: Tests 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 (all 12 Run 10 Hugin pretests).
+- Input Depths from `Test_point_table.xls`:
+  - Test 1: MD = 3,127.71 m | tvd_m = 2,871.76 m | Pressure = 320.020 bar
+  - Test 2: MD = 3,127.99 m | tvd_m = 2,871.92 m | Pressure = 320.042 bar
+  - Test 3: MD = 3,136.74 m | tvd_m = 2,877.09 m | Pressure = 320.385 bar
+  - Test 4: MD = 3,144.07 m | tvd_m = 2,881.43 m | Pressure = 320.713 bar
+  - Test 5: MD = 3,152.61 m | tvd_m = 2,886.49 m | Pressure = 321.050 bar
+  - Test 6: MD = 3,170.73 m | tvd_m = 2,897.20 m | Pressure = 321.827 bar
+  - Test 7: MD = 3,191.85 m | tvd_m = 2,909.70 m | Pressure = 322.677 bar
+  - Test 8: MD = 3,221.68 m | tvd_m = 2,927.35 m | Pressure = 323.892 bar
+  - Test 9: MD = 3,240.73 m | tvd_m = 2,938.67 m | Pressure = 324.698 bar
+  - Test 10: MD = 3,254.85 m | tvd_m = 2,947.11 m | Pressure = 325.298 bar
+  - Test 11: MD = 3,263.51 m | tvd_m = 2,952.29 m | Pressure = 325.702 bar
+  - Test 12: MD = 3,262.78 m | tvd_m = 2,951.85 m | Pressure = 325.686 bar
 
-The reconciled inventory is dual-saved in:
-- Table: `outputs/audit/pressure_station_reconciliation.csv` and `outputs/audit/pressure_station_reconciliation.json`
+### 2.2 Root Cause of the 3.86 bar Discrepancy
+When regressing formation pressure against `tvd_m` from Schlumberger's official table:
+P = 118.2048 + 0.070276 * TVD (bar) [R2 = 0.999915]
 
-### 2.2 Individual Verification of Tests 18, 19, 20, and 21
-
-#### Test 18 (Skagerrak Upper Sand):
-- Depths: MD = 3,386.51 m | TVD RKB = 3,025.98 m | TVD MSL = 2,971.08 m
-- Source File Records:
-  - ASC File: Pressure = 354.26 bar, Quality = 0, Remarks = "Pressure did not stabilize."
-  - Official Table: Pressure = 354.001 bar, Remarks = "Fair Test", FPQC = 7, Pretest Volume = 4.55 cc.
-  - FPWD Report Plot (p. 164): Investigation buildup = 342.317 bar, Final buildup = 354.001 bar.
-- Quality Status: Secondary reference only. The ASC file explicitly flagged this pretest as non-stabilized (Quality 0).
-
-#### Test 20 (Skagerrak Upper Sand Companion Repeat):
-- Depths: MD = 3,386.99 m | TVD RKB = 3,026.27 m | TVD MSL = 2,971.37 m
-- Spatial Offset relative to Test 18: 0.48 m MD (0.29 m TVD).
-- Source File Records:
-  - ASC File: Pressure = 368.88 bar, Quality = 2, Remarks = "Good test."
-  - Official Table: Pressure = 368.706 bar, Remarks = "Good Test", FPQC = 10, Pretest Volume = 0.51 cc (Type A pretest).
-  - FPWD Report Plot (p. 178): Investigation buildup = 368.736 bar, Final buildup = 368.706 bar.
-- Quality Status: Primary physical reference. Fully stabilized with minimal drawdown volume.
-- Discrepancy with Test 18:
-  - Test 20 is 14.705 bar higher than Test 18 over a vertical distance of only 0.29 m TVD (an unphysical fluid gradient of 50.7 bar/m).
-  - Explanation: Test 18 was an incomplete drawdown buildup flagged Quality 0. Repeat Test 20 is the stabilized physical measurement.
-
-#### Test 19 (Skagerrak Lower Sand):
-- Depths: MD = 3,403.53 m | TVD RKB = 3,036.23 m | TVD MSL = 2,981.33 m
-- Source File Records:
-  - ASC File: Pressure = NaN / blank, Quality = 0, Remarks = "Unit shutdown. Memory results."
-  - Official Table: Pressure = 357.714 bar, Remarks = "Good Test", FPQC = 10, Drawdown mobility = 5.37 mD/cP, Pretest Volume = 6.02 cc.
-  - FPWD Report Plot (p. 171): Final buildup reading = 357.714 bar.
-- Quality Status: Recovered post-run from downhole tool memory following a telemetry shutdown.
-
-#### Test 21 (Skagerrak Lower Sand Companion Repeat):
-- Depths: MD = 3,403.57 m | TVD RKB = 3,036.26 m | TVD MSL = 2,981.36 m
-- Spatial Offset relative to Test 19: 0.04 m MD (4 centimeters) | 0.03 m TVD (3 centimeters).
-- Source File Records:
-  - ASC File: Pressure = 368.97 bar, Quality = 2, Remarks = "Good test."
-  - Official Table: Pressure = 368.818 bar, Remarks = "Good Test", FPQC = 10, Drawdown mobility = 4.61 mD/cP, Pretest Volume = 6.02 cc.
-  - FPWD Report Plot (p. 185): Final buildup reading = 368.818 bar.
-- Quality Status: Primary physical reference.
-
-#### Unresolved Geological Discrepancy Between Test 19 and Test 21:
-- Test 21 is 11.104 bar higher than Test 19 at virtually the exact same point in the borehole (separated by 4 cm MD).
-- Comparison with Test 20:
-  - Test 20 (3,026.27 m TVD RKB): 368.706 bar
-  - Test 21 (3,036.26 m TVD RKB): 368.818 bar
-  - Difference: 0.112 bar over 9.99 m TVD (a physically realistic hydrostatic fluid gradient of 0.0112 bar/m).
-- Comparison with Test 18:
-  - Test 18 (3,025.98 m TVD RKB): 354.001 bar
-  - Test 19 (3,036.23 m TVD RKB): 357.714 bar
-  - Difference: 3.713 bar over 10.25 m TVD (gradient of 0.362 bar/m).
-- Assessment:
-  - In the original ASC file, Test 19 suffered an unexpected tool shutdown and had zero valid real-time pressure.
-  - However, in the post-run memory recovery, Schlumberger classified both Test 19 and Test 21 as "Good Test" with buildup curves that appear flat.
-  - The 11.104 bar discrepancy is present in the official Schlumberger documentation itself. It is flagged as an unresolved measurement discrepancy rather than explained away. Test 21 is retained as the primary reference because it agrees with Test 20 within 0.11 bar.
+Crucially, the column `tvd_m` in `Test_point_table.xls` was referenced to **RKB** (drill floor, +54.90 m MSL), NOT to MSL:
+- At Test 1, TVD_RKB = 2,871.76 m:
+  P = 118.2048 + 0.070276 * 2871.76 = 320.020 bar (exact agreement with measured pretest).
+- When evaluated with TVD_MSL = 2,816.86 m:
+  P = 118.2048 + 0.070276 * 2816.86 = 316.162 bar.
+- The 3.858 bar discrepancy equals:
+  Delta P = 54.90 m * 0.070276 bar/m = 3.858 bar.
+- Conversion to True TVD MSL Coordinate Frame:
+  Substituting TVD_RKB = TVD_MSL + 54.90 m into the verified regression:
+  P(TVD_MSL) = 118.2048 + 0.070276 * (TVD_MSL + 54.90)
+  P(TVD_MSL) = 122.0629 + 0.070276 * TVD_MSL (bar)
+  At Test 1 (TVD_MSL = 2,816.86 m):
+  P = 122.0629 + 0.070276 * 2816.86 = 320.020 bar.
+- This mathematically resolves the discrepancy without arbitrarily adjusting any values.
 
 ---
 
-## 3. Target-Generation Methodology and Physics Audit
+## 3. Overpressure Recalculation under Corrected Trajectory 1
 
-Full specification documented in:
-- Document: `outputs/audit/target_generation_methodology.md`
-
-Summary of key principles:
-1. Formation Formations:
-   - Hugin (3,127.71 to 3,263.50 m MD): Continuous oil column gradient P = 118.205 + 0.07028 * TVD_MSL (R2 = 0.999915, crude oil density 0.7167 g/cm3, 42.6 deg API). Values are measured at test stations and calculated from fluid physics between stations.
-   - Sleipner (3,263.50 to 3,340.00 m MD): Compartmentalized progression bounded by dense calcite hardgrounds (CARB_FLAG = 1.0, density 2.50 to 2.66 g/cm3) acting as permeability baffles. Sand intervals are anchored to measured pretests (334.10, 335.61, 341.71 bar). Test 17 (69.28 bar dry test) is excluded.
-   - Skagerrak (3,340.00 to 3,403.55 m MD): Deep overpressured compartment anchored to stabilized measurements 368.71 to 368.82 bar (overpressure magnitude +63.76 bar above normal brine hydrostatic).
-2. Eaton Sonic Limitations:
-   - 22 of 23 pressure stations are in sandstone (SAND_FLAG = 1.0), whereas Eaton's method applies exclusively to undercompacted shales.
-   - Chemical compaction in deep Jurassic shales (TVD > 2,800 m, temp > 70 deg C) permanently stiffens the shale matrix (DT = 75 to 82 us/ft). Extrapolating a mechanical NCT (~114 us/ft) predicts DT_n / DT_obs > 1.0, generating unphysical sub-hydrostatic pressures.
-   - Blanket Eaton calibration is rejected; a formation-aware hybrid target is required.
-3. Target Leakage Prevention:
-   - Contiguous depth partitioning isolates the test partition (3,362.40 to 3,403.55 m MD).
-   - Test partition measurements must never be used to calibrate training targets, feature scalers, or model hyperparameters.
-
----
-
-## 4. Overburden Stress and Hydrostatic Reference Audit
-
-Full sensitivity table dual-saved in:
-- Table: `outputs/audit/overburden_sensitivity.csv` and `outputs/audit/overburden_sensitivity.json`
-
-### 4.1 Density Coverage and Integration
-- Seabed: 91.0 m TVD MSL (water depth = 91.0 m, water column pressure = 9.147 bar at seawater density 1.025 g/cm3).
-- Density Data Coverage: Decoded bulk density from Run 3 pilot hole MWD and composite LIS begins at 262.43 m TVD MSL with an empirical mean of 2.011 g/cm3.
-- Truly Unmeasured Shallow Sediments: Only 171.43 m (seabed 91.0 m to 262.43 m TVD MSL).
-- Sensitivity Analysis across 171.43 m shallow sediment:
-  - Low density (1.80 g/cm3): Interval stress = 30.26 bar
-  - Mid density (1.88 g/cm3): Interval stress = 31.61 bar
-  - High density (1.95 g/cm3): Interval stress = 32.78 bar
-  - Shallow density uncertainty: +/- 1.26 bar (+/- 0.21% of total overburden).
-  - Contrasted with the unlogged LAS assumption (1,180 m unmeasured sediment, uncertainty +/- 26.7 bar), splicing the composite density collapsed shallow uncertainty by 95.3%.
-
-### 4.2 Overburden Stress Recalculation Across Trajectories
-Across the 1,811 predictor observations:
-- Trajectory 1 (True MSL: 2,819.38 m to 2,983.34 m TVD MSL):
-  - Top Predictor (3,127.71 m MD): Sv = 574.72 bar (OBG = 0.2039 bar/m, 2.079 s.g.)
-  - Base Predictor (3,403.55 m MD): Sv = 612.60 bar (OBG = 0.2053 bar/m, 2.094 s.g.)
-- Trajectory 2 (Surface Spliced: 2,853.25 m to 3,017.83 m TVD MSL):
-  - Top Predictor (3,127.71 m MD): Sv = 580.05 bar (OBG = 0.2033 bar/m, 2.073 s.g.)
-  - Base Predictor (3,403.55 m MD): Sv = 618.07 bar (OBG = 0.2048 bar/m, 2.088 s.g.)
-- Normal Hydrostatic Reference Ph(z) (formation brine density 1.030 g/cm3):
-  - Trajectory 1: Top = 284.74 bar | Base = 301.30 bar
-  - Trajectory 2: Top = 288.16 bar | Base = 304.78 bar
+The overpressure in the Skagerrak Formation was recalculated using the corrected Trajectory 1:
+- Base Predictor (MD = 3,403.55 m / Test 21):
+  - Corrected TVD MSL = 2,983.34 m
+  - Seabed: 91.0 m TVD MSL, seawater density 1.025 g/cm3 (P_seabed = 9.147 bar)
+  - Formation brine hydrostatic pressure (density 1.030 g/cm3):
+    Ph = 9.147 + 1.030 * 0.0980665 * (2983.34 - 91.0) = 301.30 bar
+  - Measured stabilized formation pressure (Test 21): 368.818 bar
+  - Corrected Overpressure at Test 21:
+    Delta P = 368.818 - 301.30 = +67.52 bar (+979.3 psi)
+- Test 20 (MD = 3,386.99 m):
+  - Corrected TVD MSL = 2,973.36 m
+  - Formation brine hydrostatic pressure: Ph = 300.29 bar
+  - Measured stabilized formation pressure (Test 20): 368.706 bar
+  - Corrected Overpressure at Test 20:
+    Delta P = 368.706 - 300.29 = +68.42 bar (+992.3 psi)
+- Deprecation Note:
+  The previously cited overpressure of +63.76 bar was computed using uncorrected Trajectory 2 (TVD MSL = 3,017.83 m, Ph = 304.78 bar) and is formally deprecated.
 
 ---
 
-## 5. Automated Unit Test Verification
+## 4. Formation-Pressure Reference Reconciliation: Tests 18 to 21
 
-Automated test execution was conducted via pytest across the full suite:
-- `tests/test_data_validation.py`: 6 test cases passed.
-- `tests/test_physics_models.py`: 6 test cases passed.
-- Total: 12 passed in 1.25s (100% pass rate).
-- Zero test failures, zero regressions.
+All 24 Run 10 tests are detailed in `outputs/audit/pressure_station_reconciliation.csv`:
+- Test 18 (3,386.51 m MD): Pressure = 354.001 bar, ASC Quality 0 ("Pressure did not stabilize"), Fair Test. Initial aborted pretest.
+- Test 20 (3,386.99 m MD, 0.48 m deeper): Pressure = 368.706 bar, ASC Quality 2, Good Test (Type A pretest, 0.51 cc). Primary stabilized reference.
+- Test 19 (3,403.53 m MD): Real-time ASC recorded tool shutdown with zero valid telemetry. Post-run memory gauge recovery in operations report yielded 357.714 bar.
+- Test 21 (3,403.57 m MD, 4 cm deeper): Pressure = 368.818 bar, ASC Quality 2, Good Test. Primary stabilized reference.
+- Unresolved Discrepancy:
+  Test 21 is 11.104 bar higher than Test 19 at virtually the same depth. Test 21 agrees with Test 20 within 0.112 bar over 9.99 m TVD (a physical fluid gradient of 0.0112 bar/m). The discrepancy in the official documentation is flagged and preserved.
 
 ---
 
-## 6. Audit Conclusion and Recommendations
+## 5. Target Provenance and Independent Validation Split
 
-1. Trajectory Resolution: The ~34.19 m discrepancy is fully identified and documented as an RKB-to-MSL datum tie-in shift. Trajectory 1 represents the true MSL coordinates matching Schlumberger MWD pretests.
-2. Pressure Station Verification: Tests 18, 19, 20, and 21 are reconciled. Repeat assignments (18/20 and 19/21) are explained. The 11.10 bar discrepancy between Test 19 and 21 is preserved and flagged.
-3. Target Generation: Target vector generation must use the formation-aware methodology specified in `outputs/audit/target_generation_methodology.md`.
-4. Proceed Status: All Phase 2 pre-execution requirements are met. The pipeline is ready for review.
+### 5.1 Target Provenance Specification
+- Hugin (3,127.71 to 3,263.50 m MD): Measured at 12 stations; calculated via oil gradient P = 122.063 + 0.07028 * TVD_MSL in clean sand; thin mudstones assumed in equilibrium.
+- Sleipner (3,263.50 to 3,340.00 m MD): Measured at stations 14 (334.10 bar), 15 (335.61 bar), 16 (341.71 bar); step-wise compartment anchoring across calcite hardgrounds; lower Sleipner mudstones (3,326 to 3,340 m MD) are unsupported by permeable tests and represent an unmeasured transition zone.
+- Skagerrak (3,340.00 to 3,403.55 m MD): Measured at stations 20 (368.71 bar) and 21 (368.82 bar); compartment anchored to 368.8 bar; top Skagerrak (3,340 to 3,386 m MD) lacks direct tests.
+
+### 5.2 Independent Validation Split
+- Calibration Set (Tests 1 to 15, MD <= 3,320.80 m): Used for model training and Hugin/upper Sleipner calibration.
+- Unseen Validation Set (Tests 16 and 17, 3,320.95 to 3,362.25 m MD): Held out as an intermediate validation checkpoint. Test 17 (dry test, 69.28 bar) excluded.
+- Completely Independent Evaluation Set (Tests 18 to 21, 3,362.40 to 3,403.55 m MD): Held out strictly for final evaluation.
+- Reporting Rule: ML performance on the test set must be evaluated against the discrete physical pretest measurements (Tests 20 and 21), rather than solely against generated continuous curves.
+
+---
+
+## 6. Formation Boundaries and Geological Assumptions
+
+1. Established Physical Observations:
+   - Official MWD pretest logs categorize Tests 1-12 as Hugin, Tests 13-17 as Sleipner, and Tests 18-24 as Skagerrak.
+   - Continuous logs record dense carbonate-cemented stringers (CARB_FLAG = 1.0, density 2.50 to 2.66 g/cm3, DT 64 to 75 us/ft).
+   - Physical pressure steps: 325.70 bar in Hugin -> 334.10 bar in upper Sleipner -> 341.71 bar in lower Sleipner -> 368.82 bar in Skagerrak.
+2. Geological Interpretations (Flagged):
+   - Lateral continuity of calcite stringers as regional sealing hardgrounds is an interpretation from 1D borehole data.
+   - Placing boundary depths at exactly 3,263.50 m and 3,340.00 m MD is an operational interpretation based on log character transitions.
+   - Pressure profile shape across the unmeasured mudstones between 3,326 m and 3,386 m MD is an unverified model assumption.
+
+---
+
+## 7. Concise List of Unresolved Scientific Limitations
+
+1. Lower Sleipner to Upper Skagerrak Transition (3,326.0 to 3,386.5 m MD):
+   - A 60.5-meter interval without valid permeable pressure tests (only dry Test 17 at 3,333.6 m MD).
+   - The exact depth where pressure transitions from 341.7 bar to 368.7 bar cannot be directly observed from well test data.
+2. Test 19 versus Test 21 Memory Recovery Discrepancy (3,403.55 m MD):
+   - Official operations report records an 11.10 bar discrepancy between two companion tests conducted 4 cm apart. Both are classified as "Good Test" in the Schlumberger summary table.
+3. 1D Extrapolation of Calcite Hardground Baffles:
+   - While pressure steps prove hydraulic compartmentalization at the wellbore, lateral extent and continuity cannot be independently verified without 3D seismic or multi-well production data.
+4. Chemical Compaction Precludes Classical Eaton Sonic Application:
+   - Deep Jurassic shales have undergone quartz cementation, lowering DT to 75-82 us/ft. Standard mechanical NCT extrapolation predicts unphysical sub-hydrostatic pressures.

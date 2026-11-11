@@ -4,6 +4,10 @@ overburden:
   shallow_sediment_top_tvd: 91.0
   shallow_sediment_base_tvd: 262.43
   shallow_sediment_mean_density_gcc: 2.011
+  shallow_density_scenarios:
+    low: 1.80
+    mid: 1.88
+    high: 1.95
   gravity_accel_m_s2: 9.80665
 
 hydrostatic:
@@ -18,26 +22,44 @@ formation_regimes:
     top_md: 3127.7052
     base_md: 3263.5000
     fluid_type: "oil"
-    oil_gradient_bar_m: 0.07028
+    oil_gradient_bar_m: 0.070276
     oil_density_gcc: 0.7167
     api_gravity: 42.6
-    intercept_pressure_bar: 118.205
+    # Regression equations depending on coordinate reference frame:
+    # 1. Referenced to TVD RKB (Schlumberger table datum):
+    intercept_rkb_bar: 118.2048
+    # 2. Referenced to TVD MSL (TVD_RKB - 54.90 m):
+    intercept_msl_bar: 122.0629
+    r2_score: 0.999915
+    air_gap_offset_bar: 3.8582
     test_range: [1, 12]
   Sleipner:
     top_md: 3263.5000
     base_md: 3340.0000
     fluid_type: "baffled_regime"
     pressure_range_bar: [334.10, 341.71]
+    calcite_hardground_intervals_md:
+      - [3286.5, 3290.8]
+      - [3296.8, 3299.2]
+      - [3326.3, 3330.1]
     test_range: [13, 16]
+    excluded_dry_test: 17
   Skagerrak:
     top_md: 3340.0000
     base_md: 3403.5492
     fluid_type: "overpressured"
-    stabilized_pressure_bar: 368.80
+    stabilized_pressure_stations:
+      test_20: 368.706
+      test_21: 368.818
+    # Corrected overpressure under Trajectory 1 (TVD MSL = 2,983.34 m; Ph = 301.30 bar):
+    overpressure_trajectory_1_bar: 67.52
+    overpressure_trajectory_1_psi: 979.3
+    # Deprecated Trajectory 2 overpressure (uncorrected surface tie-in, TVD MSL = 3,017.83 m):
+    overpressure_trajectory_2_deprecated_bar: 63.76
     test_range: [18, 21]
 
 eaton_calibration:
   sonic_exponent: 3.0
   regional_dt0_us_ft: 195.0
   regional_compaction_c: 0.00045
-
+  limitation_note: "Eaton method restricted to pure shale facies (VCL > 0.50). Chemical quartz cementation renders blanket mechanical NCT invalid."

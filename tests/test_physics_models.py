@@ -123,3 +123,54 @@ def test_nct_trend_fitting():
     pred_dt = predict_normal_transit_time(z, fit_results["dt0_us_ft"], fit_results["compaction_coeff_c"])
     assert np.allclose(pred_dt, dt_synthetic, rtol=1e-4)
 
+
+def test_hugin_regression_reconciliation():
+    """Verify Hugin oil gradient regression on TVD RKB vs TVD MSL."""
+    import pandas as pd
+    from pathlib import Path
+
+    p_table = Path("tables/schlumberger_test_point_table.csv")
+    assert p_table.exists()
+    df = pd.read_csv(p_table)
+    hugin = df[(df["run"] == 10) & (df["test_no"] <= 12)]
+    assert len(hugin) == 12
+
+    # 1. Regression on tvd_m (RKB datum)
+    slope_rkb, intercept_rkb = np.polyfit(hugin["tvd_m"], hugin["formation_pressure_bar"], 1)
+    assert pytest.approx(intercept_rkb, abs=1e-3) == 118.205
+    assert pytest.approx(slope_rkb, abs=1e-5) == 0.07028
+
+    # 2. Conversion to TVD MSL (TVD_MSL = TVD_RKB - 54.90 m)
+    rkb_elev = 54.90
+    intercept_msl = intercept_rkb + slope_rkb * rkb_elev
+    assert pytest.approx(intercept_msl, abs=1e-3) == 122.063
+
+    # 3. Predict at Test 1 in both coordinate frames
+    pred_rkb = intercept_rkb + slope_rkb * 2871.76
+    pred_msl = intercept_msl + slope_rkb * (2871.76 - rkb_elev)
+    assert pytest.approx(pred_rkb, abs=1e-2) == 320.02
+    assert pytest.approx(pred_msl, abs=1e-2) == 320.02
+
+
+def test_skagerrak_overpressure_reconciliation_trajectory_1():
+    """Verify Skagerrak overpressure calculation under corrected Trajectory 1."""
+    water_depth = 91.0
+    rho_seawater = 1.025
+    rho_brine = 1.030
+
+    # At Test 21 (base predictor, TVD MSL = 2983.34 m in Trajectory 1)
+    tvd_msl_t21 = 2983.34
+    p_meas_t21 = 368.818
+    ph_t21 = calculate_hydrostatic_pressure(tvd_msl_t21, water_depth, rho_seawater, rho_brine)
+    overpressure_t21 = p_meas_t21 - ph_t21
+
+    assert pytest.approx(float(ph_t21), abs=0.1) == 301.30
+    assert pytest.approx(float(overpressure_t21), abs=0.1) == 67.52
+
+    # Deprecated Trajectory 2 check: verify it differed by ~3.76 bar due to the datum shift
+    tvd_msl_old_t2 = 3017.83
+    ph_old = calculate_hydrostatic_pressure(tvd_msl_old_t2, water_depth, rho_seawater, rho_brine)
+    overpressure_old = p_meas_t21 - ph_old
+    assert pytest.approx(float(overpressure_old), abs=0.5) == 64.04
+
+
