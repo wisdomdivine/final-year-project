@@ -118,14 +118,14 @@ The target dataset must rigorously document provenance across every interval to 
 | Sleipner Upper Sand (3,263.50 to 3,300.0 m) | Test 14 (334.10 bar at 3,294.0 m MD) | Anchor to Test 14 with brine gradient (0.101 bar/m) | Hydraulic isolation from Hugin by regional seal; internal sand continuity | +/- 0.50 bar | Upper boundary seal transition (3,263.5 to 3,293.5 m MD); unmeasured mudstones. |
 | Sleipner Middle Sand (3,300.0 to 3,315.0 m) | Test 15 (335.61 bar at 3,307.7 m MD) | Anchor to Test 15 with brine gradient | Compartment bounded by hardground at 3,297 m | +/- 0.50 bar | Bounding hardground transitions. |
 | Sleipner Lower Sand (3,315.0 to 3,326.0 m) | Test 16 (341.71 bar at 3,324.7 m MD) | Anchor to Test 16 with brine gradient | Isolated step compartment bounded by hardground at 3,326 m | +/- 0.80 bar | Lower Sleipner mudstones (3,326 to 3,340 m MD). |
-| Sleipner-Skagerrak Transition (3,326.0 to 3,386.5 m) | None (Test 17 at 3,333.6 m is dry test, 69.28 bar) | Excluded from all primary targets (IS_TARGET_VALID = False); sensitivity scenarios held strictly separate | Seal / compaction disequilibrium zone across 60.5 m unmeasured mudstones | High (+/- 10 to 15 bar if interpolated) | Completely unsupported by permeable pressure tests. Excluded from primary training, validation, and test targets. |
+| Sleipner-Skagerrak Transition (3,326.0 to 3,386.5 m) | None (Test 17 at 3,333.6 m is dry test, 69.28 bar) | Excluded from all primary targets (IS_TARGET_VALID = False); sensitivity scenarios held strictly separate | Seal / compaction disequilibrium zone across 60.5 m unmeasured interbedded succession (76% shale/mudstone, 24% silty sand) | High (+/- 10 to 15 bar if interpolated) | Completely unsupported by permeable pressure tests. Excluded from primary training, validation, and test targets. |
 | Skagerrak Sand (3,386.5 to 3,403.55 m) | Tests 20 (368.71 bar) and 21 (368.82 bar) as separate measured anchors | Provisional constant compartment assumption: P = 368.762 bar; unverified fluid gradient | Overpressured Triassic reservoir; constant pressure is an operational assumption, not a proven profile | +/- 0.15 bar near anchors; +/- 5.0 bar toward 3,340 m | Upper Skagerrak section (3,340 to 3,386.5 m MD) lacks direct tests; extrapolation carries high uncertainty. |
 
 ---
 
 ## 3. Evaluation of the Sleipner-Skagerrak Transition Zone (3,326.0 to 3,386.5 m MD)
 
-The transition between the lower Sleipner sandstone (Test 16, 341.71 bar at 3,324.65 m MD) and the upper Skagerrak reservoir sand (Test 20, 368.71 bar at 3,386.99 m MD) represents a 60.5-meter interval (396 depth points at 0.1524 m spacing) characterized by a +27.0 bar pressure jump. The only test station within this interval is Test 17 at 3,333.57 m MD, which was a dry test (69.28 bar) confirming extremely tight formation permeability rather than reservoir pore pressure.
+The transition between the lower Sleipner sandstone (Test 16, 341.71 bar at 3,324.65 m MD) and the upper Skagerrak reservoir sand (Test 20, 368.71 bar at 3,386.99 m MD) represents a 60.5-meter interval (397 depth points at 0.1524 m spacing) characterized by a +27.0 bar pressure jump. Petrophysical analysis confirms that this interval is an interbedded succession of silty shales and claystones (76.1% with VCL >= 0.50) and thin silty sandstones and siltstone stringers (23.9% with VCL < 0.50, porosity up to 20.8%), rather than a homogeneous mudstone package. The only test station within this interval is Test 17 at 3,333.57 m MD, which was a dry test (69.28 bar) confirming extremely tight formation permeability rather than reservoir pore pressure.
 
 We evaluated three potential treatments for this unsupported interval:
 
@@ -133,7 +133,7 @@ We evaluated three potential treatments for this unsupported interval:
 - Mechanism: Mask the target curve for the 3,326.0 to 3,386.5 m MD interval (`IS_TARGET_VALID = False` / NaN in primary target column).
 - Advantages:
   - Eliminates target leakage and mathematical hallucinations: ML loss functions optimize strictly on physical ground-truth calibration data.
-  - Protects validation integrity: In the spatial train/val/test split (Train: <= 3,320.8 m; Val: 3,320.95 to 3,362.25 m; Test: 3,362.40 to 3,403.55 m), this interval spans both the validation set (238 points) and upper test set (158 points). Evaluating model accuracy against synthetic interpolations rewards models that fit arbitrary mathematical functions rather than real physical laws.
+  - Protects validation integrity: In the spatial train/val/test split (Train: <= 3,320.8 m; Val: 3,320.95 to 3,362.25 m; Test: 3,362.40 to 3,403.55 m), this interval spans both the validation set (238 points) and upper test set (159 points). Evaluating model accuracy against synthetic interpolations rewards models that fit arbitrary mathematical functions rather than real physical laws.
 - Disadvantages:
   - Results in an incomplete continuous target curve across the 60.5 m gap.
 
@@ -148,7 +148,7 @@ We evaluated three potential treatments for this unsupported interval:
 - Mechanism: Define distinct physical transition scenarios:
   - Scenario A (Basal Sleipner Seal): Sharp step at the basal hardground (3,326.3 m MD).
   - Scenario B (Top Skagerrak Seal): Sharp step at the lithological Skagerrak boundary (3,340.0 m MD).
-  - Scenario C (Gradual Compaction Disequilibrium): Distributed linear ramp across the full mudstone package.
+  - Scenario C (Gradual Compaction Disequilibrium): Distributed linear ramp across the full interbedded transition interval.
 - Advantages:
   - Quantifies model prediction variance and out-of-distribution stability under alternative geological configurations without polluting benchmark evaluation.
 
@@ -204,4 +204,4 @@ To enforce zero target leakage and prevent circular validation, pressure station
 2. Formation Boundary Depths:
    - Placing the Hugin/Sleipner boundary at 3,263.50 m MD and Sleipner/Skagerrak boundary at 3,340.00 m MD is an operational interpretation based on log facies transitions.
 3. Transition Zone Gradients:
-   - Assuming a smooth or sigmoidal pressure ramp across the unmeasured mudstones between 3,326 m and 3,386 m MD is an unverified model assumption.
+   - Assuming a smooth or sigmoidal pressure ramp across the unmeasured interbedded interval between 3,326.0 m and 3,386.5 m MD is an unverified model assumption.

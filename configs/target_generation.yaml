@@ -104,7 +104,7 @@ transition_zones:
     mask_primary_training_target: true
     mask_validation_target: true
     mask_test_target: true
-    rationale: "Unmeasured mudstone interval crossing validation and test splits; synthetic interpolation would corrupt objective function with unverified mathematical spline."
+    rationale: "Unmeasured interbedded interval (76% shale, 24% silty sand) crossing validation and test splits; synthetic interpolation would corrupt objective function with unverified mathematical spline."
     sensitivity_experiment: true
     sensitivity_policy: "strictly_separate_from_primary_train_val_test"
     sensitivity_scenarios:

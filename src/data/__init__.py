@@ -12,6 +12,10 @@ from src.data.preprocessing import (
     transform_log_features,
     scale_dataset_splits,
 )
+from src.data.targets import (
+    generate_target_vectors,
+    audit_target_generation,
+)
 
 __all__ = [
     "load_predictor_dataset",
@@ -22,5 +26,7 @@ __all__ = [
     "split_dataset_by_depth",
     "transform_log_features",
     "scale_dataset_splits",
+    "generate_target_vectors",
+    "audit_target_generation",
 ]
 

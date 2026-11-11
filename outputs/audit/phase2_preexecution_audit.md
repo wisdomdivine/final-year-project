@@ -187,7 +187,7 @@ All 24 Run 10 tests are detailed in `outputs/audit/pressure_station_reconciliati
 2. Geological Interpretations (Flagged):
    - Lateral continuity of calcite stringers as regional sealing hardgrounds is an interpretation from 1D borehole data.
    - Placing boundary depths at exactly 3,263.50 m and 3,340.00 m MD is an operational interpretation based on log character transitions.
-   - Pressure profile shape across the unmeasured mudstones between 3,326 m and 3,386.5 m MD is an unverified model assumption.
+   - Pressure profile shape across the unmeasured interbedded interval between 3,326.0 m and 3,386.5 m MD is an unverified model assumption.
 
 ---
 
